@@ -179,34 +179,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-
-/*
- 
- "acc"
- "aaa"
- "abcccccddddabcccccddddabcccccdddd"
- "jinhhhtttttttefffffjjjjjjjjjfffffjjjjjjjjjzvvvvvvg"
- "aaaaaaaaaaaaccccccccccccccccccccccccccaaaaaaaaaaaa"
- "aaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaa"
- "zzzzzzzzzzzzzzzzzfffffdddddddddiiiiiiiiiiiiiiiiiii"
- "zzzzzzzzzzzsssssssssssssssssqppppppppppppppnqmosat"
- 
- "abcdabcddddabcddddccccbbbbaaaa"
- "abcccccdddd"
- "aaaaabccddrrruuuuuutttt"
- "aaannnnuuuuuuwwwwwwxxzzzzzzzz"
- "dddddddddddggggggggggggvvvvvvvvzzzzzzz"
- "eccdnmcnkl"
- "cbc"
- "lkwwdddddnnnnnynnnnl"
- 
- "fafff"
- "cccerrrecdcdccedecdcccddeeeddcdcddedccdceeedccecde"
- "cceeddedceddccceecddoooocdeecddcdddedcceeeeccedccc"
- "ceeeeeeeeeeeebmmmfffeeeeeeeeeeeewww"
- 
- 
- 
- 
- 
- */
