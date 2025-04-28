@@ -14377,7 +14377,7 @@ class Leet1868 {
         assert(sut.findRLEArray([[1,3],[2,1],[3,2]], [[2,3],[3,3]]) == [[2,3],[6,1],[9,2]])
     }
 }
-//Leet1868.test()
+Leet1868.test()
 
 
 
