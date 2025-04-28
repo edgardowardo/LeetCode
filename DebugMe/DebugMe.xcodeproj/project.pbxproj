@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		771BC6F52D96A96E00B8F679 /* HeapModule in Frameworks */ = {isa = PBXBuildFile; productRef = 771BC6F42D96A96E00B8F679 /* HeapModule */; };
+		7795D4BF2DBFC77200FA9D42 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 7795D4BE2DBFC77200FA9D42 /* OrderedCollections */; };
 		77E5599E2D83440E00153964 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 77E5599D2D83440E00153964 /* DequeModule */; };
 		77F685E02CC1355600D8F554 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F685DF2CC1355600D8F554 /* AppDelegate.swift */; };
 		77F685E22CC1355600D8F554 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F685E12CC1355600D8F554 /* SceneDelegate.swift */; };
@@ -36,6 +37,7 @@
 			files = (
 				771BC6F52D96A96E00B8F679 /* HeapModule in Frameworks */,
 				77E5599E2D83440E00153964 /* DequeModule in Frameworks */,
+				7795D4BF2DBFC77200FA9D42 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +399,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 77E5599A2D83421B00153964 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = HeapModule;
+		};
+		7795D4BE2DBFC77200FA9D42 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77E5599A2D83421B00153964 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 		77E5599D2D83440E00153964 /* DequeModule */ = {
 			isa = XCSwiftPackageProductDependency;
