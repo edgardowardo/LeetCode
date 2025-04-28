@@ -163,8 +163,29 @@ public class TreeNode {
 ///
 
 ///---------------------------------------------------------------------------------------
-///
-
+///https://leetcode.com/problems/binary-subarrays-with-sum/
+class Leet0930 {
+    func numSubarraysWithSum(_ nums: [Int], _ goal: Int) -> Int {
+        let n = nums.count
+        var count = 0, sum = 0, map = [Int: Int]()
+        map[0] = 1
+        
+        for i in 0..<n {
+            sum += nums[i]
+            if let cnt = map[sum - goal] {
+                count += cnt
+            }
+            map[sum, default: 0] += 1
+        }
+        return count
+    }
+    
+    static func test() {
+        let sut = Leet0930()
+        assert(sut.numSubarraysWithSum([1,0,1,0,1], 2) == 4)
+        assert(sut.numSubarraysWithSum([0,0,0,0,0], 0) == 15)
+    }
+}
 
 
 
@@ -174,6 +195,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 
+        Leet0930.test()
         
 
         
