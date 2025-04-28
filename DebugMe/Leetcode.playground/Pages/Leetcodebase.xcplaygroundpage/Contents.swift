@@ -13578,30 +13578,6 @@ class Leet2176 {
 
 
 
-///---------------------------------------------------------------------------------------
-///https://leetcode.com/problems/subarray-sum-equals-k/
-class Leet0560 {
-    func subarraySum(_ nums: [Int], _ k: Int) -> Int {
-        let n = nums.count
-        var count = 0, sum = 0, map = [Int: Int]()
-        map[0] = 1
-        for i in 0..<n {
-            sum += nums[i]
-            if let c = map[sum - k] {
-                count += c
-            }
-            map[sum, default: 0] += 1
-        }
-        return count
-    }
-    static func test() {
-        let sut = Leet0560()
-        assert(sut.subarraySum([1,-1,0], 0) == 3)
-        assert(sut.subarraySum([3,4,7,-2,2,1,4,2], 7) == 6)
-    }
-}
-//Leet0560.test()
-
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/maximum-repeating-substring/
@@ -14377,12 +14353,62 @@ class Leet1868 {
         assert(sut.findRLEArray([[1,3],[2,1],[3,2]], [[2,3],[3,3]]) == [[2,3],[6,1],[9,2]])
     }
 }
-Leet1868.test()
+//Leet1868.test()
 
 
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/subarray-sum-equals-k/
+class Leet0560 {
+    func subarraySum(_ nums: [Int], _ k: Int) -> Int {
+        let n = nums.count
+        var count = 0, sum = 0, map = [Int: Int]()
+        map[0] = 1
+        for i in 0..<n {
+            sum += nums[i]
+            if let c = map[sum - k] {
+                count += c
+            }
+            map[sum, default: 0] += 1
+        }
+        return count
+    }
+    static func test() {
+        let sut = Leet0560()
+        assert(sut.subarraySum([1,-1,0], 0) == 3)
+        assert(sut.subarraySum([3,4,7,-2,2,1,4,2], 7) == 6)
+    }
+}
+Leet0560.test()
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/binary-subarrays-with-sum/
+class Leet0930 {
+    func numSubarraysWithSum(_ nums: [Int], _ goal: Int) -> Int {
+        let n = nums.count
+        var count = 0, sum = 0, map = [Int: Int]()
+        map[0] = 1
+        
+        for i in 0..<n {
+            sum += nums[i]
+            if let cnt = map[sum - goal] {
+                count += cnt
+            }
+            map[sum, default: 0] += 1
+        }
+        return count
+    }
+    
+    static func test() {
+        let sut = Leet0930()
+        assert(sut.numSubarraysWithSum([1,0,1,0,1], 2) == 4)
+        assert(sut.numSubarraysWithSum([0,0,0,0,0], 0) == 15)
+    }
+}
+Leet0930.test()
 
 
 
