@@ -8626,38 +8626,6 @@ class Leet2133 {
 
 
 
-///---------------------------------------------------------------------------------------
-///https://leetcode.com/problems/matrix-diagonal-sum/
-class Leet1572 {
-    func diagonalSum(_ mat: [[Int]]) -> Int {
-        var result = 0
-        for i in 0..<mat.count {
-            // main diagonal sum
-            result += mat[i][i]
-            
-            // anti diagonal sum
-            result += mat[i][mat.count - i - 1]
-        }
-        
-        // when odd, remove the middle value
-        if !mat.count.isMultiple(of: 2) {
-            let mid = mat.count / 2
-            result -= mat[mid][mid]
-        }
-        return result
-    }
-    
-    static func test() {
-        let sut = Leet1572()
-        assert(sut.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]) == 25)
-        assert(sut.diagonalSum([[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1]]) == 8)
-        assert(sut.diagonalSum([[5]]) == 5)
-    }
-}
-//Leet1572.test()
-
-
-
 
 
 
@@ -14414,6 +14382,56 @@ class Leet0930 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/matrix-diagonal-sum/
+class Leet1572 {
+    func diagonalSum(_ mat: [[Int]]) -> Int {
+        var result = 0
+        for i in 0..<mat.count {
+            // main diagonal sum
+            result += mat[i][i]
+            
+            // anti diagonal sum
+            result += mat[i][mat.count - i - 1]
+        }
+        
+        // when odd, remove the middle value
+        if !mat.count.isMultiple(of: 2) {
+            let mid = mat.count / 2
+            result -= mat[mid][mid]
+        }
+        return result
+    }
+    
+    static func test() {
+        let sut = Leet1572()
+        assert(sut.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]) == 25)
+        assert(sut.diagonalSum([[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1]]) == 8)
+        assert(sut.diagonalSum([[5]]) == 5)
+    }
+}
+Leet1572.test()
+
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-matrix-is-x-matrix/
+class Leet2319 {
+    func checkXMatrix(_ grid: [[Int]]) -> Bool {
+        var g2 = [[Int]](repeating: [Int](repeating: 0, count: grid[0].count), count: grid.count)
+        for i in 0..<grid.count {
+            // check diagonals
+            let d = grid[i][i]
+            guard d > 0 else { return false }
+            g2[i][i] = d
+            // check anti-diagonals
+            let ad = grid[i][grid.count - i - 1]
+            guard ad > 0 else { return false }
+            g2[i][grid.count - i - 1] = ad
+        }
+        return g2 == grid
+    }
+}
 
 
 print("All playground tests passed!")
