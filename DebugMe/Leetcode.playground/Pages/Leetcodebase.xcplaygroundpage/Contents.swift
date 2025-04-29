@@ -14436,7 +14436,7 @@ class Leet1572 {
         assert(sut.diagonalSum([[5]]) == 5)
     }
 }
-Leet1572.test()
+//Leet1572.test()
 
 
 
@@ -14458,6 +14458,20 @@ class Leet2319 {
         return g2 == grid
     }
 }
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/
+class Leet1941 {
+    func areOccurrencesEqual(_ s: String) -> Bool {
+        Set(Array(s).reduce(into: [:]) { f, c in f[c, default: 0] += 1 }.values).count == 1
+    }
+}
+
+
+
+
+
 
 
 print("All playground tests passed!")
