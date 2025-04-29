@@ -14531,9 +14531,22 @@ class Leet2682 {
         assert(sut.circularGameLosers(4,4) == [2,3,4])
     }
 }
-Leet2682.test()
+//Leet2682.test()
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/pass-the-pillow/
+class Leet2582 {
+    func passThePillow(_ n: Int, _ time: Int) -> Int {
+        let rounds = time / (n - 1), remainder = time % (n - 1)
+        if rounds % 2 == 0 {
+            return remainder + 1
+        } else {
+            return n - remainder
+        }
+    }
+}
 
 
 
