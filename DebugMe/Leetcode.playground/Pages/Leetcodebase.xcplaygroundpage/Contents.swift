@@ -14352,6 +14352,26 @@ class Leet0560 {
 //Leet0560.test()
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-number-of-nice-subarrays/
+class Leet1248 {
+    func numberOfSubarrays(_ nums: [Int], _ k: Int) -> Int {
+        let n = nums.count
+        var count = 0, sum = 0, map = [Int: Int]()
+        map[0] = 1
+        for i in 0..<n {
+            sum += nums[i] % 2
+            if let c = map[sum - k] {
+                count += c
+            }
+            map[sum, default: 0] += 1
+        }
+        return count
+    }
+}
+
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/binary-subarrays-with-sum/
 class Leet0930 {
