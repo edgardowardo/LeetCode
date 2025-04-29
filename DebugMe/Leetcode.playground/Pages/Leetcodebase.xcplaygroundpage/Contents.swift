@@ -14549,6 +14549,18 @@ class Leet2582 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-child-who-has-the-ball-after-k-seconds/
+class Leet3178 {
+    func numberOfChild(_ n: Int, _ k: Int) -> Int {
+        let rounds = k / (n  - 1), remainder = k % (n  - 1)
+        if rounds % 2 == 0 {
+            return remainder + 1
+        } else {
+            return n - remainder
+        }
+    }
+}
 
 
 
