@@ -14469,7 +14469,25 @@ class Leet1941 {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/rings-and-rods/
+class Leet2103 {
+    func countPoints(_ rings: String) -> Int {
+        let rings = Array(rings), n = rings.count, red = Character("R"), green = Character("G"), blue = Character("B")
+        var map: [Character: Set<Character>] = [red: [], green: [], blue: []]
+        for i in stride(from: 0, to: n, by: 2) {
+            let r = rings[i], g = rings[i + 1]
+            map[r]!.insert(g)
+        }
+        return ( map[red]!.intersection(map[green]!).intersection(map[blue]!) ).count
+    }
+    static func test() {
+        let sut = Leet2103()
+        assert(sut.countPoints("B0B6G0R6R0R6G9") == 1)
+        assert(sut.countPoints("B0R0G0R9R0B0G0") == 1)
+    }
+}
+//Leet2103.test()
 
 
 
