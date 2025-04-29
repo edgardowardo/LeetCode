@@ -14502,6 +14502,36 @@ class Leet2248 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-losers-of-the-circular-game/
+class Leet2682 {
+    func circularGameLosers(_ n: Int, _ k: Int) -> [Int] {
+        var receipts = Set<Int>([]), losers = [Int](), prev = 0
+        // find winner
+        for i in 0..<n {
+            let next = (prev + i * k) % n
+            prev = next
+            if receipts.contains(next) {
+                break
+            }
+            receipts.insert(next)
+        }
+        // collect the losers
+        for i in 0..<n {
+            guard !receipts.contains(i) else { continue }
+            losers.append(i+1)
+        }
+        return losers
+    }
+    static func test() {
+        let sut = Leet2682()
+        assert(sut.circularGameLosers(3,1) == [3])
+        assert(sut.circularGameLosers(2,1) == [])
+        assert(sut.circularGameLosers(5,2) == [4,5])
+        assert(sut.circularGameLosers(4,4) == [2,3,4])
+    }
+}
+Leet2682.test()
 
 
 
