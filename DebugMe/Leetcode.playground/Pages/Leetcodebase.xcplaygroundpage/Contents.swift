@@ -14332,14 +14332,14 @@ class Leet1868 {
 class Leet0560 {
     func subarraySum(_ nums: [Int], _ k: Int) -> Int {
         let n = nums.count
-        var count = 0, sum = 0, map = [Int: Int]()
-        map[0] = 1
+        var count = 0, sum = 0, freq = [Int: Int]()
+        freq[0] = 1
         for i in 0..<n {
             sum += nums[i]
-            if let c = map[sum - k] {
+            if let c = freq[sum - k] {
                 count += c
             }
-            map[sum, default: 0] += 1
+            freq[sum, default: 0] += 1
         }
         return count
     }
@@ -14358,19 +14358,25 @@ class Leet0560 {
 class Leet1248 {
     func numberOfSubarrays(_ nums: [Int], _ k: Int) -> Int {
         let n = nums.count
-        var count = 0, sum = 0, map = [Int: Int]()
-        map[0] = 1
+        var count = 0, sum = 0, freq = [Int: Int]()
+        freq[0] = 1
         for i in 0..<n {
             sum += nums[i] % 2
-            if let c = map[sum - k] {
+            if let c = freq[sum - k] {
                 count += c
             }
-            map[sum, default: 0] += 1
+            freq[sum, default: 0] += 1
         }
         return count
     }
+    static func test() {
+        let sut = Leet1248()
+        assert(sut.numberOfSubarrays([1,1,2,1,1], 3) == 2)
+        assert(sut.numberOfSubarrays([2,4,6], 1) == 0)
+        assert(sut.numberOfSubarrays([2,2,2,1,2,2,1,2,2,2], 2) == 16)
+    }
 }
-
+//Leet1248.test()
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/binary-subarrays-with-sum/
