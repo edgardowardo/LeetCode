@@ -14490,6 +14490,23 @@ class Leet2103 {
 //Leet2103.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/intersection-of-multiple-arrays/
+class Leet2248 {
+    func intersection(_ nums: [[Int]]) -> [Int] {
+        Array(nums
+            .map(Set.init)
+            .reduce(Set(nums[0])) { $0.intersection($1) }
+        ).sorted()
+    }
+}
+
+
+
+
+
+
+
 
 
 print("All playground tests passed!")
