@@ -14755,7 +14755,14 @@ class Leet2243 {
 
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-sum-of-four-digit-number-after-splitting-digits/
+class Leet2160 {
+    func minimumSum(_ num: Int) -> Int {
+        let a = Array(String(num)).sorted()
+        return Int("\(a[0])\(a[3])")! + Int("\(a[1])\(a[2])")!
+    }
+}
 
 
 
