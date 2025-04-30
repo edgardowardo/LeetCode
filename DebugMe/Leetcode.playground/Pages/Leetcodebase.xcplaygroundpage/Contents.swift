@@ -4191,6 +4191,25 @@ func countEvenLengthNumbers(_ nums: [Int]) -> Int {
 //assert(countEvenLengthNumbers([555,901,482,1771]) == 1)
 
 
+extension Int {
+    var count: Int {
+        var n = self, count = 0
+        while n != 0 {
+            n /= 10
+            count += 1
+        }
+        return count
+    }
+}
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-numbers-with-even-number-of-digits/
+class Leet1295 {
+    func findNumbers(_ nums: [Int]) -> Int {
+        nums.count { $0.count.isMultiple(of: 2) }
+    }
+}
+
 ///---------------------------------------------------------------------------------------
 /// Leetcode 977
 /// https://leetcode.com/problems/squares-of-a-sorted-array/
