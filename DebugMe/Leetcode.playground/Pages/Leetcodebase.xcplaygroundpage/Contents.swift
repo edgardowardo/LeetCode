@@ -14581,6 +14581,33 @@ class Leet3178 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/unique-3-digit-even-numbers/
+class Leet3483 {
+    func totalNumbers(_ digits: [Int]) -> Int {
+        var set = Set<Int>()
+        let n = digits.count
+        for i in 0..<n where digits[i] > 0 {
+            for j in 0..<n {
+                for k in 0..<n where digits[k].isMultiple(of: 2) {
+                    guard i != j, i != k, j != k else { continue }
+                    set.insert(digits[i]*100 + digits[j]*10 + digits[k])
+                }
+            }
+        }
+        return set.count
+    }
+    static func test() {
+        let sut = Leet3483()
+        assert(sut.totalNumbers([1,2,3,4]) == 12)
+    }
+}
+Leet3483.test()
+
+
+
+
+
 
 
 print("All playground tests passed!")
