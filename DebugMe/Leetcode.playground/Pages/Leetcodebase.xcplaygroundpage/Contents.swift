@@ -14725,6 +14725,34 @@ extension String {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/calculate-digit-sum-of-a-string/
+class Leet2243 {
+    func digitSum(_ s: String, _ k: Int) -> String {
+        var result = Array(s)
+        while result.count > k {
+            var round = ""
+            for i in stride(from: 0, to: result.count, by: k) {
+                let group: String
+                if i + k < result.count {
+                    group = String(result[i..<(i+k)])
+                } else {
+                    group = String(result[i...])
+                }
+                round += String(group.sum)
+            }
+            result = Array(round)
+        }
+        return String(result)
+    }
+    
+    static func test() {
+        let sut = Leet2243()
+        assert(sut.digitSum("11111222223", 3) == "135")
+    }
+}
+//Leet2243.test()
+
 
 
 
