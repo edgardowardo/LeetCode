@@ -14701,8 +14701,27 @@ class Leet1198 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-of-digits-of-string-after-convert/
+class Leet1945 {
+    func getLucky(_ s: String, _ k: Int) -> Int {
+        var result = Array(s).map { String(Int($0.asciiValue!) - 96) }.joined().sum
+        guard k > 1 else { return result }
+        for _ in 1..<k {
+            result = result.sum
+        }
+        return result
+    }
+    static func test() {
+        let sut = Leet1945()
+        assert(sut.getLucky("fleyctuuajsr", 5) == 8)
+    }
+}
 
-
+extension String {
+    var sum: Int { Array(self).reduce(0) { $0 + Int(String($1))! } }
+}
+//Leet1945.test()
 
 
 
