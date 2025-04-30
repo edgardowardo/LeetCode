@@ -14680,7 +14680,14 @@ class Leet1213 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-difference-of-two-arrays/
+class Leet2215 {
+    func findDifference(_ nums1: [Int], _ nums2: [Int]) -> [[Int]] {
+        let n1 = Set(nums1), n2 = Set(nums2), i = n1.intersection(n2)
+        return [Array(n1.subtracting(i)), Array(n2.subtracting(i))]
+    }
+}
 
 
 
