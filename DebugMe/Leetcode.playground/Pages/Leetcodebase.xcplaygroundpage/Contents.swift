@@ -14633,7 +14633,24 @@ class Leet3232 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-integers-with-even-digit-sum/
+class Leet2180 {
+    func countEven(_ num: Int) -> Int {
+        (1...num).map { $0 }.filter { $0.sum.isMultiple(of: 2) }.count
+    }
+}
 
+extension Int {
+    var sum: Int {
+        var n = self, sum = 0
+        while n != 0 {
+            sum += n % 10
+            n /= 10
+        }
+        return sum
+    }
+}
 
 
 
