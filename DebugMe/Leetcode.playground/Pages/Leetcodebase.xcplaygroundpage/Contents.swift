@@ -14690,7 +14690,13 @@ class Leet2215 {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-smallest-common-element-in-all-rows/
+class Leet1198 {
+    func smallestCommonElement(_ mat: [[Int]]) -> Int {
+        mat.map { Set($0) }.reduce(Set(mat[0])) { $0.intersection($1) }.min() ?? -1
+    }
+}
 
 
 
