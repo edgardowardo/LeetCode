@@ -14653,6 +14653,35 @@ extension Int {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-even-and-odd-bits/
+class Leet2595 {
+    func evenOddBit(_ n: Int) -> [Int] {
+        Array(String(n, radix: 2))
+            .reversed()
+            .enumerated()
+            .reduce(into: [0, 0]) { counts, item in
+                guard item.element == "1" else { return }
+                if item.offset.isMultiple(of: 2) {
+                    counts[0] += 1
+                } else {
+                    counts[1] += 1
+                }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
