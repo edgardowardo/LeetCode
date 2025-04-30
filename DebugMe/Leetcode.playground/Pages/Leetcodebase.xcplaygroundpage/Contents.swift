@@ -14623,7 +14623,13 @@ class Leet2094 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-if-digit-game-can-be-won/
+class Leet3232 {
+    func canAliceWin(_ nums: [Int]) -> Bool {
+        nums.reduce(0) { $0 + (($1 < 10) ? $1 : 0) } != nums.reduce(0) { $0 + (($1 >= 10) ? $1 : 0) }
+    }
+}
 
 
 
