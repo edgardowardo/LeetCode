@@ -14765,6 +14765,25 @@ class Leet2160 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/alternating-digit-sum/
+class Leet2544 {
+    func alternateDigitSum(_ n: Int) -> Int {
+        var n = n, list = [Int]()
+        while n > 0 {
+            list.append(n % 10)
+            n /= 10
+        }
+        return list.reversed().enumerated().reduce(0) { $0 + ($1.offset.isMultiple(of: 2) ? $1.element : -$1.element) }
+    }
+}
+
+
+
+
+
+
+
 
 
 
