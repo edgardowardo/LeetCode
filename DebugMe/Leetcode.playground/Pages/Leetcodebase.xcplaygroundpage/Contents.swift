@@ -14672,7 +14672,13 @@ class Leet2595 {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/intersection-of-three-sorted-arrays/
+class Leet1213 {
+    func arraysIntersection(_ arr1: [Int], _ arr2: [Int], _ arr3: [Int]) -> [Int] {
+        Set(arr1).intersection(Set(arr2)).intersection(Set(arr3)).sorted()
+    }
+}
 
 
 
