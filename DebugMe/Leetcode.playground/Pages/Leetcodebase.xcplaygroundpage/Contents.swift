@@ -14891,7 +14891,13 @@ class Leet0728 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/perfect-number/
+class Leet0507 {
+    func checkPerfectNumber(_ num: Int) -> Bool {
+        Set([6, 28, 496, 8128, 33550336]).contains(num)
+    }
+}
 
 
 
