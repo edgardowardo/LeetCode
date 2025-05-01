@@ -14842,7 +14842,26 @@ extension Int {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/ugly-number/
+class Leet0263 {
+    func isUgly(_ n: Int) -> Bool {
+        guard n > 0 else { return false }
+        var n = n
+        n = keepDividingWhenDivisible(n, 2)
+        n = keepDividingWhenDivisible(n, 3)
+        n = keepDividingWhenDivisible(n, 5)
+        return n == 1
+    }
+    
+    private func keepDividingWhenDivisible(_ dividend: Int, _ divisor: Int) -> Int {
+        var dividend = dividend
+        while dividend % divisor == 0 {
+            dividend /= divisor
+        }
+        return dividend
+    }
+}
 
 
 
