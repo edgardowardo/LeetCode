@@ -14883,8 +14883,13 @@ class Leet2520 {
 }
 
 
-
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/self-dividing-numbers/
+class Leet0728 {
+    func selfDividingNumbers(_ left: Int, _ right: Int) -> [Int] {
+        (left...right).compactMap { num in num.digits.allSatisfy { $0 != 0 && num.isMultiple(of: $0) } ? num : nil  }
+    }
+}
 
 
 
