@@ -14779,7 +14779,48 @@ class Leet2544 {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-number-of-tasks-you-can-assign/
+///REVISIT!!
+class Leet2071 {
+    func maxTaskAssign(_ tasks: [Int], _ workers: [Int], _ pills: Int, _ strength: Int) -> Int {
+        let n = tasks.count, m = workers.count, tasks = tasks.sorted(), workers = workers.sorted()
+        var l = 1, r = min(m, n), ans = 0
+        while l <= r {
+            let mid = (l + r) / 2
+            if check(tasks, workers, pills, strength, mid) {
+                ans = mid
+                l = mid + 1
+            } else {
+                r = mid - 1
+            }
+        }
+        return ans
+    }
+    
+    private func check(_ tasks: [Int], _ workers: [Int], _ pills: Int, _ strength: Int, _ mid: Int) -> Bool {
+        let m = workers.count
+        var p = pills, ptr = m - 1, ws = Deque<Int>()
+        for i in stride(from: mid-1, through: 0, by: -1) {
+            while (ptr >= m - mid && workers[ptr] + strength >= tasks[i]) {
+                ws.prepend(workers[ptr])
+                ptr -= 1
+            }
+            if ws.isEmpty {
+                return false
+            } else if ws.last! >= tasks[i] {
+                ws.removeLast()
+            } else {
+                if p == 0 {
+                    return false
+                }
+                p -= 1
+                ws.removeFirst()
+            }
+        }
+        return true
+    }
+}
 
 
 
