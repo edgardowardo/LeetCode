@@ -14874,6 +14874,17 @@ class Leet3300 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-the-digits-that-divide-a-number/
+class Leet2520 {
+    func countDigits(_ num: Int) -> Int {
+        num.digits.compactMap { num % $0 == 0 ? 1 : nil }.count
+    }
+}
+
+
+
+
 
 
 
