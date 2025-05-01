@@ -14826,7 +14826,7 @@ class Leet2071 {
 ///https://leetcode.com/problems/separate-the-digits-in-an-array/
 class Leet2553 {
     func separateDigits(_ nums: [Int]) -> [Int] {
-        nums.map { $0.digits }.flatMap { $0 }
+        nums.map { $0.digitsReversed }.flatMap { $0 }
     }
 }
 
@@ -14837,8 +14837,10 @@ extension Int {
             result.append(num % 10)
             num /= 10
         }
-        return result.reversed()
+        return result
     }
+    
+    var digitsReversed: [Int] { digits.reversed() }
 }
 
 
