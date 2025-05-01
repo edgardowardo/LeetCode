@@ -14864,6 +14864,17 @@ class Leet0263 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-element-after-replacement-with-digit-sum/
+class Leet3300 {
+    func minElement(_ nums: [Int]) -> Int {
+        nums.map { $0.sum }.min() ?? 0
+    }
+}
+
+
+
+
 
 
 
