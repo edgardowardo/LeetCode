@@ -14900,7 +14900,142 @@ class Leet0507 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/push-dominoes/
+class Leet0838 {
+        
+    func pushDominoes(_ dominoes: String) -> String {
+        typealias State = (c: Character, rDistance: Int?)
+        var stack = [State](), result = [Character](), dominoes = Array(dominoes)
+        for c in dominoes {
+            if c == "." {
+                if let top = stack.last {
+                    if top.c == "R" {
+                        stack.append(State(c, 1))
+                    } else if top.c == "." {
+                        var distance: Int? = nil
+                        if let rDistance = top.rDistance {
+                            distance = rDistance + 1
+                        }
+                        stack.append(State(c, distance))
+                    }
+                } else {
+                    stack.append(State(c, nil))
+                }
+            } else if c == "R" {
+                if let top = stack.last {
+                    if top.c == "." {
+                        if let rDistance = top.rDistance {
+                        // "R...R"
+                            result.append(contentsOf: Array(repeating: "R", count: rDistance + 1))
+                            stack.removeAll()
+                        } else {
+                        // "...R"
+                            result.append(contentsOf: stack.map(\.c))
+                            stack.removeAll()
+                        }
+                        stack.append(State(c, nil))
+                    } else if top.c == "R" {
+                        result.append(stack.removeLast().c)
+                        stack.append(State(c, nil))
+                    }
+                } else {
+                    stack.append(State(c, nil))
+                }
+            } else if c == "L" {
+                // clear the stack and convert dots and Rs
+                var stk2 = [Character](["L"])
+                if let top = stack.last {
+                    if top.c == "R" {
+                        stk2.append("R")
+                        stack.removeLast()
+                    } else if top.c == "." {
+                        if let rDistance = top.rDistance {
+                            // "R...L", "R.L", "R..L"
+                            let mid = rDistance / 2
+                            for _ in 0..<mid {
+                                stk2.append("L")
+                                stack.removeLast()
+                            }
+                            if rDistance % 2 == 1 {
+                                stk2.append(stack.removeLast().c)
+                            }
+                            for _ in 0..<mid {
+                                stk2.append("R")
+                                stack.removeLast()
+                            }
+                            stk2.append(stack.removeLast().c)
+                        } else {
+                            // "....L"
+                            while !stack.isEmpty {
+                                if let top2 = stack.last, top2.c == "." {
+                                    stk2.append("L")
+                                    stack.removeLast()
+                                }
+                            }
+                        }
+                    }
+                }
+                while !stk2.isEmpty {
+                    result.append(stk2.removeLast())
+                }
+            }
+        }
+        while !stack.isEmpty {
+            if let top = stack.last {
+                if top.c == "." {
+                    if let rDistance = top.rDistance {
+                        // "R..."
+                        result.append(contentsOf: Array(repeating: "R", count: rDistance + 1))
+                    } else {
+                        // "...."
+                        result.append(contentsOf: stack.map(\.c))
+                    }
+                    stack.removeAll()
+                } else if top.c == "R" {
+                    // "R"
+                    result.append(stack.removeLast().c)
+                }
+            }
+        }
+        return String(result)
+    }
+    
+    static func test(){
+        let sut = Leet0838()
+        assert(sut.pushDominoes("RL.R..R.") == "RL.RRRRR")
+        assert(sut.pushDominoes("R...R") == "RRRRR")
+        assert(sut.pushDominoes("L...R") == "L...R")
+        assert(sut.pushDominoes("R...L") == "RR.LL")
+        assert(sut.pushDominoes("...R") == "...R")
+        assert(sut.pushDominoes(".L.R...LR..L..") == "LL.RR.LLRRLL..")
+        assert(sut.pushDominoes("RR.L") == "RR.L")
+    }
+}
+Leet0838.test()
 
+
+/*
+ "RR.L"
+ ".L.R...LR..L.."
+ "R...L"
+ "...."
+ "R..."
+ "L..."
+ "...R"
+ "...L"
+ 
+ 
+ "."
+ "..."
+ "L.R.L.R"
+ "R.L.R.L"
+ "LLLLLLLLLL"
+ ".......LR...LR.R......L"
+ "LL...R.L.......R.LR..L..RL.R..R.L...LRR.LR.L.R...R"
+ ".R....RLRR......RL...L..L....R.L.......L..R.....L........RL.L..LR......L...L..RL.R...LRL.....R......"
+ 
+ */
 
 
 
