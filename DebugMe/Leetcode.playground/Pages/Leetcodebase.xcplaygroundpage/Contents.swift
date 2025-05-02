@@ -15012,7 +15012,7 @@ class Leet0838 {
         assert(sut.pushDominoes("RR.L") == "RR.L")
     }
 }
-Leet0838.test()
+//Leet0838.test()
 
 
 /*
@@ -15036,6 +15036,26 @@ Leet0838.test()
  ".R....RLRR......RL...L..L....R.L.......L..R.....L........RL.L..LR......L...L..RL.R...LRL.....R......"
  
  */
+
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-number-has-equal-digit-count-and-digit-value/
+class Leet2283 {
+    func digitCount(_ num: String) -> Bool {
+        let digits = Array(num).compactMap { $0.wholeNumberValue }, freq = digits.reduce(into: [:]) { c, d in c[d, default: 0] += 1 }
+        return digits.indices.allSatisfy { digits[$0] == (freq[$0] ?? 0) }
+    }
+    static func test() {
+        let sut = Leet2283()
+        assert(sut.digitCount("1210") == true)
+        assert(sut.digitCount("030") == false)
+    }
+}
+//Leet2283.test()
+
+
+
 
 
 
