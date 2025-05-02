@@ -15056,7 +15056,48 @@ class Leet2283 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/buddy-strings/
+class Leet0859 {
+    func buddyStrings(_ s: String, _ goal: String) -> Bool {
+        guard s.count == goal.count else { return false }
+        var freq = [Character: Int](), s = Array(s), diffs = [Int]() //diffCount = 0
+        let goal = Array(goal)
+        for i in 0..<s.count {
+            let sc = s[i], gc = goal[i]
+            freq[sc, default: 0] += 1
+            if sc != gc {
+                diffs.append(i)
+            }
+        }
+        guard diffs.count <= 2 else { return false }
+        if s == goal {
+            return Set(freq.values).max()! > 1
+        } else {
+            guard diffs.count == 2 else { return false }
+            s.swapAt(diffs[0], diffs[1])
+            return s == goal
+        }
+    }
+}
 
+/*
+ Test cases:
+ 
+"abcd"
+"abcd"
+"aabb"
+"aabb"
+"abc"
+"ab"
+"abcd"
+"abed"
+"abdcgf"
+"abcdfg"
+
+"abcaa"
+"abcbb"
+*/
 
 
 
