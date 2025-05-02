@@ -15100,6 +15100,27 @@ class Leet0859 {
 */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-one-string-swap-can-make-strings-equal/
+class Leet1790 {
+    func areAlmostEqual(_ s1: String, _ s2: String) -> Bool {
+        guard s1 != s2 else { return true }
+        guard s1.count == s2.count else { return false }
+        var s1 = Array(s1), diffs = [Int]()
+        let s2 = Array(s2)
+        for i in 0..<s1.count {
+            let sc = s1[i], gc = s2[i]
+            if sc != gc {
+                diffs.append(i)
+            }
+        }
+        guard diffs.count == 2 else { return false }
+        s1.swapAt(diffs[0], diffs[1])
+        return s1 == s2
+    }
+}
+
+
 
 
 print("All playground tests passed!")
