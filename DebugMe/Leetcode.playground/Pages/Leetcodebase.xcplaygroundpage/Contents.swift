@@ -15162,6 +15162,20 @@ class Leet2733 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/ant-on-the-boundary/
+class Leet3028 {
+    func returnToBoundaryCount(_ nums: [Int]) -> Int {
+        var sum = 0, result = 0
+        for num in nums {
+            sum += num
+            result += sum == 0 ? 1 : 0
+        }
+        return result
+    }
+}
+
+
 
 
 
