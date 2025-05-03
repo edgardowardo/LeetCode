@@ -15121,6 +15121,37 @@ class Leet1790 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/
+class Leet1007 {
+    
+    func minDominoRotations(_ tops: [Int], _ bottoms: [Int]) -> Int {
+        min(minRotations(tops, bottoms), minRotations(bottoms, tops))
+    }
+    private func minRotations(_ tops: [Int], _ bottoms: [Int]) -> Int {
+        let n = tops.count
+        var topMaxCount = 0
+        let topCounts: [Int: Int] = tops.reduce(into: [:]) { counts, top in
+            counts[top, default: 0] += 1
+            topMaxCount = max(topMaxCount, counts[top]!)
+        }
+        let topMaxes = topCounts.filter { $1 == topMaxCount }.keys
+        for t in topMaxes {
+            var result = 0
+            for i in 0..<n where tops[i] != t && bottoms[i] == t {
+                result += 1
+            }
+            if n - topMaxCount == result {
+                return result
+            }
+        }
+        return -1
+    }
+}
+
+
+
+
 
 
 print("All playground tests passed!")
