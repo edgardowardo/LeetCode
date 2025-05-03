@@ -15149,6 +15149,19 @@ class Leet1007 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/neither-minimum-nor-maximum/
+class Leet2733 {
+    func findNonMinOrMax(_ nums: [Int]) -> Int {
+        guard nums.count > 2 else { return -1 }
+        let minValue = nums.min()!, maxValue = nums.max()!
+        for n in nums where n != minValue && n != maxValue {
+            return n
+        }
+        return -1
+    }
+}
+
 
 
 
