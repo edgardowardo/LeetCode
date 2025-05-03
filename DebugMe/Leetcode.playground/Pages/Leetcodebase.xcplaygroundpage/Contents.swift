@@ -15193,7 +15193,19 @@ class Leet2810 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-original-typed-string-i/
+class Leet3330 {
+    func possibleStringCount(_ word: String) -> Int {
+        let word = Array(word)
+        var result = 1
+        guard word.count > 1 else { return result }
+        for i in 1..<word.count where word[i] == word[i - 1] {
+            result += 1
+        }
+        return result
+    }
+}
 
 
 print("All playground tests passed!")
