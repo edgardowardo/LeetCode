@@ -15176,7 +15176,22 @@ class Leet3028 {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/faulty-keyboard/
+class Leet2810 {
+    func finalString(_ s: String) -> String {
+        let s = Array(s)
+        var result = [Character]()
+        for c in s {
+            if c != "i" {
+                result.append(c)
+            } else {
+                result.reverse()
+            }
+        }
+        return String(result)
+    }
+}
 
 
 
