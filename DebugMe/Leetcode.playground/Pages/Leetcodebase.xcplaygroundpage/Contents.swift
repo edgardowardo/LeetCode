@@ -15207,5 +15207,20 @@ class Leet3330 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/keyboard-row/
+class Leet0500 {
+    func findWords(_ words: [String]) -> [String] {
+        let keyboard = ["qwertyuiop", "asdfghjkl", "zxcvbnm"].map(Set.init), wordsLower = words.map { Array($0.lowercased()) }
+        var result = [String]()
+        for (i, word) in wordsLower.enumerated() {
+            let isWordInRow = keyboard.reduce(false) { (res, row) in res || word.allSatisfy { c in row.contains(c) } }
+            guard isWordInRow else { continue }
+            result.append(words[i])
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
