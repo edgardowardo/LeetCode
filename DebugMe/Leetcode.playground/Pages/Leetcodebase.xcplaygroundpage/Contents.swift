@@ -15222,5 +15222,21 @@ class Leet0500 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-equivalent-domino-pairs
+class Leet1128 {
+    func numEquivDominoPairs(_ dominoes: [[Int]]) -> Int {
+        var num = Array(repeating: 0, count: 100), result = 0
+        for d in dominoes {
+            let v = d[0] < d[1] ? d[0] * 10 + d[1] : d[1] * 10 + d[0]
+            result += num[v]
+            num[v] += 1
+        }
+        return result
+    }
+}
+
+
+
 
 print("All playground tests passed!")
