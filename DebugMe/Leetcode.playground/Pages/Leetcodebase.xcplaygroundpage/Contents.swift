@@ -15236,6 +15236,23 @@ class Leet1128 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/domino-and-tromino-tiling
+class Leet0790 {
+    func numTilings(_ n: Int) -> Int {
+        let mod = 1_000_000_007
+        guard n > 2 else { return n }
+        var fCurr = 5, fPrev = 2, fBeforePrev = 1, k = 4
+        while k < n + 1 {
+            k += 1
+            let tmp = fPrev
+            fPrev = fCurr
+            fCurr = (2 * fCurr + fBeforePrev) % mod
+            fBeforePrev = tmp
+        }
+        return fCurr % mod
+    }
+}
 
 
 
