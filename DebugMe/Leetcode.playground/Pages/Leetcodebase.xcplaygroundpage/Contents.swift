@@ -15290,7 +15290,24 @@ class Leet2535 {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/get-maximum-in-generated-array/
+class Leet1646 {
+    func getMaximumGenerated(_ n: Int) -> Int {
+        guard n > 1 else { return n }
+        var result = 1, nums = [0, 1]
+        for i in 2...n {
+            let half = i / 2
+            if i.isMultiple(of: 2) {
+                nums.append(nums[half])
+            } else {
+                nums.append(nums[half] + nums[half + 1])
+            }
+            result = max(result, nums.last!)
+        }
+        return result
+    }
+}
 
 
 
