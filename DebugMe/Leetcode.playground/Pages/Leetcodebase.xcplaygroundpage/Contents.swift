@@ -15255,5 +15255,13 @@ class Leet0790 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/build-array-from-permutation/
+class Leet1920 {
+    func buildArray(_ nums: [Int]) -> [Int] {
+        nums.map { nums[$0] }
+    }
+}
+
 
 print("All playground tests passed!")
