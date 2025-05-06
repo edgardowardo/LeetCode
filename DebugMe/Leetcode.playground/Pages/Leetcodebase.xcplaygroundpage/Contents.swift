@@ -15324,6 +15324,33 @@ class Leet2240 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/make-number-of-distinct-characters-equal/
+class Leet2531 {
+    func isItPossible(_ word1: String, _ word2: String) -> Bool {
+        let word1 = Array(word1), word2 = Array(word2)
+        var freq1 = word1.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+        var freq2 = word2.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+        for (k1, v1) in freq1 {
+            for (k2, v2) in freq2 {
+                var temp1 = freq1, temp2 = freq2
+
+                temp1[k1, default: 0] -= 1
+                temp2[k1, default: 0] += 1
+                if temp1[k1]! == 0 { temp1[k1] = nil }
+                                
+                temp2[k2, default: 0] -= 1
+                temp1[k2, default: 0] += 1
+                if temp2[k2]! == 0 { temp2[k2] = nil }
+                                
+                if temp1.count == temp2.count {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+}
 
 
 print("All playground tests passed!")
