@@ -15352,5 +15352,23 @@ class Leet2531 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-players-with-zero-or-one-losses/
+class Leet2225 {
+    func findWinners(_ matches: [[Int]]) -> [[Int]] {
+        var winsMap = [Int: Int](), losMap = [Int: Int]()
+        for m in matches {
+            winsMap[m[0], default: 0] += 1
+            losMap[m[1], default: 0] += 1
+        }
+        return [winsMap.keys.filter { losMap[$0] == nil }.sorted(),
+                losMap.keys.filter { losMap[$0] == 1 }.sorted()]
+    }
+}
+
+
+
+
+
 
 print("All playground tests passed!")
