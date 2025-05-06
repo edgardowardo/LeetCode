@@ -15281,6 +15281,19 @@ class Leet2457 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/difference-between-element-sum-and-digit-sum-of-an-array/
+class Leet2535 {
+    func differenceOfSum(_ nums: [Int]) -> Int {
+        abs(nums.reduce(0, +) - nums.reduce(0) { $0 + $1.sum })
+    }
+}
+
+
+
+
+
+
 
 
 
