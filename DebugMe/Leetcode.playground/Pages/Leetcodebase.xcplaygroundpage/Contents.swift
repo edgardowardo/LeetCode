@@ -15309,7 +15309,19 @@ class Leet1646 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-ways-to-buy-pens-and-pencils/
+class Leet2240 {
+    func waysToBuyPensPencils(_ total: Int, _ cost1: Int, _ cost2: Int) -> Int {
+        var i = 0, hiCost = max(cost1, cost2), hiTotal = 0, loCost = min(cost1, cost2), result = 0
+        while hiTotal <= total {
+            result += (total - hiTotal) / loCost + 1
+            i += 1
+            hiTotal = i * hiCost
+        }
+        return result
+    }
+}
 
 
 
