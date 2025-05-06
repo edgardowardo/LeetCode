@@ -15367,6 +15367,33 @@ class Leet2225 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/transformed-array/
+class Leet3379 {
+    func constructTransformedArray(_ nums: [Int]) -> [Int] {
+        var result = nums
+        for i in 0..<nums.count where nums[i] != 0 {
+            let n = nums[i]
+            if n > 0 {
+                let j = (i + n) % nums.count
+                result[i] = nums[j]
+            } else {
+                let j = ((i + n) %  nums.count + nums.count) % nums.count
+                result[i] = nums[j]
+            }
+        }
+        return result
+    }
+    static func test() {
+        let sut = Leet3379()
+        assert(sut.constructTransformedArray([-10,-10,-4]) == [-4,-10,-10])
+        assert(sut.constructTransformedArray([3,-2,1,1]) == [1,1,1,3])
+        assert(sut.constructTransformedArray([-1,4,-1]) == [-1,-1,4])
+        assert(sut.constructTransformedArray([-10,-10]) == [-10,-10])
+    }
+}
+//Leet3379.test()
+
 
 
 
