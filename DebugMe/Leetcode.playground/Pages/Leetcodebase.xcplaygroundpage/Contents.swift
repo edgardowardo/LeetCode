@@ -15264,4 +15264,24 @@ class Leet1920 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-addition-to-make-integer-beautiful/
+class Leet2457 {
+    func makeIntegerBeautiful(_ n: Int, _ target: Int) -> Int {
+        var order = 10, x = 0
+        while !isBeautiful(n + x, target) {
+            x = order - (n % order)
+            order *= 10
+        }
+        return x
+    }
+    private func isBeautiful(_ n: Int, _ target: Int) -> Bool {
+        n.sum <= target
+    }
+}
+
+
+
+
+
 print("All playground tests passed!")
