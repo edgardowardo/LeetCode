@@ -15395,6 +15395,50 @@ class Leet3379 {
 //Leet3379.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i
+class Leet3341 {
+    struct State: Comparable {
+        let x: Int, y: Int, time: Int
+        static func < (lhs: State, rhs: State) -> Bool {
+            lhs.time < rhs.time
+        }
+    }
+        
+    func minTimeToReach(_ moveTime: [[Int]]) -> Int {
+        let n = moveTime.count, m = moveTime[0].count
+        var d = [[Int]](repeating: [Int](repeating: Int.max, count: m), count: n)
+        var v = [[Bool]](repeating: [Bool](repeating: false, count: m), count: n)
+        let dirs = [(1,0), (-1,0), (0,1), (0,-1)]
+        d[0][0] = 0
+        var q: Heap<State> = [.init(x: 0, y: 0, time: 0)]
+        while let s = q.popMin() {
+            guard !v[s.x][s.y] else { continue }
+            v[s.x][s.y] = true
+            for (dx, dy) in dirs {
+                let nx = s.x + dx, ny = s.y + dy
+                guard 0..<n ~= nx, 0..<m ~= ny else { continue }
+                let time = max(d[s.x][s.y], moveTime[nx][ny]) + 1
+                guard d[nx][ny] > time else { continue }
+                d[nx][ny] = time
+                q.insert(.init(x: nx, y: ny, time: time))
+            }
+        }
+        return d[n-1][m-1]
+    }
+    static func test() {
+        let sut = Leet3341()
+        assert(sut.minTimeToReach([[56,93], [3,38]]) == 39)
+    }
+}
+//Leet3341.test()
+
+
+
+
+
+
+
 
 
 
