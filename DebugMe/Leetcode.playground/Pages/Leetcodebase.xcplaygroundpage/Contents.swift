@@ -15434,7 +15434,18 @@ class Leet3341 {
 //Leet3341.test()
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/
+class Leet1779 {
+    func nearestValidPoint(_ x: Int, _ y: Int, _ points: [[Int]]) -> Int {
+        points
+            .enumerated()
+            .filter { (_, v) in v[0] == x || v[1] == y }
+            .map { (i, v) in (i: i, d: abs(v[0] - x) + abs(v[1] - y)) }
+            .sorted { $0.d < $1.d }
+            .first?.i ?? -1
+    }
+}
 
 
 
