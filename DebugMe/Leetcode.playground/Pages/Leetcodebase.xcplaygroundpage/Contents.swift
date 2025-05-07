@@ -15553,5 +15553,20 @@ class Leet2287 {
         return factors.reduce(into: Int.max) { result, pair in result = min(result, (counts[pair.key] ?? 0) / pair.value) }    }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/
+class Leet1160 {
+    func countCharacters(_ words: [String], _ chars: String) -> Int {
+        let charsCount = chars.reduce(into: [Character: Int]()) { counts, c in counts[c, default: 0] += 1 }
+        var result = 0
+        for w in words {
+            let wCount = w.reduce(into: [Character: Int]()) { counts, c in counts[c, default: 0] += 1 }
+            guard wCount.allSatisfy({ charsCount[$0.key] ?? 0 >= $0.value }) else { continue }
+            result += w.count
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
