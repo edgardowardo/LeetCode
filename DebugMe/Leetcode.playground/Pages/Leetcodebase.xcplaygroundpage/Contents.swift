@@ -15463,7 +15463,33 @@ class Leet1827 {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-operations-to-make-columns-strictly-increasing/
+class Leet3402 {
+    
+    private func minOperations(_ nums: [Int]) -> Int {
+        var result = 0, nums = nums
+        guard nums.count > 1 else { return result }
+        for i in 1..<nums.count where nums[i] <= nums[i-1] {
+            let diff = nums[i-1] - nums[i] + 1
+            nums[i] += diff
+            result += diff
+        }
+        return result
+    }
+    
+    func minimumOperations(_ grid: [[Int]]) -> Int {
+        var result = 0
+        for col in grid[0].indices {
+            var columnValues: [Int] = []
+            for row in grid.indices {
+                columnValues.append(grid[row][col])
+            }
+            result += minOperations(columnValues)
+        }
+        return result
+    }
+}
 
 
 print("All playground tests passed!")
