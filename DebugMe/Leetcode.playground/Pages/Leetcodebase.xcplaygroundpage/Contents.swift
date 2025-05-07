@@ -15501,4 +15501,37 @@ class Leet1133 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/design-neighbor-sum-service/
+class Leet3242 {
+    
+    private var map = [Int: (x: Int, y: Int)]()
+    private let n: Int, m: Int, grid: [[Int]]
+    private func sum(_ value: Int, _ vector: [(Int, Int)]) -> Int {
+        guard let p = map[value] else { return 0 }
+        var result = 0
+        for (dx, dy) in vector {
+            let nx = p.x + dx, ny = p.y + dy
+            guard 0..<n ~= nx, 0..<m ~= ny else { continue }
+            result += grid[nx][ny]
+        }
+        return result
+    }
+        
+    init(_ grid: [[Int]]) {
+        n = grid.count
+        m = grid[0].count
+        self.grid = grid
+        for x in 0..<grid.count {
+            for y in 0..<grid[x].count {
+                map[grid[x][y]] = (x: x, y: y)
+            }
+        }
+    }
+    
+    func adjacentSum(_ value: Int) -> Int { sum(value, [(0, 1), (0, -1), (1, 0), (-1, 0)]) }
+    func diagonalSum(_ value: Int) -> Int { sum(value, [(1, 1), (1, -1), (-1, 1), (-1, -1)]) }
+}
+
+
 print("All playground tests passed!")
