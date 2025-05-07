@@ -15534,4 +15534,16 @@ class Leet3242 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-number-of-balloons/
+class Leet1189 {
+    func maxNumberOfBalloons(_ text: String) -> Int {
+        let counts = text.reduce(into: [:]) { counts, c in counts[c, default: 0] += 1 }.filter { "balloon".contains($0.key) }
+        let factors = "balloon".reduce(into: [:]) { counts, c in counts[c, default: 0] += 1 }
+        return factors.reduce(into: Int.max) { result, pair in result = min(result, (counts[pair.key] ?? 0) / pair.value) }
+    }
+}
+
+
+
 print("All playground tests passed!")
