@@ -15544,6 +15544,14 @@ class Leet1189 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/rearrange-characters-to-make-target-string/
+class Leet2287 {
+    func rearrangeCharacters(_ s: String, _ target: String) -> Int {
+        let counts = s.reduce(into: [:]) { counts, c in counts[c, default: 0] += 1 }.filter { target.contains($0.key) }
+        let factors = target.reduce(into: [:]) { counts, c in counts[c, default: 0] += 1 }
+        return factors.reduce(into: Int.max) { result, pair in result = min(result, (counts[pair.key] ?? 0) / pair.value) }    }
+}
 
 
 print("All playground tests passed!")
