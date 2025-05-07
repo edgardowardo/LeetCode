@@ -15568,5 +15568,17 @@ class Leet1160 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-balanced-string/
+class Leet3340 {
+    func isBalanced(_ num: String) -> Bool {
+        let nums = Array(num).map { Int(String($0))! }
+        return nums.indices.reduce(into: 0) { (sum, i) in sum += (i % 2 == 0) ? nums[i] : 0 }
+            == nums.indices.reduce(into: 0) { (sum, i) in sum += (i % 2 != 0) ? nums[i] : 0 }
+    }
+}
+
+
+
 
 print("All playground tests passed!")
