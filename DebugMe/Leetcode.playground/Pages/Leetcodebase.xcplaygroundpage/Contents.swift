@@ -15447,7 +15447,20 @@ class Leet1779 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-operations-to-make-the-array-increasing/
+class Leet1827 {
+    func minOperations(_ nums: [Int]) -> Int {
+        var result = 0, nums = nums
+        guard nums.count > 1 else { return result }
+        for i in 1..<nums.count where nums[i] <= nums[i-1] {
+            let diff = nums[i-1] - nums[i] + 1
+            nums[i] += diff
+            result += diff
+        }
+        return result
+    }
+}
 
 
 
