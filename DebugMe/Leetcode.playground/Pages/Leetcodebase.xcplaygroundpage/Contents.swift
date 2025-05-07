@@ -15492,4 +15492,13 @@ class Leet3402 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/largest-unique-number/
+class Leet1133 {
+    func largestUniqueNumber(_ nums: [Int]) -> Int {
+        nums.reduce(into: [:]) { $0[$1, default: 0] += 1 }.filter { $1 == 1 }.keys.max() ?? -1
+    }
+}
+
+
 print("All playground tests passed!")
