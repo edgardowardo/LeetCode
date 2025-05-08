@@ -15433,6 +15433,39 @@ class Leet3341 {
 }
 //Leet3341.test()
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-minimum-time-to-reach-last-room-ii/
+class Leet3342 {
+    struct State: Comparable {
+        let x: Int, y: Int, time: Int
+        static func < (lhs: State, rhs: State) -> Bool {
+            lhs.time < rhs.time
+        }
+    }
+        
+    func minTimeToReach(_ moveTime: [[Int]]) -> Int {
+        let n = moveTime.count, m = moveTime[0].count
+        var d = [[Int]](repeating: [Int](repeating: Int.max, count: m), count: n)
+        var v = [[Bool]](repeating: [Bool](repeating: false, count: m), count: n)
+        let dirs = [(1,0), (-1,0), (0,1), (0,-1)]
+        d[0][0] = 0
+        var q: Heap<State> = [.init(x: 0, y: 0, time: 0)]
+        while let s = q.popMin() {
+            guard !v[s.x][s.y] else { continue }
+            v[s.x][s.y] = true
+            for (dx, dy) in dirs {
+                let nx = s.x + dx, ny = s.y + dy, offset = (nx % 2 == 0) ? ((ny % 2 == 0) ? 2 : 1) : ((ny % 2 == 0) ? 1 : 2)
+                guard 0..<n ~= nx, 0..<m ~= ny else { continue }
+                let time = max(d[s.x][s.y], moveTime[nx][ny]) + offset
+                guard d[nx][ny] > time else { continue }
+                d[nx][ny] = time
+                q.insert(.init(x: nx, y: ny, time: time))
+            }
+        }
+        return d[n-1][m-1]
+    }
+}
+
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/
