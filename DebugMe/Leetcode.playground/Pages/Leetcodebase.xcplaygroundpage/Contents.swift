@@ -15661,4 +15661,23 @@ Leet0734.test()
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/
+class Leet2273 {
+    func removeAnagrams(_ words: [String]) -> [String] {
+        var result = [words[0]], last = words[0].sortedCharacters
+        guard words.count > 1 else { return result }
+        for i in 1..<words.count {
+            let current = words[i].sortedCharacters
+            if current != last {
+                result.append(words[i])
+                last = current
+            }
+        }
+        return result
+    }
+}
+
+
+
 print("All playground tests passed!")
