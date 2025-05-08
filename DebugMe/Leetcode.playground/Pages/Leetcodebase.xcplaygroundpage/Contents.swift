@@ -15678,6 +15678,18 @@ class Leet2273 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-the-number-of-vowel-strings-in-range/
+class Leet2586 {
+    func vowelStrings(_ words: [String], _ left: Int, _ right: Int) -> Int {
+        words[left...right]
+            .count(where: {
+                "aeiou".contains(String($0.prefix(1)))
+                && "aeiou".contains(String($0.suffix(1))) }
+            )
+    }
+}
+
 
 
 print("All playground tests passed!")
