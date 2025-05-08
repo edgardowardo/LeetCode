@@ -15636,7 +15636,7 @@ class Leet0734 {
             [["good","nice"],["good","excellent"],["good","well"],["good","great"],["fine","nice"],["fine","excellent"],["fine","well"],["fine","great"],["wonderful","nice"],["wonderful","excellent"],["wonderful","well"],["wonderful","great"],["extraordinary","nice"],["extraordinary","excellent"],["extraordinary","well"],["extraordinary","great"],["one","a"],["one","an"],["one","unique"],["one","any"],["single","a"],["single","an"],["single","unique"],["single","any"],["the","a"],["the","an"],["the","unique"],["the","any"],["some","a"],["some","an"],["some","unique"],["some","any"],["car","vehicle"],["car","automobile"],["car","truck"],["auto","vehicle"],["auto","automobile"],["auto","truck"],["wagon","vehicle"],["wagon","automobile"],["wagon","truck"],["have","take"],["have","drink"],["eat","take"],["eat","drink"],["entertain","take"],["entertain","drink"],["meal","lunch"],["meal","dinner"],["meal","breakfast"],["meal","fruits"],["super","lunch"],["super","dinner"],["super","breakfast"],["super","fruits"],["food","lunch"],["food","dinner"],["food","breakfast"],["food","fruits"],["brunch","lunch"],["brunch","dinner"],["brunch","breakfast"],["brunch","fruits"],["own","have"],["own","possess"],["keep","have"],["keep","possess"],["very","super"],["very","actually"],["really","super"],["really","actually"],["extremely","super"],["extremely","actually"]]))
     }
 }
-Leet0734.test()
+//Leet0734.test()
 
 /*
  ["great","acting","skills"]
@@ -15658,6 +15658,38 @@ Leet0734.test()
  ["well", "food", "food"]
  [["fine","well"],["fine","great"],["apple","food"],["orange","food"]]
  */
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sentence-similarity-ii/
+class Leet0737 {
+    func areSentencesSimilarTwo(_ sentence1: [String], _ sentence2: [String], _ similarPairs: [[String]]) -> Bool {
+        guard sentence1.count == sentence2.count else { return false }
+        let d = similarPairs.reduce(into: [String: Set<String>]()) { r, p in
+            r[p[0], default: []].insert(p[1])
+            r[p[1], default: []].insert(p[0])
+        }
+        func isSimilar(_ w1: String, _ w2: String, _ seen: inout Set<String>) -> Bool {
+            guard w1 != w2 else { return true }
+            guard let s = d[w1], !seen.contains(w1) else { return false }
+            seen.insert(w1)
+            // traverse the "d" dictionary until we find w2
+            return s.reduce(into: false) { ok, w in ok = ok || w == w2 || isSimilar(w, w2, &seen) }
+        }
+        return zip(sentence1, sentence2).allSatisfy {
+            var seen: Set<String> = []
+            return isSimilar($0, $1, &seen)
+        }
+    }
+    static func test() {
+        let sut = Leet0737()
+        assert(sut.areSentencesSimilarTwo(["I","love","leetcode"], ["I","love","onepiece"], [["manga","onepiece"],["platform","anime"],["leetcode","platform"],["anime","manga"]]))
+        assert(sut.areSentencesSimilarTwo(["great", "acting", "skills"], ["fine","drama","talent"], [["great","good"],["fine","good"],["drama","acting"],["skills","talent"]]))
+    }
+}
+//Leet0737.test()
+
+
 
 
 
@@ -15689,6 +15721,9 @@ class Leet2586 {
             )
     }
 }
+
+
+
 
 
 
