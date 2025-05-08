@@ -1471,7 +1471,16 @@ func getGroupedAnagrams(words: [String]) -> Int {
 //assert(getGroupedAnagrams(words: ["cat", "listen", "silent", "kitten", "salient"]) == 4)
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/group-anagrams/description/
+class Leet0049 {
+    func groupAnagrams(_ strs: [String]) -> [[String]] {
+        strs.reduce(into: [String: [String]]()) { r, s in r[s.sortedCharacters, default: []].append(s) }.values.compactMap { $0 }
+    }
+}
+extension String {
+    var sortedCharacters: String { String(self.sorted()) }
+}
 
 
 
