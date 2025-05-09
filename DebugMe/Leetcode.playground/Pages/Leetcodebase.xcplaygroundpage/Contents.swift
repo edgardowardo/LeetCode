@@ -15765,7 +15765,59 @@ class Leet2342 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-number-of-balanced-permutations/
+///REVITSIT!
+class Leet3343 {
+    func countBalancedPermutations(_ num: String) -> Int {
+        let mod = 1_000_000_007, n = num.count
+        var tot = 0, cnt = [Int](repeating: 0, count: 10)
+        for c in num {
+            guard let d = Int(String(c)) else { continue }
+            cnt[d] += 1
+            tot += d
+        }
+        guard tot % 2 == 0 else { return 0 }
 
+        let target = tot / 2, maxOdd = (n + 1) / 2
+        var comb = [[Int]](repeating: [Int](repeating: 1, count: maxOdd + 1), count: maxOdd + 1)
+        for i in 1...maxOdd {
+            comb[i][0] = 1
+            comb[i][i] = 1
+            for j in 1..<i {
+                comb[i][j] = (comb[i - 1][j] + comb[i - 1][j - 1]) % mod
+            }
+        }
+
+        var f = [[Int]](repeating: [Int](repeating: 0, count: maxOdd + 1), count: target + 1)
+        f[0][0] = 1
+        var pSum = 0, totSum = 0
+        for i in 0...9 {
+            pSum += cnt[i]
+            totSum += i * cnt[i]
+            for oddCnt in stride(from: min(pSum, maxOdd), through: max(0, pSum - (n - maxOdd)), by: -1) {
+                let eventCnt = pSum - oddCnt
+                for curr in stride(from: min(totSum, target), through: max(0, totSum - target), by: -1) {
+                    var res = 0, j = max(0, cnt[i] - eventCnt)
+                    while j <= min(cnt[i], oddCnt) && i * j <= curr {
+                        if curr - i * j >= 0 && oddCnt - j >= 0 {
+                            let ways = (comb[oddCnt][j] * comb[eventCnt][cnt[i] - j]) % mod
+                            res = (res + ((ways * f[curr - i * j][oddCnt - j]) % mod)) % mod
+                        }
+                        j += 1
+                    }
+                    f[curr][oddCnt] = res % mod
+                }
+            }
+        }
+        return f[target][maxOdd]
+    }
+    static func test() {
+        let sut = Leet3343()
+        assert(sut.countBalancedPermutations("123") == 2)
+    }
+}
+//Leet3343.test()
 
 
 
