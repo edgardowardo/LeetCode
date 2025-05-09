@@ -15928,9 +15928,7 @@ class Leet1297 {
         var freq = [Character: Int](), l = 0, strFreqs = [String: Int]()
         func shrink(_ f: inout [Character: Int], _ l: inout Int, _ size: inout Int) {
             f[s[l]]! -= 1
-            if f[s[l]] == 0 {
-                f[s[l]] = nil
-            }
+            if f[s[l]] == 0 { f[s[l]] = nil }
             l += 1
             size -= 1
         }
@@ -15941,15 +15939,13 @@ class Leet1297 {
             while freq.keys.count > maxLetters || size > maxSize {
                 shrink(&freq, &l, &size)
             }
-            guard minSize...maxSize ~= size else { continue }
-            guard freq.keys.count <= maxLetters else { continue }
+            guard minSize...maxSize ~= size, freq.keys.count <= maxLetters else { continue }
             strFreqs[String(s[l...r]), default: 0] += 1
                         
             var freq2 = freq, size2 = size, l2 = l
             while size2 > minSize {
                 shrink(&freq2, &l2, &size2)
-                guard minSize...maxSize ~= size2 else { continue }
-                guard freq2.keys.count <= maxLetters else { continue }
+                guard minSize...maxSize ~= size2, freq2.keys.count <= maxLetters else { continue }
                 strFreqs[String(s[l2...r]), default: 0] += 1
             }
         }
@@ -15999,9 +15995,6 @@ Leet1297.test()
  2
  4
  6
- 
- 
- 
  "ffcbcecaaeaafcb"
  1
  8
