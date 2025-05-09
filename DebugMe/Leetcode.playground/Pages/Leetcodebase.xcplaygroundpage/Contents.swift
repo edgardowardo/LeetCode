@@ -16010,6 +16010,14 @@ class Leet2942 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-target-indices-after-sorting-array/
+class Leet2089 {
+    func targetIndices(_ nums: [Int], _ target: Int) -> [Int] {
+        let nums = nums.sorted { $0 < $1 }
+        return nums.indices.filter { nums[$0] == target }
+    }
+}
 
 
 print("All playground tests passed!")
