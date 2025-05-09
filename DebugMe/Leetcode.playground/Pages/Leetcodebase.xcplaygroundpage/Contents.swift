@@ -15858,6 +15858,14 @@ class Leet2352 {
 //Leet2352.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/jewels-and-stones/
+class Leet0771 {
+    func numJewelsInStones(_ jewels: String, _ stones: String) -> Int {
+        let j = Set(jewels)
+        return Array(stones).reduce(into: 0) { cnt, s in cnt += j.contains(String(s)) ? 1 : 0 }
+    }
+}
 
 
 
