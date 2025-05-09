@@ -15822,4 +15822,34 @@ class Leet3343 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/equal-row-and-column-pairs/
+class Leet2352 {
+    func equalPairs(_ grid: [[Int]]) -> Int {
+        let n = grid.count
+        var rows = [String: Int](), cols = [String: Int]()
+        for i in 0..<n {
+            let r = grid[i], kr = r.map(String.init).joined(separator: ",")
+            rows[kr, default: 0] += 1
+            let kc = (0..<n).map { "\(grid[$0][i])" }.joined(separator: ",")
+            cols[kc, default: 0] += 1
+        }
+        return rows.reduce(into: 0) { res, r in
+            guard let cCount = cols[r.key] else { return }
+            res += r.value * cCount
+        }
+    }
+    static func test() {
+        let sut = Leet2352()
+        assert(sut.equalPairs([[11,1],[1,11]]) == 2)
+        assert(sut.equalPairs([[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]) == 3)
+    }
+}
+//Leet2352.test()
+
+
+
+
+
+
 print("All playground tests passed!")
