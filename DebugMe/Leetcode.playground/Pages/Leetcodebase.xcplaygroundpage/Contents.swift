@@ -16002,6 +16002,14 @@ Leet1297.test()
  
  */
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-words-containing-character/
+class Leet2942 {
+    func findWordsContaining(_ words: [String], _ x: Character) -> [Int] {
+        words.indices.filter { words[$0].contains(x) }
+    }
+}
+
 
 
 print("All playground tests passed!")
