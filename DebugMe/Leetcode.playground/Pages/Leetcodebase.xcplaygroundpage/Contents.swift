@@ -2735,7 +2735,17 @@ func canWrite(ransomNote: String, from magazine: String) -> Bool {
 //assert(canWrite(ransomNote: "aa", from: "aab") == true)
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/ransom-note/
+class Leet0383 {
+    func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        let m = magazine
+            .reduce(into: [Character:Int]()) { m, c in m[c, default: 0] += 1 }
+        return ransomNote
+            .reduce(into: [Character:Int]()) { r, c in r[c, default: 0] += 1 }
+            .allSatisfy { m[$0.key] ?? 0 >= $0.value }
+    }
+}
 
 func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
     guard ransomNote.count <= magazine.count else {
