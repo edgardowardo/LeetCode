@@ -15868,6 +15868,29 @@ class Leet0771 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/delete-greatest-value-in-each-row/
+class Leet2500 {
+    private func deleteGreatestValue(_ grid: [Heap<Int>]) -> Int {
+        var result = 0, grid = grid
+        for i in 0..<grid.count {
+            guard let m = grid[i].popMax() else { continue }
+            result = max(result, m)
+        }
+        guard grid[0].count > 0 else { return result }
+        return deleteGreatestValue(grid) + result
+    }
+    func deleteGreatestValue(_ grid: [[Int]]) -> Int {
+        deleteGreatestValue(grid.map { Heap($0) })
+    }
+    static func test() {
+        let sut = Leet2500()
+        assert(sut.deleteGreatestValue([[1,2,4],[3,3,1]]) == 8)
+    }
+}
+//Leet2500.test()
+
+
 
 
 print("All playground tests passed!")
