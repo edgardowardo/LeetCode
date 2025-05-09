@@ -15892,5 +15892,22 @@ class Leet2500 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-in-a-matrix/
+class Leet2679 {
+    private func matrixSum(_ grid: [Heap<Int>]) -> Int {
+        var result = 0, grid = grid
+        for i in 0..<grid.count {
+            guard let m = grid[i].popMax() else { continue }
+            result = max(result, m)
+        }
+        guard grid[0].count > 0 else { return result }
+        return matrixSum(grid) + result
+    }
+    func matrixSum(_ nums: [[Int]]) -> Int {
+        matrixSum(nums.map(Heap.init))
+    }
+}
+
 
 print("All playground tests passed!")
