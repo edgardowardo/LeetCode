@@ -15909,5 +15909,15 @@ class Leet2679 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/set-mismatch/
+class Leet0645 {
+    func findErrorNums(_ nums: [Int]) -> [Int] {
+        let n = nums.count, sum = (n * (n + 1)) / 2, actualSum = nums.reduce(0, +)
+        let dup = nums.reduce(into: [Int: Int]()) { f, n in f[n, default: 0] += 1 }.filter { $1 > 1 }.keys.first!
+        return [dup, sum - (actualSum - dup)]
+    }
+}
+
 
 print("All playground tests passed!")
