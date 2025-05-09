@@ -15920,4 +15920,95 @@ class Leet0645 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/
+class Leet1297 {
+    func maxFreq(_ s: String, _ maxLetters: Int, _ minSize: Int, _ maxSize: Int) -> Int {
+        let s = Array(s)
+        var freq = [Character: Int](), l = 0, strFreqs = [String: Int]()
+        func shrink(_ f: inout [Character: Int], _ l: inout Int, _ size: inout Int) {
+            f[s[l]]! -= 1
+            if f[s[l]] == 0 {
+                f[s[l]] = nil
+            }
+            l += 1
+            size -= 1
+        }
+        for r in 0..<s.count {
+            let c = s[r]
+            freq[c, default: 0] += 1
+            var size = r - l + 1
+            while freq.keys.count > maxLetters || size > maxSize {
+                shrink(&freq, &l, &size)
+            }
+            guard minSize...maxSize ~= size else { continue }
+            guard freq.keys.count <= maxLetters else { continue }
+            strFreqs[String(s[l...r]), default: 0] += 1
+                        
+            var freq2 = freq, size2 = size, l2 = l
+            while size2 > minSize {
+                shrink(&freq2, &l2, &size2)
+                guard minSize...maxSize ~= size2 else { continue }
+                guard freq2.keys.count <= maxLetters else { continue }
+                strFreqs[String(s[l2...r]), default: 0] += 1
+            }
+        }
+        return strFreqs.values.max() ?? 0
+    }
+    static func test() {
+        let sut = Leet1297()
+        assert(sut.maxFreq("aaaaacbc", 2, 4, 6) == 2)
+        assert(sut.maxFreq("aabcabcab", 2, 2, 3) == 3)
+        assert(sut.maxFreq("aababcaab", 2, 3, 4) == 2)
+        assert(sut.maxFreq("aaaa", 1, 3, 3) == 2)
+    }
+}
+Leet1297.test()
+
+
+/*
+ "aababcaab"
+ 2
+ 3
+ 4
+ "aaaa"
+ 1
+ 3
+ 3
+ "ffcbcecaaeaafcb"
+ 1
+ 8
+ 10
+ "bccaaabac"
+ 2
+ 3
+ 3
+ "bccaaabac"
+ 2
+ 2
+ 2
+ "abcdef"
+ 2
+ 2
+ 2
+ "aabcabcab"
+ 2
+ 2
+ 3
+ "aaaaacbc"
+ 2
+ 4
+ 6
+ 
+ 
+ 
+ "ffcbcecaaeaafcb"
+ 1
+ 8
+ 10
+ 
+ */
+
+
+
 print("All playground tests passed!")
