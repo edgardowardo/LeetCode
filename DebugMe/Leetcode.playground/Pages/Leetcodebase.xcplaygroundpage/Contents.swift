@@ -16083,4 +16083,33 @@ class Leet2918 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/rank-transform-of-an-array/
+class Leet1331 {
+    func arrayRankTransform(_ arr: [Int]) -> [Int] {
+        guard !arr.isEmpty else { return [] }
+        let enumerates = arr.enumerated(), sorteds = enumerates.sorted { $0.element < $1.element }
+        var r = 1, ranks: [(r: Int, v: Int)] = [(1, sorteds[0].element)]
+        for i in 1..<sorteds.count {
+            let c = sorteds[i], p = sorteds[i-1]
+            if c.element != p.element {
+                r += 1
+            }
+            ranks.append((r, c.element))
+        }
+        let ranksMap = ranks.reduce(into: [Int: Int]()) { res, e in res[e.v] = e.r }
+        return arr.compactMap { ranksMap[$0] }
+    }
+    
+    static func test() {
+        let sut = Leet1331()
+        assert(sut.arrayRankTransform([100]) == [1])
+        assert(sut.arrayRankTransform([37,12,28,9,100,56,80,5,12]) == [5,3,4,2,8,6,7,1,3])
+    }
+}
+//Leet1331.test()
+
+
+
+
 print("All playground tests passed!")
