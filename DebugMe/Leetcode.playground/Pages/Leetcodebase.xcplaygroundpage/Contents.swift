@@ -16113,24 +16113,12 @@ class Leet1331 {
 ///https://leetcode.com/problems/perform-string-shifts/
 class Leet1427 {
     func stringShift(_ s: String, _ shift: [[Int]]) -> String {
-        var deque = Deque(s)
-        for op in shift {
-            let dir = op[0], amt = op[1]
-            if dir == 0 { // left
-                for _ in 0..<amt {
-                    let first = deque.removeFirst()
-                    deque.append(first)
-                }
-            } else {
-                for _ in 0..<amt {
-                    let last = deque.removeLast()
-                    deque.insert(last, at: 0)
-                }
-            }
-        }
-        return String(deque)
+        let netShift = shift.reduce(into: 0) { res, c in res += c[0] == 0 ? -c[1] : c[1] }
+        let n = s.count, s = Array(s), finalShift = ((netShift % n) + n ) % n
+        return String(s[(n - finalShift)...] + s[..<(n - finalShift)])
     }
 }
+
 
 
 print("All playground tests passed!")
