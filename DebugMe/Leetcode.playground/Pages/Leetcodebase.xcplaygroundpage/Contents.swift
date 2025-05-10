@@ -16109,7 +16109,28 @@ class Leet1331 {
 }
 //Leet1331.test()
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/perform-string-shifts/
+class Leet1427 {
+    func stringShift(_ s: String, _ shift: [[Int]]) -> String {
+        var deque = Deque(s)
+        for op in shift {
+            let dir = op[0], amt = op[1]
+            if dir == 0 { // left
+                for _ in 0..<amt {
+                    let first = deque.removeFirst()
+                    deque.append(first)
+                }
+            } else {
+                for _ in 0..<amt {
+                    let last = deque.removeLast()
+                    deque.insert(last, at: 0)
+                }
+            }
+        }
+        return String(deque)
+    }
+}
 
 
 print("All playground tests passed!")
