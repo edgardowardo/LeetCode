@@ -16140,5 +16140,18 @@ class Leet0836 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/destination-city
+class Leet1436 {
+    func destCity(_ paths: [[String]]) -> String {
+        let hash = paths.reduce(into: [String: String]()) { r, p in r[p[0]] = p[1] }
+        var curr = paths[0][0]
+        while let next = hash[curr] {
+            curr = next
+        }
+        return curr
+    }
+}
+
 
 print("All playground tests passed!")
