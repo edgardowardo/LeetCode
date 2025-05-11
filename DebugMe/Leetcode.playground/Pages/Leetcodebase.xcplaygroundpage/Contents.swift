@@ -16187,4 +16187,16 @@ class Leet1935 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-of-unique-elements/
+class Leet1748 {
+    func sumOfUnique(_ nums: [Int]) -> Int {
+        nums.reduce(into: [Int: Int]()) { res, n in res[n, default: 0] += 1 }
+            .map { (key: $0, value: $1) }
+            .filter { (_, v) in v == 1 }
+            .reduce(into: 0) { res, e in res += e.key }
+    }
+}
+
+
 print("All playground tests passed!")
