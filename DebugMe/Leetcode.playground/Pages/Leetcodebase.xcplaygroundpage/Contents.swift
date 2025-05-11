@@ -16178,4 +16178,13 @@ class Leet1496 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-number-of-words-you-can-type/
+class Leet1935 {
+    func canBeTypedWords(_ text: String, _ brokenLetters: String) -> Int {
+        let brokenSet = Set(brokenLetters)
+        return text.split(separator: " ").filter { brokenSet.intersection(Set($0)).count > 0 }.count
+    }
+}
+
 print("All playground tests passed!")
