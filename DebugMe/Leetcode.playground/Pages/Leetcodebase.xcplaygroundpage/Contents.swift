@@ -16198,5 +16198,16 @@ class Leet1748 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///
+class Leet3005 {
+    func maxFrequencyElements(_ nums: [Int]) -> Int {
+        let freq = nums.reduce(into: [:]) { counts, n in counts[n, default: 0] += 1 }
+        let m = freq.values.max() ?? 0
+        return freq.values.reduce(0) { (res, n) in res + (n == m ? m : 0) }
+    }
+}
+
+
 
 print("All playground tests passed!")
