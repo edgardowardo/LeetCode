@@ -16120,5 +16120,20 @@ class Leet1427 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/three-consecutive-odds/
+class Leeet1550 {
+    func threeConsecutiveOdds(_ arr: [Int]) -> Bool {
+        let n = arr.count, k = 3
+        guard n > 2 else { return false }
+        return arr[(k-1)...].indices.reduce(into: false) { (res, i) in
+            res = res || (arr[i] & 1 == 1) && (arr[i-1] & 1 == 1) && (arr[i-2] & 1 == 1)
+        }
+    }
+}
+
+
+
+
 
 print("All playground tests passed!")
