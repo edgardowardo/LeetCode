@@ -16154,4 +16154,28 @@ class Leet1436 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/path-crossing/
+class Leet1496 {
+    struct Point: Hashable { let x: Int, y: Int }
+    
+    func isPathCrossing(_ path: String) -> Bool {
+        let path = Array(path)
+        var p: Point = .init(x: 0, y: 0), seen: Set<Point> = [p]
+        for c in path {
+            switch c {
+            case "N": p = .init(x: p.x, y: p.y + 1)
+            case "S": p = .init(x: p.x, y: p.y - 1)
+            case "E": p = .init(x: p.x + 1, y: p.y)
+            case "W": p = .init(x: p.x - 1, y: p.y)
+            default: break
+            }
+            guard !seen.contains(p) else { return true }
+            seen.insert(p)
+        }
+        return false
+    }
+}
+
+
 print("All playground tests passed!")
