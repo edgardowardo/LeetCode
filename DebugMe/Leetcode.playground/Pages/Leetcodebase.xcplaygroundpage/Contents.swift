@@ -16287,5 +16287,13 @@ class Leet0438 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/isomorphic-strings/
+class Leet0205 {
+    func isIsomorphic(_ s: String, _ t: String) -> Bool {
+        Set(s).count == Set(t).count && Set(t).count == Set(zip(s, t).map { "\($0)\($1)" }).count
+    }
+}
+
 
 print("All playground tests passed!")
