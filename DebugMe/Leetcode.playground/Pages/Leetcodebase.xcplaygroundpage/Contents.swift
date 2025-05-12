@@ -16295,5 +16295,29 @@ class Leet0205 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/word-pattern/
+class Leet0290 {
+    func wordPattern(_ pattern: String, _ s: String) -> Bool {
+        let patternArray = Array(pattern), s = s.split(separator: " ").map(String.init)
+        var wMap = [String: Character](), cMap = [Character: String]()
+        guard patternArray.count == s.count else { return false }
+        for i in 0..<s.count {
+            let c = patternArray[i], w = s[i]
+            if let existingChar = wMap[w], existingChar != c {
+                return false
+            } else {
+                wMap[w] = c
+            }
+            if let existingWord = cMap[c], existingWord != w {
+                return false
+            } else {
+                cMap[c] = w
+            }
+        }
+        return true
+    }
+}
+
 
 print("All playground tests passed!")
