@@ -16222,5 +16222,23 @@ class Leet1394 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-good-pairs
+class Leet1512 {
+    func numIdenticalPairs(_ nums: [Int]) -> Int {
+        var result = 0
+        _ = nums.reduce(into: [Int: Int]()) { counts, num in
+            result += counts[num, default: 0]
+            counts[num, default: 0] += 1
+        }
+        return result
+    }
+    static func test() {
+        let sut = Leet1512()
+        assert(sut.numIdenticalPairs([1,1,1,1]) == 6)
+    }
+}
+//Leet1512.test()
+
 
 print("All playground tests passed!")
