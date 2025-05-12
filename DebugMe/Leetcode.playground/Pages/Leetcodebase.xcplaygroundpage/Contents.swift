@@ -16241,4 +16241,25 @@ class Leet1512 {
 //Leet1512.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/permutation-in-string/
+class Leet0567 {
+    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
+        guard s1.count <= s2.count else { return false }
+        let s1 = Array(s1), s2 = Array(s2)
+        let s1map = [Character: Int](s1.map { ($0, 1) }, uniquingKeysWith: +)
+        var s2map = [Character: Int](s2.prefix(s1.count).map { ($0, 1) }, uniquingKeysWith: +)
+        for r in s1.count..<s2.count {
+            guard s1map != s2map else { return true }
+            let lChar = s2[r - s1.count], rChar = s2[r]
+            s2map[rChar, default: 0] += 1
+            s2map[lChar, default: 0] -= 1
+            guard s2map[lChar]! == 0 else { continue }
+            s2map[lChar] = nil
+        }
+        return s2map == s1map
+    }
+}
+
+
 print("All playground tests passed!")
