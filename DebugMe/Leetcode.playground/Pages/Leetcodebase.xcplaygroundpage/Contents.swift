@@ -16208,6 +16208,19 @@ class Leet3005 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-lucky-integer-in-an-array
+class Leet1394 {
+    func findLucky(_ arr: [Int]) -> Int {
+        let countMap = arr.reduce(into: [Int: Int]()) { res, n in res[n, default: 0] += 1 }
+        var result = -1
+        for (k, v) in countMap where k == v {
+            result = max(result, k)
+        }
+        return result
+    }
+}
+
 
 
 print("All playground tests passed!")
