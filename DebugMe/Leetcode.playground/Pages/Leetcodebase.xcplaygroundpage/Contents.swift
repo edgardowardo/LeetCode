@@ -16262,4 +16262,30 @@ class Leet0567 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-all-anagrams-in-a-string/
+class Leet0438 {
+    func findAnagrams(_ s: String, _ p: String) -> [Int] {
+        guard p.count <= s.count else { return [] }
+        let p = Array(p), s = Array(s), pCounts = [Character: Int](p.map { ($0, 1) }, uniquingKeysWith: +)
+        var win = [Character: Int](s[..<p.count].map { ($0, 1) }, uniquingKeysWith: +), result = [Int]()
+        for r in p.count..<s.count {
+            if win == pCounts {
+                result.append(r - p.count)
+            }
+            let lChar = s[r - p.count], rChar = s[r]
+            win[rChar, default: 0] += 1
+            win[lChar, default: 0] -= 1
+            if win[lChar] == 0 {
+                win[lChar] = nil
+            }
+        }
+        if win == pCounts {
+            result.append(s.count - p.count)
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
