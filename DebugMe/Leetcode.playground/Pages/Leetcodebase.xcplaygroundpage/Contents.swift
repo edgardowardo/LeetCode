@@ -16320,4 +16320,36 @@ class Leet0290 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/total-characters-in-string-after-transformations-i
+class Leet3335 {
+    func lengthAfterTransformations(_ s: String, _ t: Int) -> Int {
+        let s = Array(s), aVal = Character("a").asciiValue!, mod = 1_000_000_007
+        var cnt = [Int](repeating: 0, count: 26)
+        for ch in s {
+            cnt[Int(ch.asciiValue! - aVal)] += 1
+        }
+        for _ in 0..<t {
+            var nxt = [Int](repeating: 0, count: 26)
+            nxt[0] = cnt[25]
+            nxt[1] = (cnt[25] + cnt[0]) % mod
+            for i in 2..<26 {
+                nxt[i] = cnt[i - 1]
+            }
+            cnt = nxt
+        }
+        var ans = 0
+        for i in 0..<26 {
+            ans = (ans + cnt[i]) % mod
+        }
+        return ans
+    }
+    static func test() {
+        let sut = Leet3335()
+        assert(sut.lengthAfterTransformations("jqktcurgdvlibczdsvnsg", 7517) == 79033769)
+    }
+}
+//Leet3335.test()
+
+
 print("All playground tests passed!")
