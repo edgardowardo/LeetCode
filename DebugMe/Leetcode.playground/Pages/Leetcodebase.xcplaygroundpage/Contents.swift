@@ -16456,4 +16456,35 @@ class Leet0082 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/reverse-linked-list-ii/
+/// REVISIT!
+class Leet0092 {
+    func reverseBetween(_ head: ListNode?, _ left: Int, _ right: Int) -> ListNode? {
+        guard head != nil else { return nil }
+        var cur = head, head = head, prev: ListNode?, m = left, n = right
+        while m > 1 {
+            prev = cur
+            cur = cur?.next
+            m -= 1
+            n -= 1
+        }
+        var con = prev, tail = cur, third: ListNode?
+        while n > 0 {
+            third = cur?.next
+            cur?.next = prev
+            prev = cur
+            cur = third
+            n -= 1
+        }
+        if con != nil {
+            con?.next = prev
+        } else {
+            head = prev
+        }
+        tail?.next = cur
+        return head
+    }
+}
+
 print("All playground tests passed!")
