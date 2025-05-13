@@ -16390,6 +16390,16 @@ class Leet0791 {
  
  */
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/determine-if-two-strings-are-close/
+class Leet1657 {
+    func closeStrings(_ word1: String, _ word2: String) -> Bool {
+        guard word1.count == word2.count else { return false }
+        guard Set(word1) == Set(word2) else { return false }
+        let counts1 = [Character: Int](word1.map { ($0, 1) }, uniquingKeysWith: +)
+        let counts2 = [Character: Int](word2.map { ($0, 1) }, uniquingKeysWith: +)
+        return counts1.values.sorted() == counts2.values.sorted()
+    }
+}
 
 print("All playground tests passed!")
