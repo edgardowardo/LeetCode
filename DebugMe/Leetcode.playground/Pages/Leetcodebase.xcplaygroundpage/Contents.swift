@@ -1134,6 +1134,20 @@ func isPalindrome(_ head: ListNode?) -> Bool {
 //assert(!isPalindrome(ListNode(1, ListNode(1, ListNode(2, ListNode(1))))))
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/linked-list-cycle/description/
+class Leet0141 {
+    func hasCycle(_ head: ListNode?) -> Bool {
+        var slow: ListNode? = head, fast: ListNode? = head
+        while fast != nil && fast?.next != nil {
+            guard slow !== fast?.next else { return true }
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        return false
+    }
+}
+
 
 ///---------------------------------------------------------------------------------------
 /// Leetcode 141
