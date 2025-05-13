@@ -16434,4 +16434,26 @@ class Leet0083 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+class Leet0082 {
+    func deleteDuplicates(_ head: ListNode?) -> ListNode? {
+        var sentinel = ListNode(0), prev: ListNode? = sentinel, head: ListNode? = head
+        sentinel.next = head
+        while head != nil {
+            if head?.val == head?.next?.val {
+                while head?.val == head?.next?.val {
+                    head = head?.next
+                }
+                prev?.next = head?.next
+            } else {
+                prev = prev?.next
+            }
+            head = head?.next
+        }
+        return sentinel.next
+    }
+}
+
+
 print("All playground tests passed!")
