@@ -16352,4 +16352,44 @@ class Leet3335 {
 //Leet3335.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/custom-sort-string/
+class Leet0791 {
+    func customSortString(_ order: String, _ s: String) -> String {
+        let sCounts = [Character: Int](s.map { ($0, 1) }, uniquingKeysWith: +), orderSet = Set(order)
+        var res = [Character]()
+        for c in order {
+            guard let count = sCounts[c] else { continue }
+            res.append(contentsOf: repeatElement(c, count: count))
+        }
+        for c in s where !orderSet.contains(c) {
+            res.append(c)
+        }
+        return String(res)
+    }
+}
+
+/*
+ "cba"
+ "abcd"
+ "bcafg"
+ "abcd"
+ "abcdefghijklmnopqrstuvwxyz"
+ "abcde"
+ "xyz"
+ "xyzab"
+ "pqrs"
+ "pqrstuvwx"
+ "aeiou"
+ "hello"
+ "cba"
+ "cba"
+ "abc"
+ "abcd"
+ 
+ 
+ */
+
+
+
 print("All playground tests passed!")
