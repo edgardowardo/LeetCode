@@ -887,7 +887,7 @@ extension Array<Int> {
 extension ListNode {
 
     static func makeList(_ arr: [Int]) -> ListNode? {
-        arr.reduce(nil) { (node, val) in
+        arr.reversed().reduce(nil) { (node, val) in
             ListNode(val, node)
         }
     }
@@ -16486,5 +16486,32 @@ class Leet0092 {
         return head
     }
 }
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-linked-list-elements/
+class Leet0203 {
+    func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
+        let sentinel = ListNode(0)
+        sentinel.next = head
+        var prev: ListNode? = sentinel, curr = head
+        while curr != nil {
+            if curr?.val == val {
+                prev?.next = curr?.next
+            } else {
+                prev = curr
+            }
+            curr = curr?.next
+        }
+        return sentinel.next
+    }
+    static func test() {
+        let sut = Leet0203()
+        assert(sut.removeElements([1,2,6,3,4,5,6].makeListNode(), 6)?.toArray() == [1,2,3,4,5])
+        assert(sut.removeElements([1,2,2,1].makeListNode(), 2)?.toArray() == [1,1])
+        assert(sut.removeElements([7,7,7,7].makeListNode(), 7) == nil)
+    }
+}
+Leet0203.test()
 
 print("All playground tests passed!")
