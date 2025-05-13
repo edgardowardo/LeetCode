@@ -29,6 +29,37 @@ public class ListNode {
     }
 }
 
+
+extension Array<Int> {
+    func makeListNode() -> ListNode? {
+        ListNode.makeList(self)
+    }
+}
+
+extension ListNode {
+
+    static func makeList(_ arr: [Int]) -> ListNode? {
+        arr.reversed().reduce(nil) { (node, val) in
+            ListNode(val, node)
+        }
+    }
+
+    static func toArray(_ head: ListNode?) -> [Int] {
+        var arr: [Int] = []
+        var node = head
+        
+        while node != nil {
+            arr.append(node!.val)
+            node = node?.next
+        }
+        return arr
+    }
+    
+    func toArray() -> [Int] {
+        Self.toArray(self)
+    }
+}
+
 ///---------------------------------------------------------------------------------------
 ///
 
