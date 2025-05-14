@@ -16684,8 +16684,51 @@ class Leet2074 {
         assert(sut.reverseEvenLengthGroups([1,1,0,6,5].makeListNode())?.toArray() == [1,0,1,5,6])
     }
 }
-Leet2074.test()
+//Leet2074.test()
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/reverse-nodes-in-k-group/
+class Leet0025 {
+    func reverseKGroup(_ head: ListNode?, _ k: Int) -> ListNode? {
+        var i = 1, result: ListNode?, prev: ListNode?, curr = head
+        while curr != nil {
+            if i == k {
+                // reverse from c to nextKHead (exclusive)
+                let nextKHead = curr?.next
+                var p = prev, c = prev?.next
+                
+                if result == nil {
+                    result = curr
+                    c = head
+                }
+                let newTail = c
+                while c !== nextKHead {
+                    let temp = c?.next
+                    c?.next = p
+                    p = c
+                    c = temp
+                }
+                prev?.next = p
+                newTail?.next = nextKHead
+                curr = newTail
+                prev = curr
+                i = 1
+            } else {
+                i += 1
+            }
+            curr = curr?.next
+        }
+        return result
+    }
+    static func test() {
+        let sut = Leet0025()
+        assert(sut.reverseKGroup([1,2,3,4,5].makeListNode(), 2)?.toArray() == [2,1,4,3,5])
+        assert(sut.reverseKGroup([1,2,3,4,5].makeListNode(), 3)?.toArray() == [3,2,1,4,5])
+    }
+    
+}
+//Leet0025.test()
 
 
 print("All playground tests passed!")
