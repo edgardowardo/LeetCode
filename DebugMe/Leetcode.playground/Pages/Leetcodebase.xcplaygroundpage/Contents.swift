@@ -16365,6 +16365,72 @@ class Leet3335 {
 }
 //Leet3335.test()
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/total-characters-in-string-after-transformations-ii/
+class Leet3337 {
+    
+    private let mod = 1_000_000_007
+    private let k = 26
+    private typealias Matrix = [[Int]]
+    
+    private func newMatrix() -> Matrix {
+        [[Int]](repeating: [Int](repeating: 0, count: k), count: k)
+    }
+    
+    private func multiply(_ a: Matrix, _ other: Matrix) -> Matrix {
+        var res = newMatrix()
+        for i in 0..<k {
+            for j in 0..<k {
+                for k in 0..<k {
+                    res[i][j] = (res[i][j] + Int(Int64(a[i][k]) * Int64(other[k][j]) % Int64(mod))) % mod
+                }
+            }
+        }
+        return res
+    }
+    
+    private func identityMatrix() -> Matrix {
+        var res = newMatrix()
+        for i in 0..<k {
+            res[i][i] = 1
+        }
+        return res
+    }
+    
+    private func quickMultiply(_ x: Matrix, _ y: Int) -> Matrix {
+        var ans = identityMatrix(), curr = x, y = y
+        while y > 0 {
+            if y & 1 == 1 {
+                ans = multiply(ans, curr)
+            }
+            curr = multiply(curr, curr)
+            y >>= 1
+        }
+        return ans
+    }
+    
+    func lengthAfterTransformations(_ s: String, _ t: Int, _ nums: [Int]) -> Int {
+        var trans = newMatrix()
+        for i in 0..<k {
+            for j in 1...nums[i] {
+                trans[(i + j) % k][i] = 1
+            }
+        }
+        let aAscii = Int(Character("a").asciiValue!)
+        var res = quickMultiply(trans, t), f = [Int](repeating: 0, count: k), ans = 0
+        for c in s {
+            f[Int(c.asciiValue!) - aAscii] += 1
+        }
+        for i in 0..<k {
+            for j in 0..<k {
+                ans = (ans + Int(Int64(res[i][j]) * Int64(f[j]) % Int64(mod))) % mod
+            }
+        }
+        return ans
+    }
+}
+
+
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/custom-sort-string/
