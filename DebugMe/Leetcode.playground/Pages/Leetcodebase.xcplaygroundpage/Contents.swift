@@ -16512,6 +16512,39 @@ class Leet0203 {
         assert(sut.removeElements([7,7,7,7].makeListNode(), 7) == nil)
     }
 }
-Leet0203.test()
+//Leet0203.test()
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
+class Leet1290 {
+    private func power(_ base: Int, _ exponent: Int) -> Int {
+        var result = 1, base = base, exponent = exponent
+        while exponent > 0 {
+            if exponent % 2 == 1 {
+                result = (result * base)
+            }
+            base = (base * base)
+            exponent /= 2
+        }
+        return result
+    }
+    func getDecimalValue(_ head: ListNode?) -> Int {
+        var reversed: ListNode?, curr = head
+        while curr != nil {
+            let temp = curr?.next
+            curr?.next = reversed
+            reversed = curr
+            curr = temp
+        }
+        curr = reversed
+        var result = 0, exponent = 0
+        while let c = curr {
+            result += c.val * power(2, exponent)
+            exponent += 1
+            curr = c.next
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
