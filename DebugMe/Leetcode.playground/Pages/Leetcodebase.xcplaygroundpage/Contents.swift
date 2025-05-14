@@ -16613,4 +16613,36 @@ class Leet1290 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
+class Leet1721 {
+    func swapNodes(_ head: ListNode?, _ k: Int) -> ListNode? {
+        var i = 1, kFront: ListNode?, prev: ListNode?, curr = head
+        while curr != nil {
+            if i == k {
+                kFront = curr
+            }
+            i += 1
+            let temp = curr?.next
+            curr?.next = prev
+            prev = curr
+            curr = temp
+        }
+        i = 1; curr = prev; prev = nil
+        while curr != nil {
+            if i == k, let kFrontValue = kFront?.val {
+                kFront?.val = curr?.val ?? 0
+                curr?.val = kFrontValue
+            }
+            i += 1
+            let temp = curr?.next
+            curr?.next = prev
+            prev = curr
+            curr = temp
+        }
+        return head
+    }
+}
+
+
 print("All playground tests passed!")
