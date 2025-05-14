@@ -16645,4 +16645,47 @@ class Leet1721 {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/reverse-nodes-in-even-length-groups/
+class Leet2074 {
+    func reverseEvenLengthGroups(_ head: ListNode?) -> ListNode? {
+        var i = 1, groupSize = 1, prev: ListNode?, curr = head
+        while curr != nil {
+            if i == groupSize || curr?.next == nil {
+                if i.isMultiple(of: 2) {
+                    let nextGroupHead = curr?.next
+                    // reverse from c to nextGroupHead (exlusive)
+                    var p = prev, c = prev?.next, newTail = c
+                    while c !== nextGroupHead {
+                        let temp = c?.next
+                        c?.next = p
+                        p = c
+                        c = temp
+                    }
+                    prev?.next = p
+                    newTail?.next = nextGroupHead
+                    curr = newTail
+                }
+                prev = curr
+                groupSize += 1
+                i = 1
+            } else {
+                i += 1
+            }
+            curr = curr?.next
+        }
+        return head
+    }
+    static func test() {
+        let sut = Leet2074()
+        assert(sut.reverseEvenLengthGroups([5,2,6,3,9,1,7,3,8,4].makeListNode())?.toArray() == [5,6,2,3,9,1,4,8,3,7])
+        assert(sut.reverseEvenLengthGroups([1,1,0,6].makeListNode())?.toArray() == [1,0,1,6])
+        assert(sut.reverseEvenLengthGroups([1,1,0,6,5].makeListNode())?.toArray() == [1,0,1,5,6])
+    }
+}
+Leet2074.test()
+
+
+
 print("All playground tests passed!")
