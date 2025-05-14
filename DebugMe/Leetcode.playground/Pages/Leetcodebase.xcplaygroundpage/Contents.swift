@@ -16731,4 +16731,38 @@ class Leet0025 {
 //Leet0025.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
+class Leet2130 {
+    func pairSum(_ head: ListNode?) -> Int {
+        var slow = head, fast = head, maxPairSum = 0
+        // traverse slow and fast pointers
+        while fast?.next?.next != nil {
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        // split the list and reverse the second half
+        var curr = slow?.next, prev: ListNode?
+        slow?.next = nil
+        while curr != nil {
+            let temp = curr?.next
+            curr?.next = prev
+            prev = curr
+            curr = temp
+        }
+        // traverse the two pointers and get the maximum sum pair
+        var p1 = head, p2 = prev
+        while p1 != nil && p2 != nil {
+            maxPairSum = max(maxPairSum, p1!.val + p2!.val)
+            p1 = p1?.next
+            p2 = p2?.next
+        }
+        return maxPairSum
+    }
+}
+
+
+
+
+
 print("All playground tests passed!")
