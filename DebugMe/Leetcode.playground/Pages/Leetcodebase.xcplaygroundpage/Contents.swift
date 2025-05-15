@@ -16986,4 +16986,23 @@ class Leet1678 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/reformat-date/
+class Leet1507 {
+    func reformatDate(_ date: String) -> String {
+        // remove ordinals from the date string
+        let dateWithoutOrdinal = date
+            .replacing("st", with: "")
+            .replacing("nd", with: "")
+            .replacing("rd", with: "")
+            .replacing("th", with: "")
+        let f = DateFormatter()
+        f.dateFormat = "dd MMM yyyy"
+        guard let d = f.date(from: dateWithoutOrdinal) else { return "" }
+        f.dateFormat = "yyyy-MM-dd"
+        return f.string(from: d)
+    }
+}
+
+
 print("All playground tests passed!")
