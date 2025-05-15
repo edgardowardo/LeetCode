@@ -16808,4 +16808,77 @@ class Leet0328 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/design-linked-list/
+///Leet0707
+class MyLinkedList {
+    private var head: ListNode?
+    private var tail: ListNode?
+    private var count = 0
+    init() {}
+    
+    func get(_ index: Int) -> Int {
+        guard index >= 0 else { return -1 }
+        var curr = head
+        for _ in 0..<index {
+            curr = curr?.next
+        }
+        return curr?.val ?? -1
+    }
+    
+    func addAtHead(_ val: Int) {
+        count += 1
+        let newHead = ListNode(val)
+        newHead.next = head
+        head = newHead
+        if tail == nil {
+            tail = newHead
+        }
+    }
+    
+    func addAtTail(_ val: Int) {
+        count += 1
+        let newTail = ListNode(val)
+        if head == nil {
+            head = newTail
+        } else {
+            tail?.next = newTail
+        }
+        tail = newTail
+    }
+    
+    func addAtIndex(_ index: Int, _ val: Int) {
+        guard index > 0 else { return addAtHead(val) }
+        guard index != count else { return addAtTail(val) }
+        guard index < count else { return }
+        var prev = head
+        for _ in 1..<index {
+            prev = prev?.next
+        }
+        let newNode = ListNode(val)
+        let temp = prev?.next
+        prev?.next = newNode
+        newNode.next = temp
+        count += 1
+    }
+    
+    func deleteAtIndex(_ index: Int) {
+        guard 0..<count ~= index else { return }
+        guard index > 0 else { return head = head?.next }
+        var prev = head
+        for i in 1..<count {
+            guard i < index else { break }
+            prev = prev?.next
+        }
+        let temp = prev?.next?.next
+        prev?.next = temp
+        if count - 1 == index {
+            tail = prev
+        }
+        count -= 1
+    }
+}
+
+
+
 print("All playground tests passed!")
