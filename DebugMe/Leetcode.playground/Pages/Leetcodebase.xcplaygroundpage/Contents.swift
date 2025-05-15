@@ -16928,6 +16928,14 @@ class Leet1209 {
 }
 //Leet1209.test()
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimize-string-length/
+class Leet2716 {
+    func minimizedStringLength(_ s: String) -> Int {
+        Set(s).count
+    }
+}
+
 
 
 print("All playground tests passed!")
