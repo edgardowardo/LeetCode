@@ -16879,6 +16879,22 @@ class MyLinkedList {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
+class Leet1074 {
+    func removeDuplicates(_ s: String) -> String {
+        let s = Array(s)
+        var stack = [Character]()
+        for c in s {
+            if let last = stack.last, last == c {
+                stack.removeLast()
+            } else {
+                stack.append(c)
+            }
+        }
+        return String(stack)
+    }
+}
 
 
 print("All playground tests passed!")
