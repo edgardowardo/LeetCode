@@ -16897,4 +16897,37 @@ class Leet1074 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
+class Leet1209 {
+    func removeDuplicates(_ s: String, _ k: Int) -> String {
+        typealias C = (char: Character, count: Int)
+        let s = Array(s)
+        var stack = [C]()
+        for c in s {
+            guard let last = stack.last else {
+                stack.append(C(char: c, count: 1))
+                continue
+            }
+            if last.char == c {
+                if last.count + 1 == k {
+                    stack.removeLast(k - 1)
+                } else {
+                    stack.append(C(char: c, count: last.count + 1))
+                }
+            } else {
+                stack.append(C(char: c, count: 1))
+            }
+        }
+        return stack.map { String($0.char) }.joined()
+    }
+    static func test() {
+        let sut = Leet1209()
+        assert(sut.removeDuplicates("deeedbbcccbdaa", 3) == "aa")
+    }
+}
+//Leet1209.test()
+
+
+
 print("All playground tests passed!")
