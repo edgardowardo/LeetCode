@@ -16975,4 +16975,15 @@ class Leet0071 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/goal-parser-interpretation/
+class Leet1678 {
+    func interpret(_ command: String) -> String {
+        command
+            .replacingOccurrences(of: "(al)", with: "al")
+            .replacingOccurrences(of: "()", with: "o")
+    }
+}
+
+
 print("All playground tests passed!")
