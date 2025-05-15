@@ -16777,5 +16777,35 @@ class Leet2900 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/odd-even-linked-list/
+class Leet0328 {
+    func oddEvenList(_ head: ListNode?) -> ListNode? {
+        var i = 1, curr = head, result = curr, oddTail: ListNode?, evenHead = curr?.next, evenTail: ListNode?
+        while curr != nil {
+            let temp = curr?.next
+            // when odd
+            if i % 2 == 1 {
+                oddTail = curr
+                oddTail?.next = curr?.next?.next
+            // when even
+            } else {
+                evenTail = curr
+                evenTail?.next = curr?.next?.next
+            }
+            curr = temp
+            i += 1
+        }
+        oddTail?.next = evenHead
+        return result
+    }
+    static func test() {
+        let sut = Leet0328()
+        assert(sut.oddEvenList([1,2,3,4,5].makeListNode())?.toArray() == [1,3,5,2,4])
+    }
+}
+//Leet0328.test()
+
+
 
 print("All playground tests passed!")
