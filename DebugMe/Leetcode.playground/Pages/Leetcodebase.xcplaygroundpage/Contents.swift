@@ -16956,5 +16956,23 @@ class Leet2390 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/simplify-path/
+class Leet0071 {
+    func simplifyPath(_ path: String) -> String {
+        var stack = [String]()
+        for item in path.split(separator: "/") where item != "." {
+            if item == ".." {
+                if !stack.isEmpty {
+                    stack.removeLast()
+                }
+            } else {
+                stack.append(String(item))
+            }
+        }
+        return "/" + stack.joined(separator: "/")
+    }
+}
+
 
 print("All playground tests passed!")
