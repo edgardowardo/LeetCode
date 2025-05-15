@@ -16937,5 +16937,24 @@ class Leet2716 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/removing-stars-from-a-string/
+class Leet2390 {
+    func removeStars(_ s: String) -> String {
+        let s = Array(s)
+        var stack = [Character]()
+        for c in s {
+            if c == "*" {
+                if !stack.isEmpty {
+                    stack.removeLast()
+                }
+            } else {
+                stack.append(c)
+            }
+        }
+        return String(stack)
+    }
+}
+
 
 print("All playground tests passed!")
