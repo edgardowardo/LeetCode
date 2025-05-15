@@ -16762,7 +16762,20 @@ class Leet2130 {
 }
 
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-i/
+class Leet2900 {
+    func getLongestSubsequence(_ words: [String], _ groups: [Int]) -> [String] {
+        zip(words, groups)
+            .enumerated()
+            .map { (i: $0.offset, w: $0.element.0, g: $0.element.1) }
+            .compactMap { (i, w, g) in
+                guard i != 0 else { return w }
+                guard groups[i - 1] != g else { return nil }
+                return w
+            }
+    }
+}
 
 
 print("All playground tests passed!")
