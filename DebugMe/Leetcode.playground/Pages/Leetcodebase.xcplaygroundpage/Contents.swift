@@ -17005,4 +17005,14 @@ class Leet1507 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/shuffle-string/
+class Leet1528 {
+    func restoreString(_ s: String, _ indices: [Int]) -> String {
+        String(zip(Array(s), indices).sorted { $0.1 < $1.1 }.map(\.0))
+    }
+}
+
+
+
 print("All playground tests passed!")
