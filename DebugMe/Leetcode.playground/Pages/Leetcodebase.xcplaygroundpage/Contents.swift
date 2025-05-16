@@ -17044,4 +17044,27 @@ class Leet2901 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/make-the-string-great/
+class Leet1544 {
+            
+    func makeGood(_ s: String) -> String {
+        let s = Array(s)
+        var stack = [s[0]]
+        for c in s[1...] {
+            if let last = stack.last, isBad(last, c) {
+                stack.removeLast()
+                continue
+            }
+            stack.append(c)
+        }
+        return String(stack)
+    }
+    
+    private func isBad(_ c1: Character, _ c2: Character) -> Bool {
+        c1.isLowercase && c2.isUppercase && c1 == c2.lowercased().first! || c1.isUppercase && c2.isLowercase && c1 == c2.uppercased().first!
+    }
+}
+
+
 print("All playground tests passed!")
