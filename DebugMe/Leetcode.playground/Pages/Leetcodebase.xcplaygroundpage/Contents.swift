@@ -17067,4 +17067,50 @@ class Leet1544 {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-letter-to-equalize-frequency/
+class Leet2423 {
+    func equalFrequency(_ word: String) -> Bool {
+        let word = Array(word)
+        var result = false
+        for i in 0..<word.count {
+            let lessIthWord = Array(word[0..<i] + word[i+1..<word.count])
+            let freq = lessIthWord.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+            result = result || Set(freq.values).count == 1
+        }
+        return result
+    }
+}
+
+
+
+/*
+ 
+ 
+ "ceeeec"
+ "abcabc"
+ "abcdefg"
+ "cccd"
+ "ab"
+ "aaaabbbbccc"
+ "abbcc"
+ "ddaccb"
+ 
+ "abcc"
+
+ "aazz"
+ "bac"
+ "bacc"
+ "abbcc"
+ "dddaccc"
+ "aca"
+ "cbccca"
+ "zzzzzzzzzzzzzzzzzzzzz"
+ 
+ 
+ */
+
+
+
 print("All playground tests passed!")
