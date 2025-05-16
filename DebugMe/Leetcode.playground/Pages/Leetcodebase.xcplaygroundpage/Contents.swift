@@ -17013,6 +17013,35 @@ class Leet1528 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/
+class Leet2901 {
+    func getWordsInLongestSubsequence(_ words: [String], _ groups: [Int]) -> [String] {
+        let n = words.count
+        var dp = [Int](repeating: 1, count: n), prev = Array(repeating: -1, count: n), maxIndex = 0
+        for i in 1..<n {
+            for j in 0..<i {
+                if isValid(words[i], words[j]) && dp[j] + 1 > dp[i] && groups[i] != groups[j] {
+                    dp[i] = dp[j] + 1
+                    prev[i] = j
+                }
+            }
+            if dp[i] > dp[maxIndex] {
+                maxIndex = i
+            }
+        }
+        var result = [String](), i = maxIndex
+        while i >= 0 {
+            result.append(words[i])
+            i = prev[i]
+        }
+        return result.reversed()
+    }
+        
+    private func isValid(_ s1: String, _ s2: String) -> Bool {
+        guard s1.count == s2.count else { return false }
+        return zip(s1, s2).filter { $0 != $1 }.count == 1
+    }
+}
 
 print("All playground tests passed!")
