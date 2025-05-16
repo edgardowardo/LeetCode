@@ -17112,5 +17112,23 @@ class Leet2423 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/
+class Leet1752 {
+    func check(_ nums: [Int]) -> Bool {
+        let min = nums.min()!
+        let indexesOfMin = nums.indices.filter { nums[$0] == min }
+        let sorted = nums.sorted()
+        var result = false
+        for indexOfMin in indexesOfMin {
+            let leftHalf = nums[0..<indexOfMin]
+            let rightHalf = nums[indexOfMin...]
+            let combined = Array(rightHalf) + Array(leftHalf)
+            result = result || sorted == combined
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
