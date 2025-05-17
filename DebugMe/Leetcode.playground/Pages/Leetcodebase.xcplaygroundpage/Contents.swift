@@ -17207,4 +17207,13 @@ class Leet2124 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-numbers-are-ascending-in-a-sentence/
+class Leet2042 {
+    func areNumbersAscending(_ s: String) -> Bool {
+        let nums = s.split(separator: " ").compactMap { Int(String($0)) }
+        return nums.indices.dropFirst(1).allSatisfy { nums[$0 - 1] < nums[$0] }
+    }
+}
+
 print("All playground tests passed!")
