@@ -17131,4 +17131,23 @@ class Leet1752 {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/score-of-parentheses/
+class Leet0856 {
+    func scoreOfParentheses(_ s: String) -> Int {
+        var stack = [0]
+        for c in s {
+            if c == "(" {
+                stack.append(0)
+            } else {
+                let v = stack.removeLast(), w = stack.removeLast()
+                stack.append(w + max(2 * v, 1))
+            }
+        }
+        return stack[0]
+    }
+}
+
+
 print("All playground tests passed!")
