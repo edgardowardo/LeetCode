@@ -1009,47 +1009,33 @@ assert(getTwoSum(from: [3,3], target: 6) == [0,1])
 
 */
 
-#warning("Error in Leetcode run!")
+
+
 ///---------------------------------------------------------------------------------------
-/// Leetcode 21
-///https://leetcode.com/problems/merge-two-sorted-lists/description/
-func xxx_mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
-    guard let list1 = list1 else { return list2 }
-    guard let list2 = list2 else { return list1 }
+///https://leetcode.com/problems/merge-two-sorted-lists/
+class Leet0024 {
 
-    var merged: ListNode?
-    var p1:ListNode? = list1
-    var p2:ListNode? = list2
-
-    if p1!.val < p2!.val {
-        merged = p1
-        p1 = p1?.next
-    } else {
-        merged = p2
-        p2 = p2?.next
-    }
-
-    var pointMerged = merged
-
-    while p1 != nil && p2 != nil {
-
-        if p1!.val < p2!.val {
-            pointMerged = p1
-            p1 = p1?.next
-        } else {
-            pointMerged = p2
-            p2 = p2?.next
+    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
+        var prehead = ListNode(0), prev: ListNode? = prehead, l1 = list1, l2 = list2
+        while l1 != nil && l2 != nil {
+            if l1!.val < l2!.val {
+                prev?.next = l1
+                l1 = l1?.next
+            } else {
+                prev?.next = l2
+                l2 = l2?.next
+            }
+            prev = prev?.next
         }
-        pointMerged = pointMerged?.next
+        
+        if l1 != nil {
+            prev?.next = l1
+        } else {
+            prev?.next = l2
+        }
+        
+        return prehead.next
     }
-
-    if p1 == nil {
-        pointMerged?.next = p2
-    } else {
-        pointMerged?.next = p1
-    }
-
-    return merged
 }
 
 
