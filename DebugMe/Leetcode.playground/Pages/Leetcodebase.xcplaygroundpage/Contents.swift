@@ -17150,4 +17150,24 @@ class Leet0856 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sort-colors/
+class Leet0075 {
+    func sortColors(_ nums: inout [Int]) {
+        var l = 0, r = nums.count - 1, p = 0
+        while p <= r {
+            if nums[p] == 0 {
+                nums.swapAt(l, p)
+                l += 1
+                p += 1
+            } else if nums[p] == 2 {
+                nums.swapAt(p, r)
+                r -= 1
+            } else {
+                p += 1
+            }
+        }
+    }
+}
+
 print("All playground tests passed!")
