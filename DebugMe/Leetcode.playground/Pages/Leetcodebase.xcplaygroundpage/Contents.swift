@@ -1027,13 +1027,7 @@ class Leet0024 {
             }
             prev = prev?.next
         }
-        
-        if l1 != nil {
-            prev?.next = l1
-        } else {
-            prev?.next = l2
-        }
-        
+        prev?.next = l1 != nil ? l1 : l2
         return prehead.next
     }
 }
