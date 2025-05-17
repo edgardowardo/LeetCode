@@ -17216,4 +17216,25 @@ class Leet2042 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sorting-the-sentence/
+class Leet1859 {
+    func sortSentence(_ s: String) -> String {
+        var m = 0, result = ""
+        let d = s
+            .split(separator: " ")
+            .reduce(into: [Int:String]()) { r, w in
+                let n = Int(String(w.last!))!
+                r[n] = String(w.dropLast())
+                m = max(m, n)
+            }
+        for i in 1...m {
+            result += d[i]! + " "
+        }
+        result.removeLast()
+        return result
+    }
+}
+
 print("All playground tests passed!")
