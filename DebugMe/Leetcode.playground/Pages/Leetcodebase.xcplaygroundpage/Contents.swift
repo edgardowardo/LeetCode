@@ -17150,4 +17150,53 @@ class Leet0075 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sort-list/
+class Leet0148 {
+    func sortList(_ head: ListNode?) -> ListNode? {
+        guard head != nil && head?.next != nil else { return head }
+        guard let middle = mid(head) else { return head }
+        let left = sortList(head)
+        let right = sortList(middle)
+        let result = mergeTwoLists(left, right)
+        return result
+        
+    }
+    
+    private func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        var prehead = ListNode(0), prev: ListNode? = prehead, p1 = l1, p2 = l2
+        while p1 != nil && p2 != nil {
+            if p1!.val < p2!.val {
+                prev?.next = p1
+                p1 = p1?.next
+            } else {
+                prev?.next = p2
+                p2 = p2?.next
+            }
+            prev = prev?.next!
+        }
+        prev?.next = p1 != nil ? p1 : p2
+        return prehead.next
+    }
+
+    private func mid(_ head: ListNode?) -> ListNode? {
+        var slow = head, fast = head, prev: ListNode?
+        while fast != nil && fast?.next != nil {
+            prev = slow
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        prev?.next = nil
+        return slow
+    }
+    
+    static func test() {
+        let sut = Leet0148()
+        assert(sut.sortList([10,1,60,30,5].makeListNode())?.toArray() == [1,5,10,30,60])
+    }
+}
+
+
+
 print("All playground tests passed!")
