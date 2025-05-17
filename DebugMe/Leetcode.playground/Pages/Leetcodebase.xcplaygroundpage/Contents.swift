@@ -17196,6 +17196,7 @@ class Leet0148 {
         assert(sut.sortList([10,1,60,30,5].makeListNode())?.toArray() == [1,5,10,30,60])
     }
 }
+//Leet0148.test()
 
 
 
