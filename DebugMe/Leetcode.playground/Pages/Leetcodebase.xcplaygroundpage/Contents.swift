@@ -17403,7 +17403,57 @@ class Leet0061 {
         assert(sut.rotateRight([1,2,3,4,5].makeListNode(), 2)?.toArray() == [4,5,1,2,3])
     }
 }
-Leet0061.test()
+//Leet0061.test()
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/split-linked-list-in-parts/
+class Leet0725 {
+    func splitListToParts(_ head: ListNode?, _ k: Int) -> [ListNode?] {
+        guard head != nil else { return [ListNode?](repeating: nil, count: k) }
+        var n = 0, curr = head, head = head
+        while curr != nil {
+            curr = curr?.next
+            n += 1
+        }
+        let size = n / k
+        var remainder = n % k, result = [ListNode?](repeating: nil, count: k), count = 1, i = 0, currentSize = size + (remainder > 0 ? 1 : 0)
+        curr = head; remainder -= 1
+        while curr != nil {
+            if count == currentSize {
+                count = 1
+                currentSize = size + (remainder > 0 ? 1 : 0)
+                remainder -= 1
+                result[i] = head
+                i += 1
+                head = curr?.next
+                curr?.next = nil
+                curr = head
+            } else {
+                curr = curr?.next
+                count += 1
+            }
+        }
+        return result
+    }
+    static func test() {
+        let sut = Leet0725()
+        assert(sut.splitListToParts([1,2,3].makeListNode(), 5).map { $0?.toArray() ?? [] } == [[1],[2],[3],[],[]] )
+        assert(sut.splitListToParts([1,2,3,4,5,6,7,8,9,10].makeListNode(), 3).map { $0?.toArray() } == [[1,2,3,4],[5,6,7],[8,9,10]] )
+    }
+}
+//Leet0725.test()
+
+/*
+ 
+ [1,2,3,4,5,6,7,8,9,10]
+ 3
+ [1,2,3,4,5,6,7,8,9,10,11]
+ 3
+ [1,2,3]
+ 5
+ 
+ 
+ */
 
 print("All playground tests passed!")
