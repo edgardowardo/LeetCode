@@ -17237,4 +17237,68 @@ class Leet1859 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/painting-a-grid-with-three-different-colors/
+class Leet1931 {
+    
+    func colorTheGrid(_ m: Int, _ n: Int) -> Int {
+        let mod = 1_000_000_007, maskEnd = Int(pow(3.0, Double(m)))
+        var valid = [Int: [Int]]()
+        
+        for mask in 0..<maskEnd {
+            var color = [Int](), mm = mask, check = true
+            for _ in 0..<m {
+                color.append(mm % 3)
+                mm /= 3
+            }
+            for i in 0..<m-1 {
+                if color[i] == color[i+1] {
+                    check = false
+                    break
+                }
+            }
+            if check {
+                valid[mask] = color
+            }
+        }
+        
+        var adjacent = [Int: [Int]]()
+        for mask1 in valid.keys {
+            for mask2 in valid.keys {
+                var check = true
+                for i in 0..<m {
+                    if valid[mask1]?[i] == valid[mask2]?[i] {
+                        check = false
+                        break
+                    }
+                }
+                if check {
+                    adjacent[mask1, default: []].append(mask2)
+                }
+                
+            }
+        }
+        var f = [Int: Int]()
+        for mask in valid.keys {
+            f[mask] = 1
+        }
+        for _ in 1..<n {
+            var g = [Int: Int]()
+            for mask2 in valid.keys {
+                for mask1 in adjacent[mask2] ?? [] {
+                    g[mask2, default: 0] = ((g[mask2] ?? 0) + (f[mask1] ?? 0)) % mod
+                }
+            }
+            f = g
+        }
+        var ans = 0
+        for num in f.values {
+            ans = (ans + num) % mod
+        }
+        return ans
+    }
+}
+
+
+
 print("All playground tests passed!")
