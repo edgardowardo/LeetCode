@@ -17370,4 +17370,40 @@ class Leet2046 {
 //Leet2046.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/rotate-list/
+class Leet0061 {
+    func rotateRight(_ head: ListNode?, _ k: Int) -> ListNode? {
+        guard k > 0 else { return head }
+        var n = 0, curr = head, prev: ListNode?, head = head
+        while curr != nil {
+            prev = curr
+            curr = curr?.next
+            n += 1
+        }
+        guard n > 1, k%n > 0 else { return head }
+        let tail = prev
+        curr = head
+        for _ in 0..<(n-k%n) {
+            prev = curr
+            curr = curr?.next
+        }
+        tail?.next = head
+        head = curr
+        prev?.next = nil
+        return head
+    }
+    
+    static func test() {
+        let sut = Leet0061()
+        assert(sut.rotateRight([1,2].makeListNode(), 2)?.toArray() == [1,2])
+        assert(sut.rotateRight([1,2].makeListNode(), 0)?.toArray() == [1,2])
+        assert(sut.rotateRight([1].makeListNode(), 3)?.toArray() == [1])
+        assert(sut.rotateRight([1].makeListNode(), 1)?.toArray() == [1])
+        assert(sut.rotateRight([1,2,3,4,5].makeListNode(), 2)?.toArray() == [4,5,1,2,3])
+    }
+}
+Leet0061.test()
+
+
 print("All playground tests passed!")
