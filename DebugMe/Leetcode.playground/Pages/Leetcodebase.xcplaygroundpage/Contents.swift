@@ -17302,9 +17302,25 @@ class Leet1931 {
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/sort-linked-list-already-sorted-using-absolute-values/
-///REVISIT. OPTIMISED SOLUTION IS TO MOVE NEGATIVE NODES TO HEAD.
 class Leet2046 {
+    
     func sortLinkedList(_ head: ListNode?) -> ListNode? {
+        var head = head, prev: ListNode?, curr = head
+        while curr != nil {
+            if let currVal = curr?.val, currVal < 0, head !== curr {
+                prev?.next = curr?.next
+                curr?.next = head
+                head = curr
+                curr = prev?.next
+            } else {
+                prev = curr
+                curr = curr?.next
+            }
+        }
+        return head
+    }
+    
+    func xxx_sortLinkedList(_ head: ListNode?) -> ListNode? {
         var prev: ListNode?, curr = head, posHead: ListNode?, posTail: ListNode?, negHead: ListNode?, negTail: ListNode?
         while curr != nil {
             guard let val = curr?.val else { break }
