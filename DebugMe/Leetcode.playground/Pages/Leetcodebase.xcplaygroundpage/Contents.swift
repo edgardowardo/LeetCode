@@ -17300,5 +17300,58 @@ class Leet1931 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sort-linked-list-already-sorted-using-absolute-values/
+///REVISIT. OPTIMISED SOLUTION IS TO MOVE NEGATIVE NODES TO HEAD.
+class Leet2046 {
+    func sortLinkedList(_ head: ListNode?) -> ListNode? {
+        var prev: ListNode?, curr = head, posHead: ListNode?, posTail: ListNode?, negHead: ListNode?, negTail: ListNode?
+        while curr != nil {
+            guard let val = curr?.val else { break }
+            if val >= 0 {
+                if let p = prev, p.val < 0 {
+                    p.next = curr?.next
+                    posTail?.next = curr
+                }
+                if posHead == nil {
+                    posHead = curr
+                }
+                posTail = curr
+            } else {
+                if let p = prev, p.val >= 0 {
+                    p.next = curr?.next
+                    negTail?.next = curr
+                }
+                if negHead == nil {
+                    negHead = curr
+                }
+                negTail = curr
+            }
+            prev = curr
+            curr = curr?.next
+        }
+        posTail?.next = nil
+        negTail?.next = nil
+        // reverse negHead
+        prev = nil; curr = negHead; negTail = negHead
+        while curr != nil {
+            let temp = curr?.next
+            curr?.next = prev
+            prev = curr
+            curr = temp
+        }
+        negHead = prev
+        negTail?.next = posHead // connect!
+        return negHead ?? posHead
+    }
+    static func test() {
+        let sut = Leet2046()
+        assert(sut.sortLinkedList([0,-6,-9,-10].makeListNode())?.toArray() == [-10,-9,-6,0])
+        assert(sut.sortLinkedList([0,1,2].makeListNode())?.toArray() == [0,1,2])
+        assert(sut.sortLinkedList([0,2,-5,5,10,-10].makeListNode())?.toArray() == [ -10, -5, 0, 2, 5, 10 ])
+    }
+}
+//Leet2046.test()
+
 
 print("All playground tests passed!")
