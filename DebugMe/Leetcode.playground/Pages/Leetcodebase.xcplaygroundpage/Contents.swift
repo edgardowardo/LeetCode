@@ -17701,4 +17701,19 @@ class Leet3280 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-k-or-of-an-array/
+class Leet2917 {
+    func findKOr(_ nums: [Int], _ k: Int) -> Int {
+        let pad = String(nums.max()!, radix: 2).count
+        let bins = nums.map { n in Array(String(n, radix: 2).padded(to: pad).map { Int(String($0))! }.reversed()) }
+        var result = [Bool](repeating: false, count: pad)
+        for i in result.indices {
+            result[i] = (k <= bins.reduce(into: 0) { r, b in r += b[i] })
+        }
+        return Int(result.reversed().map { $0 ? "1" : "0" }.joined(), radix: 2)!
+    }
+}
+
 print("All playground tests passed!")
