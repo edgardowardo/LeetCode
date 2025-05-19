@@ -2787,6 +2787,14 @@ func isPowerOfThree(_ n: Int) -> Bool {
     return n > 0 && 1_162_261_467 % n == 0
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/power-of-four/
+class Leet0342 {
+    func isPowerOfFour(_ n: Int) -> Bool {
+        n > 0 && (n & (n-1)) == 0 && (n & 0x55555555) != 0
+    }
+}
+
 //for i in -1 ... 27 {
 //    print("\(i)   \(isPowerOfThree(i))")
 //}
