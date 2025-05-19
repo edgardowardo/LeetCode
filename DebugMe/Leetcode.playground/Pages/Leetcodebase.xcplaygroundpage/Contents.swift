@@ -17475,6 +17475,24 @@ class Leet3024 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/insertion-sort-list/
+class Leet0147 {
+    func insertionSortList(_ head: ListNode?) -> ListNode? {
+        var result: ListNode? = ListNode(0), curr = head
+        while curr != nil {
+            var prev = result
+            while prev?.next != nil && prev!.next!.val < curr!.val {
+                prev = prev?.next
+            }
+            let next = curr?.next
+            curr?.next = prev?.next
+            prev?.next = curr
+            curr = next
+        }
+        return result?.next
+    }
+}
 
 
 print("All playground tests passed!")
