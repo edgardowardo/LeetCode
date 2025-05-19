@@ -17594,4 +17594,76 @@ class Leet0024 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/partition-list/
+class Leet0086 {
+   func partition(_ head: ListNode?, _ x: Int) -> ListNode? {
+       var curr = head, prev: ListNode?, rightHead: ListNode?, result: ListNode?, leftTail: ListNode?
+       while curr != nil {
+           let temp = curr?.next
+           if let v = curr?.val, v < x {
+               if result == nil {
+                   result = curr
+               } else {
+                   leftTail?.next = curr
+               }
+               prev?.next = temp
+               curr?.next = nil
+               leftTail = curr
+           } else {
+               if rightHead == nil {
+                   rightHead = curr
+               }
+               prev = curr
+           }
+           curr = temp
+       }
+       leftTail?.next = rightHead
+       guard let result = result else { return rightHead }
+       return result
+   }
+}
+
+
+/*
+ 
+ [1,4,3,2,5,2]
+ 3
+ [2,1]
+ 2
+ [2,1]
+ 1
+ []
+ 0
+ [3,6,5,2,4,8,1,7]
+ 4
+ [3,6,5,4,8,1,7,2,4,5,6,7,2,1,2,3,4,5,77,88,3,3,3,4,4,4]
+ 4
+ [3,1]
+ 2
+ [2,4,1,1,2,3,4,2,2]
+ 3
+ 
+ 
+ [1,1,1,1,1]
+ 0
+ [3,6,5,4,1,2]
+ 4
+ [1,1]
+ 0
+ [1,1]
+ 1
+ [3,1]
+ 2
+ [1,4,3,0,2,5,2]
+ 3
+ [4,3,2,5,2]
+ 3
+ 
+ 
+ */
+
+
+
 print("All playground tests passed!")
