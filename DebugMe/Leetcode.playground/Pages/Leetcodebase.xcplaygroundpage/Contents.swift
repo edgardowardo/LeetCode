@@ -17581,5 +17581,17 @@ class Leet2116 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/swap-nodes-in-pairs/
+class Leet0024 {
+    func swapPairs(_ head: ListNode?) -> ListNode? {
+        guard let h = head else { return nil }
+        guard let t = h.next else { return h }
+        let nt = swapPairs(t.next)
+        t.next = h
+        h.next = nt
+        return t
+    }
+}
 
 print("All playground tests passed!")
