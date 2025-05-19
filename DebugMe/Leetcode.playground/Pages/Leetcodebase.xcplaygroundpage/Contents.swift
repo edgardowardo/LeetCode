@@ -17495,4 +17495,28 @@ class Leet0147 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
+class Leet1249 {
+    func minRemoveToMakeValid(_ s: String) -> String {
+        let s = Array(s)
+        var indexExcludes = [Int]() // unpaired closing parenthesis indeces
+        var indexStack = [Int]() // index stack of open parenthesis that must match
+        for i in s.indices {
+            let c = s[i]
+            if c == "(" {
+                indexStack.append(i)
+            } else if c == ")" {
+                if indexStack.isEmpty {
+                    indexExcludes.append(i)
+                } else {
+                    indexStack.removeLast()
+                }
+            }
+        }
+        let set = Set(indexStack + indexExcludes)
+        return String(s.enumerated().filter { !set.contains($0.offset) }.map(\.element))
+    }
+}
+
 print("All playground tests passed!")
