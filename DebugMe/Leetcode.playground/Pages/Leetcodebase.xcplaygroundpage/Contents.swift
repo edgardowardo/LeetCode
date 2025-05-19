@@ -17682,5 +17682,14 @@ class Leet0086 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/counting-bits/
+class Leet0338 {
+    func countBits(_ n: Int) -> [Int] {
+        (0...n).map { $0.nonzeroBitCount }
+    }
+}
+
+
 
 print("All playground tests passed!")
