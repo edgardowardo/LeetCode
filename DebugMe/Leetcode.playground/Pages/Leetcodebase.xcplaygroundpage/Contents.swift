@@ -17519,4 +17519,38 @@ class Leet1249 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/description/
+class Leet2116 {
+    func canBeValid(_ s: String, _ locked: String) -> Bool {
+        let n = s.count, s = Array(s), locked = Array(locked)
+        guard n.isMultiple(of: 2) else { return false }
+        var openStack = [Int](), unlockedStack = [Int]()
+        for i in 0..<n {
+            let l = locked[i], c = s[i]
+            if l == "0" {
+                unlockedStack.append(i)
+            } else if c == "(" {
+                openStack.append(i)
+            } else if c == ")" {
+                if !openStack.isEmpty {
+                    openStack.removeLast()
+                } else if !unlockedStack.isEmpty {
+                    unlockedStack.removeLast()
+                } else {
+                    return false
+                }
+            }
+        }
+        while !openStack.isEmpty && !unlockedStack.isEmpty && openStack.last! < unlockedStack.last! {
+            openStack.removeLast()
+            unlockedStack.removeLast()
+        }
+        guard openStack.isEmpty else { return false }
+        return true
+    }
+}
+
+
 print("All playground tests passed!")
