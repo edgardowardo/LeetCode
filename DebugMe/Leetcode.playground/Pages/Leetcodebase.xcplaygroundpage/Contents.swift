@@ -17456,4 +17456,25 @@ class Leet0725 {
  
  */
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/type-of-triangle
+class Leet3024 {
+    func triangleType(_ nums: [Int]) -> String {
+        guard nums.count == 3 else { return "none" }
+        let a = nums[0], b = nums[1], c = nums[2]
+        let counts = nums.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+        if counts.count == 1 {
+            return "equilateral"
+        } else if (a + b) <= c || (a + c) <= b || (b + c) <= a {
+            return "none"
+        } else if counts.count == 2 {
+            return "isosceles"
+        } else {
+            return "scalene"
+        }
+    }
+}
+
+
+
 print("All playground tests passed!")
