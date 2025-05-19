@@ -2772,6 +2772,15 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
 
 
 ///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/power-of-two/
+class Leet0231 {
+    func isPowerOfTwo(_ n: Int) -> Bool {
+        n > 0 && (n & (n-1)) == 0
+    }
+}
+
+
+///---------------------------------------------------------------------------------------
 /// Leetcode 326
 /// https://leetcode.com/problems/power-of-three/description/
 func isPowerOfThree(_ n: Int) -> Bool {
