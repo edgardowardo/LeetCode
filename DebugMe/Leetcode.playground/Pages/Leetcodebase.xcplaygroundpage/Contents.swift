@@ -17690,6 +17690,15 @@ class Leet0338 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/convert-date-to-binary/
+class Leet3280 {
+    func convertDateToBinary(_ date: String) -> String {
+        date
+            .split(separator: "-")
+            .map {  String(Int($0)!, radix: 2) }
+            .joined(separator: "-")
+    }
+}
 
 print("All playground tests passed!")
