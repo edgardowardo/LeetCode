@@ -1013,7 +1013,7 @@ assert(getTwoSum(from: [3,3], target: 6) == [0,1])
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/merge-two-sorted-lists/
-class Leet0024 {
+class Leet0021 {
 
     func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
         var prehead = ListNode(0), prev: ListNode? = prehead, l1 = list1, l2 = list2
