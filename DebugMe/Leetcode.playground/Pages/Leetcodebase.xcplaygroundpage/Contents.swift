@@ -17198,6 +17198,35 @@ class Leet0148 {
 }
 //Leet0148.test()
 
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/merge-k-sorted-lists/
+class Leet0023 {
+    func mergeKLists(_ lists: [ListNode?]) -> ListNode? {
+        var result: ListNode?
+        for head in lists {
+            result = mergeTwoLists(result, head)
+        }
+        return result
+    }
+    private func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        var prehead = ListNode(0), prev: ListNode? = prehead, p1 = l1, p2 = l2
+        while p1 != nil && p2 != nil {
+            if p1!.val < p2!.val {
+                prev?.next = p1
+                p1 = p1?.next
+            } else {
+                prev?.next = p2
+                p2 = p2?.next
+            }
+            prev = prev?.next!
+        }
+        prev?.next = p1 != nil ? p1 : p2
+        return prehead.next
+    }
+}
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/check-if-all-as-appears-before-all-bs/
 class Leet2124 {
