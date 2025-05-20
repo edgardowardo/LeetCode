@@ -17909,5 +17909,14 @@ class Leet3014 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/average-value-of-even-numbers-that-are-divisible-by-three/
+class Leet2455 {
+    func averageValue(_ nums: [Int]) -> Int {
+        let sixes = nums.filter { $0.isMultiple(of: 6) }
+        guard sixes.count > 0 else { return 0 }
+        return sixes.reduce(0, +) / sixes.count
+    }
+}
 
 print("All playground tests passed!")
