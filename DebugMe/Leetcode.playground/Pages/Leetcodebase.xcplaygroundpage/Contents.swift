@@ -17835,4 +17835,21 @@ class Leet0762 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/median-of-two-sorted-arrays/
+class Leet0004 {
+    func findMedianSortedArrays(_ nums1: [Int], _ nums2: [Int]) -> Double {
+        Array(nums1 + nums2).median()
+    }
+}
+
+extension Array where Element == Int {
+    func median() -> Double {
+        let sortedArray = sorted()
+        guard count.isMultiple(of: 2) else { return Double(sortedArray[count / 2]) }
+        return Double(sortedArray[count / 2] + sortedArray[count / 2 - 1]) / 2.0
+    }
+}
+
+
 print("All playground tests passed!")
