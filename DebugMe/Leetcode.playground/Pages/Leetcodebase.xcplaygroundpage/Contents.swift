@@ -17716,4 +17716,29 @@ class Leet2917 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/zero-array-transformation-i/
+class Leet3355 {
+    func isZeroArray(_ nums: [Int], _ queries: [[Int]]) -> Bool {
+        let n1 = nums.count + 1
+        var delta = [Int](repeating: 0, count: n1)
+        for q in queries {
+            let l = q[0], r = q[1]
+            delta[l] += 1
+            delta[r + 1] -= 1
+        }
+        var opCounts = [Int](repeating: 0, count: n1), ops = 0
+        for i in 0..<n1 {
+            ops += delta[i]
+            opCounts[i] = ops
+        }
+        for i in 0..<nums.count {
+            if opCounts[i] < nums[i] {
+                return false
+            }
+        }
+        return true
+    }
+}
+
 print("All playground tests passed!")
