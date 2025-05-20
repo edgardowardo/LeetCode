@@ -17919,4 +17919,18 @@ class Leet2455 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/binary-prefix-divisible-by-5/
+class Leet1018 {
+    func prefixesDivBy5(_ nums: [Int]) -> [Bool] {
+        var outputArr = [Bool](), num = 0
+        for i in 0..<nums.count {
+            num = (num * 2 + nums[i]) % 5
+            outputArr.append(num == 0)
+        }
+        return outputArr
+    }
+}
+
+
 print("All playground tests passed!")
