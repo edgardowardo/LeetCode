@@ -17818,4 +17818,12 @@ class Leet3083 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/binary-number-with-alternating-bits/
+class Leet0693 {
+    func hasAlternatingBits(_ n: Int) -> Bool {
+        (n & (n >> 1)) == 0 && (n | (n >> 2)) == n
+    }
+}
+
 print("All playground tests passed!")
