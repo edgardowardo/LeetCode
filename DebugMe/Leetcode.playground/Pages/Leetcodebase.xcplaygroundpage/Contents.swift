@@ -17761,4 +17761,19 @@ class Leet2053 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-common-words-with-one-occurrence/
+class Leet2085 {
+    func countWords(_ words1: [String], _ words2: [String]) -> Int {
+        let s = words1.count < words2.count ? words1 : words2
+        let l = words1.count < words2.count ? words2 : words1
+        var hash = l.reduce(into: [String: Int]()) { h, w in h[w, default: 0] += 1 }
+        hash = hash.filter { $0.value == 1 }
+        for w in s {
+            hash[w, default: 0] -= 1
+        }
+        return hash.count(where: { $0.value == 0 })
+    }
+}
+
 print("All playground tests passed!")
