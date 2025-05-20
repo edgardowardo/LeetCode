@@ -17860,4 +17860,35 @@ class Leet2387 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+class Leet0017 {
+        
+    private var digits = [Character]()
+    private let letters: [Character: [Character]] = ["2": ["a", "b", "c"], "3": ["d", "e", "f"], "4": ["g", "h", "i"], "5": ["j", "k", "l"], "6": ["m", "n", "o"], "7": ["p", "q", "r", "s"], "8": ["t", "u", "v"], "9": ["w", "x", "y", "z"]]
+    private var result = [String]()
+    
+    func letterCombinations(_ digits: String) -> [String] {
+        guard !digits.isEmpty else { return [] }
+        result = []
+        self.digits = Array(digits)
+        backtrack(0, [])
+        return result
+    }
+    
+    private func backtrack(_ index: Int, _ path: [Character]) {
+        guard path.count < digits.count else {
+            return result.append(String(path))
+        }
+        var path = path
+        for l in letters[digits[index]]! {
+            path.append(l)
+            backtrack(index + 1, path)
+            path.removeLast()
+        }
+    }
+    
+}
+
 print("All playground tests passed!")
