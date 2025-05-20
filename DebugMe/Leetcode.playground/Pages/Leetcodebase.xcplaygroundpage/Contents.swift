@@ -17891,4 +17891,23 @@ class Leet0017 {
     
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-i/
+class Leet3014 {
+    func minimumPushes(_ word: String) -> Int {
+        let n = word.count
+        guard n <= 26 else { fatalError("Should not happen") }
+        var pushes = 0, remaining = n, costPerLetter = 1
+        while remaining > 0 {
+            let chunk = min(8, remaining)
+            pushes += chunk * costPerLetter
+            remaining -= chunk
+            costPerLetter += 1
+        }
+        return pushes
+    }
+}
+
+
 print("All playground tests passed!")
