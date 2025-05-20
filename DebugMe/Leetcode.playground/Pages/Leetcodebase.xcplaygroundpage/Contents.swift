@@ -17788,4 +17788,20 @@ class Leet0884 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-subarrays-with-equal-sum/
+class Leet2395 {
+    func findSubarrays(_ nums: [Int]) -> Bool {
+        var sums: Set<Int> = []
+        for i in 1..<nums.count {
+            let sum = nums[i-1] + nums[i]
+            if sums.contains(sum) {
+                return true
+            }
+            sums.insert(sum)
+        }
+        return false
+    }
+}
+
 print("All playground tests passed!")
