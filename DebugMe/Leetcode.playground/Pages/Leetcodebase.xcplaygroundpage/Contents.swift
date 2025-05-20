@@ -17741,4 +17741,13 @@ class Leet3355 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-of-values-at-indices-with-k-set-bits/
+class Leet2859 {
+    func sumIndicesWithKSetBits(_ nums: [Int], _ k: Int) -> Int {
+        (0..<nums.count).reduce(into: 0) { r, i in r += (i.nonzeroBitCount == k) ? nums[i] : 0 }
+    }
+}
+
 print("All playground tests passed!")
