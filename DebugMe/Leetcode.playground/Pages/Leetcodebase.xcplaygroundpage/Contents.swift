@@ -17851,5 +17851,13 @@ extension Array where Element == Int {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/median-of-a-row-wise-sorted-matrix/
+class Leet2387 {
+    func matrixMedian(_ grid: [[Int]]) -> Int {
+        let nums = grid.flatMap(\.self).sorted(), n = nums.count
+        return nums[n/2]
+    }
+}
 
 print("All playground tests passed!")
