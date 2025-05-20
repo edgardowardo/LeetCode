@@ -17776,4 +17776,16 @@ class Leet2085 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/uncommon-words-from-two-sentences/
+class Leet0884 {
+    func uncommonFromSentences(_ s1: String, _ s2: String) -> [String] {
+        (s1 + " " + s2)
+            .split(separator: " ")
+            .reduce(into: [String: Int]()) { cnt, w in cnt[String(w), default: 0] += 1 }
+            .filter { $1 == 1 }
+            .map { String($0.key) }
+    }
+}
+
 print("All playground tests passed!")
