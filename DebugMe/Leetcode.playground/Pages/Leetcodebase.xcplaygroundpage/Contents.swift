@@ -17750,4 +17750,15 @@ class Leet2859 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/kth-distinct-string-in-an-array/
+class Leet2053 {
+    func kthDistinct(_ arr: [String], _ k: Int) -> String {
+        let counts = arr.reduce(into: [:]) { counts, element in counts[element, default: 0] += 1 }
+        let distincts = arr.filter { counts[$0]! == 1 }
+        guard k <= distincts.count else { return "" }
+        return distincts[k - 1]
+    }
+}
+
 print("All playground tests passed!")
