@@ -17804,4 +17804,18 @@ class Leet2395 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/existence-of-a-substring-in-a-string-and-its-reverse/
+class Leet3083 {
+    func isSubstringPresent(_ s: String) -> Bool {
+        let s = Array(s), r = Array(s.reversed()), n = s.count
+        let seen = (1..<n).reduce(into: Set<String>()) { m, i in m.insert(String(r[i-1...i])) }
+        for i in 1..<n where seen.contains(String(s[i-1...i])) {
+            return true
+        }
+        return false
+    }
+}
+
+
 print("All playground tests passed!")
