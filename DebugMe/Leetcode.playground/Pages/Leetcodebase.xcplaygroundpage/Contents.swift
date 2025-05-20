@@ -17826,4 +17826,13 @@ class Leet0693 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/
+class Leet0762 {
+    func countPrimeSetBits(_ left: Int, _ right: Int) -> Int {
+        let primes = Set([2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31])
+        return (left...right).count { n in primes.contains(n.nonzeroBitCount) }
+    }
+}
+
 print("All playground tests passed!")
