@@ -18062,6 +18062,24 @@ class Leet0011 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/trapping-rain-water/
+class Leet0042 {
+    func trap(_ height: [Int]) -> Int {
+        var l = 0, r = height.count - 1, result = 0, lmax = 0, rmax = 0
+        while l < r {
+            if height[l] < height[r] {
+                lmax = max(lmax, height[l])
+                result += lmax - height[l]
+                l += 1
+            } else {
+                rmax = max(rmax, height[r])
+                result += rmax - height[r]
+                r -= 1
+            }
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
