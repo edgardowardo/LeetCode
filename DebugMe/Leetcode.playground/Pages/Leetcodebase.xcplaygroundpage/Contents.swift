@@ -18035,4 +18035,13 @@ class Leet0006 {
  2
  */
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/percentage-of-letter-in-string/
+class Leet2278 {
+    func percentageLetter(_ s: String, _ letter: Character) -> Int {
+        s.count(where: { $0 == letter }) * 100 / s.count
+    }
+}
+
 print("All playground tests passed!")
