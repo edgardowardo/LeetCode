@@ -18102,4 +18102,29 @@ class Leet0015 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/3sum-closest/
+class Leet0016 {
+    func threeSumClosest(_ nums: [Int], _ target: Int) -> Int {
+        var diff = Int.max, n = nums.count, i = 0
+        let nums = nums.sorted()
+        while i < n && diff != 0 {
+            var lo = i + 1, hi = n - 1
+            while lo < hi {
+                let sum = nums[i] + nums[lo] + nums[hi]
+                if abs(target - sum) < abs(diff) {
+                    diff = target - sum
+                }
+                if sum < target {
+                    lo += 1
+                } else {
+                    hi -= 1
+                }
+            }
+            i += 1
+        }
+        return target - diff
+    }
+}
+
 print("All playground tests passed!")
