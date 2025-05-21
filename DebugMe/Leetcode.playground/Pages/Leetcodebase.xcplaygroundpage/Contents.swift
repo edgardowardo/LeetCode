@@ -18000,4 +18000,39 @@ class Leet0073 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/zigzag-conversion/
+class Leet0006 {
+    func convert(_ s: String, _ numRows: Int) -> String {
+        guard numRows > 1 else { return s }
+        let s = Array(s), n = s.count
+        var result = [[Character]](repeating: [], count: numRows), row = 0, down = false
+        for c in s {
+            result[row].append(c)
+            if row == 0 || row == numRows - 1 {
+                down.toggle()
+            }
+            row += down ? 1 : -1
+        }
+        return result.compactMap { String($0) }.joined()
+    }
+}
+
+/*
+ "PAYPALISHIRING"
+ 3
+ "PAYPALISHIRING"
+ 4
+ "A"
+ 1
+ "ABC"
+ 2
+ "A"
+ 1
+ "AB"
+ 1
+ "ABCD"
+ 2
+ */
+
 print("All playground tests passed!")
