@@ -18127,4 +18127,27 @@ class Leet0016 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/3sum-smaller/description/
+class Leet0259 {
+    func threeSumSmaller(_ nums: [Int], _ target: Int) -> Int {
+        var n = nums.count, result = 0
+        let nums = nums.sorted()
+        for i in 0..<n {
+            var lo = i + 1, hi = n - 1
+            while lo < hi {
+                let sum = nums[i] + nums[lo] + nums[hi]
+                if sum < target {
+                    result += hi - lo
+                    lo += 1
+                } else {
+                    hi -= 1
+                }
+            }
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
