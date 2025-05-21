@@ -18150,4 +18150,42 @@ class Leet0259 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/4sum/
+class Leet0018 {
+    func fourSum(_ nums: [Int], _ target: Int) -> [[Int]] {
+        kSum(nums.sorted(), target, 0, 4)
+    }
+    private func kSum(_ nums: [Int], _ target: Int, _ start: Int, _ k: Int) -> [[Int]] {
+        var result = [[Int]]()
+        let n = nums.count, ave = target / k
+        guard start < n else { return result }
+        guard !(nums[start] > ave || ave > nums[n - 1]) else { return result }
+        guard k > 2 else { return twoSum(nums, target, start) }
+        for i in start..<n where i == start || nums[i] != nums[i - 1]{
+            for subset in kSum(nums, target - nums[i], i + 1, k - 1) {
+                result.append([nums[i]] + subset)
+            }
+        }
+        return result
+    }
+    private func twoSum ( _ nums: [Int], _ target: Int, _ start: Int) -> [[Int]] {
+        let n = nums.count
+        var result = [[Int]](), lo = start, hi = n - 1
+        while lo < hi {
+            let currSum = nums[lo] + nums[hi]
+            if currSum < target || (lo > start && nums[lo] == nums[lo - 1]) {
+                lo += 1
+            } else if currSum > target || (hi < n - 1 && nums[hi] == nums[hi + 1]) {
+                hi -= 1
+            } else {
+                result.append([nums[lo], nums[hi]])
+                lo += 1
+                hi -= 1
+            }
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
