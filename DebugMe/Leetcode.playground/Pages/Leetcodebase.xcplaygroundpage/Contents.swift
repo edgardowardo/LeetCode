@@ -17933,4 +17933,71 @@ class Leet1018 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/set-matrix-zeroes/
+class Leet0073 {
+    func setZeroes(_ matrix: inout [[Int]]) {
+        let m = matrix.count, n = matrix[0].count
+        var isFirstRow0 = false, isFirstCol0 = false
+        for row in 0..<m {
+            for col in 0..<n where matrix[row][col] == 0 {
+                if row == 0 {
+                    isFirstRow0 = true
+                }
+                if col == 0 {
+                    isFirstCol0 = true
+                }
+                matrix[0][col] = 0
+                matrix[row][0] = 0
+            }
+        }
+        // set rows
+        for col in 1..<n where matrix[0][col] == 0 {
+            for row in 1..<m {
+                matrix[row][col] = 0
+            }
+        }
+        // set columns
+        for row in 1..<m where matrix[row][0] == 0 {
+            for col in 1..<n {
+                matrix[row][col] = 0
+            }
+        }
+        // set first row or columns
+        if isFirstCol0 {
+            for row in 0..<m {
+                matrix[row][0] = 0
+            }
+        }
+        if isFirstRow0 {
+            for col in 0..<n {
+                matrix[0][col] = 0
+            }
+        }
+    }
+}
+
+
+/*
+ [[1,1,1],[1,0,1],[1,1,1]]
+ [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+ [[1],[0]]
+ [[0,1,1],[1,1,1],[1,0,0]]
+ [[-4,-2147483648,6,-7,0],[-8,6,-8,-6,0],[2147483647,2,-9,-6,-10]]
+ [[2147483647],[2],[3]]
+ [[1,2,3,4],[5,0,7,8],[0,10,11,12],[13,14,15,0]]
+
+ 
+ [[1,1,1],[1,0,1],[1,1,1]]
+ [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+ [[-1],[2],[3]]
+ [[2147483647],[2],[3]]
+ [[-2147483648],[2],[3]]
+ [[-2147483647,1,1],[1,0,1],[1,1,1]]
+ [[1],[0]]
+ [[-4,-2147483648,6,-7,0],[-8,6,-8,-6,0],[2147483647,2,-9,-6,-10]]
+ 
+ */
+
+
 print("All playground tests passed!")
