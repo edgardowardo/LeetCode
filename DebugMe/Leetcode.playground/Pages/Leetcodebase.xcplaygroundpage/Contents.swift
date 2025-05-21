@@ -18082,4 +18082,24 @@ class Leet0042 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/3sum/
+class Leet0015 {
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+        let numIdxMap = nums.enumerated()
+            .map { (i: $0.offset, v: $0.element) }
+            .reduce(into: [Int: Set<Int>]()) { r, e in r[e.v, default: []].insert(e.i) }
+        var result = Set<[Int]>()
+        for i in 0..<nums.count {
+            for j in i+1..<nums.count {
+                let target = -(nums[i] + nums[j])
+                guard let s = numIdxMap[target], s.contains(where: { $0 != i && $0 != j }) else { continue }
+                result.insert([nums[i], nums[j], target].sorted())
+            }
+        }
+        return result.map { $0 }
+    }
+}
+
+
 print("All playground tests passed!")
