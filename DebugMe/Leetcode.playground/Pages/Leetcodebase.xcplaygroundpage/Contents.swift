@@ -18044,4 +18044,24 @@ class Leet2278 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/container-with-most-water/
+class Leet0011 {
+    func maxArea(_ height: [Int]) -> Int {
+        var result = 0, l = 0, r = height.count - 1
+        while l < r {
+            if height[l] < height[r] {
+                result = max(result, (r - l) * height[l])
+                l += 1
+            } else {
+                result = max(result, (r - l) * height[r])
+                r -= 1
+            }
+        }
+        return result
+    }
+}
+
+
+
 print("All playground tests passed!")
