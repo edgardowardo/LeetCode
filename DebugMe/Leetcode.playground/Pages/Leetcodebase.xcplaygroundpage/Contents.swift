@@ -18248,6 +18248,25 @@ class Leet2784 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/generate-parentheses/
+class Leet0022 {
+    func generateParenthesis(_ n: Int) -> [String] {
+        var result = [String]()
+        backtrack(n, 0, 0, "", &result)
+        return result
+    }
+    private func backtrack(_ n: Int, _ open: Int, _ close: Int, _ current:  String, _ result: inout [String]) {
+        guard current.count < n * 2 else { return result.append(String(current)) }
+        let par: [String] = ["(", ")"]
+        for c in par {
+            if c == "(" && open < n {
+                backtrack(n, open + 1, close, current + c, &result)
+            } else if c == ")" && open > close {
+                backtrack(n, open, close + 1, current + c, &result)
+            }
+        }
+    }
+}
 
 print("All playground tests passed!")
