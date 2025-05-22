@@ -18238,5 +18238,16 @@ class Leet0454 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-array-is-good/
+class Leet2784 {
+    func isGood(_ nums: [Int]) -> Bool {
+        let n = nums.count - 1, m = nums.reduce(into: [:]) { c, n in c[n, default: 0] += 1 }
+        guard n > 1 else { return nums == [1,1] }
+        return m[n] == 2 && m.count == n && (1...n-1).allSatisfy { m[$0] ?? 0 == 1 }
+    }
+}
+
+
 
 print("All playground tests passed!")
