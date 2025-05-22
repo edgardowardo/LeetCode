@@ -18188,4 +18188,38 @@ class Leet0018 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/zero-array-transformation-iii/
+class Leet3362 {
+    func maxRemoval(_ nums: [Int], _ queries: [[Int]]) -> Int {
+        let queries = queries.sorted { (q1, q2) -> Bool in q1[0] < q2[0] }, n = nums.count
+        var heap = Heap<Int>(), deltas = [Int](repeating: 0, count: n + 1), ops = 0, j = 0
+        for i in 0..<n {
+            ops += deltas[i]
+            while j < queries.count, queries[j][0] == i {
+                heap.insert(queries[j][1])
+                j += 1
+            }
+            while ops < nums[i], let top = heap.max, top >= i {
+                ops += 1
+                deltas[heap.removeMax() + 1] -= 1
+            }
+            if ops < nums[i] {
+                return -1
+            }
+        }
+        return heap.count
+    }
+    static func test() {
+        let sut = Leet3362()
+        assert(sut.maxRemoval([0,0,1,1,0], [[3,4],[0,2],[2,3]]) == 2)
+        assert(sut.maxRemoval([2,0,2], [[0,2],[0,2],[1,1]]) == 1)
+    }
+}
+//Leet3362.test()
+
+
+
+
 print("All playground tests passed!")
