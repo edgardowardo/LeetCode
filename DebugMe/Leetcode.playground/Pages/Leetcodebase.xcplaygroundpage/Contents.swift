@@ -18269,4 +18269,23 @@ class Leet0022 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/index-pairs-of-a-string/
+class Leet1065 {
+    func indexPairs(_ text: String, _ words: [String]) -> [[Int]] {
+        let text = Array(text)
+        var result = [[Int]]()
+        for i in 0..<text.count {
+            for w in words {
+                let l = w.count
+                guard i + l <= text.count else { continue }
+                if String(text[i..<i+l]) == w {
+                    result.append([i, i+l-1])
+                }
+            }
+        }
+        return result.sorted { $0[0] < $1[0] || ($0[0] == $1[0] && $0[1] < $1[1]) }
+    }
+}
+
 print("All playground tests passed!")
