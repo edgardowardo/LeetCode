@@ -18258,13 +18258,11 @@ class Leet0022 {
     }
     private func backtrack(_ n: Int, _ open: Int, _ close: Int, _ current:  String, _ result: inout [String]) {
         guard current.count < n * 2 else { return result.append(String(current)) }
-        let par: [String] = ["(", ")"]
-        for c in par {
-            if c == "(" && open < n {
-                backtrack(n, open + 1, close, current + c, &result)
-            } else if c == ")" && open > close {
-                backtrack(n, open, close + 1, current + c, &result)
-            }
+        if open < n {
+            backtrack(n, open + 1, close, current + "(", &result)
+        }
+        if open > close {
+            backtrack(n, open, close + 1, current + ")", &result)
         }
     }
 }
