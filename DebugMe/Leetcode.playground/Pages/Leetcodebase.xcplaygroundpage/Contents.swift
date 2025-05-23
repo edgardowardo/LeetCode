@@ -18309,4 +18309,17 @@ class Leet3068 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-different-integers-in-a-string/
+class Leet1805 {
+    func numDifferentIntegers(_ word: String) -> Int {
+        word
+            .split(whereSeparator: { c in c.isLetter })
+            .map { num in num[(num.firstIndex(where: { c in c != "0" }) ?? num.endIndex)...] }
+            .reduce(into: Set<Substring>()) { r, n in r.insert(n) }
+            .count
+    }
+}
+
 print("All playground tests passed!")
