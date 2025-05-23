@@ -18288,4 +18288,27 @@ class Leet1065 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-maximum-sum-of-node-values/
+///REVISIT
+class Leet3068 {
+    func maximumValueSum(_ nums: [Int], _ k: Int, _ edges: [[Int]]) -> Int {
+        let n = nums.count
+        var netChange = [Int](repeating: 0, count: n), nodeSum = 0
+        for i in 0..<n {
+            netChange[i] = (nums[i] ^ k) - nums[i]
+            nodeSum += nums[i]
+        }
+        netChange.sort(by: >)
+        for i in stride(from: 0, to: n, by: 2) {
+            guard i + 1 < n else { break }
+            let pairSum = netChange[i] + netChange[i + 1]
+            guard pairSum > 0 else { continue }
+            nodeSum += pairSum
+        }
+        return nodeSum
+    }
+}
+
 print("All playground tests passed!")
