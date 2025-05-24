@@ -18322,4 +18322,19 @@ class Leet1805 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-recent-calls/
+class Leet0933 {
+    private var queue: Deque<Int> = []
+    init() { queue = [] }
+    func ping(_ t: Int) -> Int {
+        let before3K = t - 3000
+        while !queue.isEmpty, queue.first! < before3K {
+            queue.removeFirst()
+        }
+        queue.append(t)
+        return queue.count
+    }
+}
+
 print("All playground tests passed!")
