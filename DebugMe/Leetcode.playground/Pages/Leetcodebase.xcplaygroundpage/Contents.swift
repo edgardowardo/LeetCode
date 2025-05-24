@@ -18337,4 +18337,56 @@ class Leet0933 {
     }
 }
 
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/dota2-senate/
+class Leet0649 {
+    func predictPartyVictory(_ senate: String) -> String {
+        let senate = Array(senate), n = senate.count
+        var rq = Deque<Int>(senate.indices.filter { senate[$0] == "R" }), dq = Deque<Int>(senate.indices.filter { senate[$0] == "D" })
+        while !rq.isEmpty || !dq.isEmpty {
+            guard let ri = rq.first else { return "Dire" }
+            guard let di = dq.first else { return "Radiant" }
+            // banning
+            if ri < di {
+                dq.removeFirst()
+                rq.append(rq.removeFirst() + n)
+            } else {
+                rq.removeFirst()
+                dq.append(dq.removeFirst() + n)
+            }
+        }
+        fatalError("Incorrect input")
+    }
+    static func test() {
+        let sut = Leet0649()
+        assert(sut.predictPartyVictory("RD") == "Radiant")
+        assert(sut.predictPartyVictory("DDRRR") == "Dire")
+        assert(sut.predictPartyVictory("RR") == "Radiant")
+        assert(sut.predictPartyVictory("DDDRRRRR") == "Radiant")
+    }
+}
+//Leet0649.test()
+
+/*
+ "RD"
+ "RDD"
+ "RRDD"
+ "DDRRR"
+ "DRRDRDRDRDDRDRDR"
+ "DDDRRRRR"
+ "RRDDDDDDDRRDRRDDRRRR"
+ 
+ "DDDRRRRR"
+ "RDD"
+ "DRRDRDRDRDDRDRDR"
+ "DDRRR"
+ "RDRDRDDRDRDRDRDRRDRDRDRDRDRDDDDRRDRDRDRDRDRDRDRRRRRDRDRDRDRDDDDDRDRDRDRDRDRDRDRRDRDRDRDRDRDRRDRDRDRDRDRDRDRDRRDRDRDRDRDRRD"
+ "RRDDDDDDDRRDRRDDRRRR"
+ "RDRDRDDRDDDDDDDRRDRRDDRRRRDDDDDDRRDRRDDRRRRDDDDDDRRDRRDDRRRRDDDDDDRRDRRDDRRRRDDDDDDRRDRRDDRRRRDDDDDDRRDRRDDRRRRDDDDDDRRDRRDDRRRRDDDDDDRRDRRDDRRRRRDRDDDDDDDRRDRRDDRRRRRDRRDRDRDDDDDDDRRDRRDDRRRRRDRDRDDDDRRDRDRDRDRDRDRDRRRRRDRDRDRDRDDDDDRDRDRDRDRDRDRDRRDRDRDRDRDRDRRDRDRDDDDDDDRRDRRDDRRRRRDRDRDRDRDRRDRDRDRDRDRRD"
+ "DDR"
+ */
+
+
 print("All playground tests passed!")
