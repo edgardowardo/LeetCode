@@ -18388,5 +18388,52 @@ class Leet0649 {
  "DDR"
  */
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/
+class Leet2131 {
+    func longestPalindrome(_ words: [String]) -> Int {
+        var syms = [String: Int](), asym = [String: Int](), result = 0
+        // collect symetric and asymetric word counts
+        for w in words {
+            guard w.count == 2 else { continue }
+            guard let f = w.first, let l = w.last else { continue }
+            if l == f {
+                syms[w, default: 0] += 1
+            } else {
+                asym[w, default: 0] += 1
+            }
+        }
+        // all asymetric words must have matching words
+        for w1 in asym {
+            guard w1.value > 0 else { continue }
+            guard let f = w1.key.first, let l = w1.key.last else { continue }
+            let w2 = "\(l)\(f)"
+            guard let c2 = asym[w2] else { continue }
+            result += 2 * min(w1.value, c2)
+            asym[w2] = 0
+        }
+        // all symetric words must be a multiple of two to pair each other except for one which can be the middle
+        var foundCenter = false
+        for v in syms.values.sorted(by: >) {
+            if v.isMultiple(of: 2) {
+                result += 2 * v
+            } else {
+                if foundCenter {
+                    result += 2 * (v - 1)
+                } else { // center can be 1 or any other odd number
+                    if v == 1 {
+                        result += 2
+                    } else {
+                        result += 2 * (v - 1) + 2
+                    }
+                    foundCenter = true
+                    continue
+                }
+            }
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
