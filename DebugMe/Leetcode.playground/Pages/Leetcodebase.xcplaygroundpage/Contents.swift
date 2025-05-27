@@ -18620,5 +18620,31 @@ class Leet0047 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/next-permutation/
+class Leet0031 {
+    func nextPermutation(_ nums: inout [Int]) {
+        var i = nums.count - 2
+        while i >= 0 && nums[i + 1] <= nums[i] {
+            i -= 1
+        }
+        if i >= 0 {
+            var j = nums.count - 1
+            while j >= 0 && nums[j] <= nums[i] {
+                j -= 1
+            }
+            nums.swapAt(i, j)
+        }
+        reverse(&nums, i + 1)
+    }
+    private func reverse(_ nums: inout [Int], _ start: Int) {
+        var i = start, j = nums.count - 1
+        while i < j {
+            nums.swapAt(i, j)
+            i += 1
+            j -= 1
+        }
+    }
+}
 
 print("All playground tests passed!")
