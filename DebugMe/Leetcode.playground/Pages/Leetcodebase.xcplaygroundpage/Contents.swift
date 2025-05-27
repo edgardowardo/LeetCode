@@ -18436,4 +18436,47 @@ class Leet2131 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/largest-color-value-in-a-directed-graph/
+class Leet1875 {
+    func largestPathValue(_ colors: String, _ edges: [[Int]]) -> Int {
+        let colors = Array(colors), n = colors.count
+        var adj = [Int: [Int]](), indegree = [Int](repeating: 0, count: n)
+        for e in edges {
+            adj[e[0], default: []].append(e[1])
+            indegree[e[1]] += 1
+        }
+        var count = [[Int]](repeating: [Int](repeating: 0, count: 26), count: n)
+        var q = Deque<Int>()
+        for i in 0..<n where indegree[i] == 0 {
+            q.append(i)
+        }
+        var result = 1, nodeSeen = 0
+        while !q.isEmpty {
+            let node = q.removeFirst()
+            let color = Int(colors[node].asciiValue! - Character("a").asciiValue!)
+            count[node][color] += 1
+            result = max(result, count[node][color])
+            nodeSeen += 1
+            guard let neighbors = adj[node] else { continue }
+            for neighbor in neighbors {
+                for i in 0..<26 {
+                    count[neighbor][i] = max(count[neighbor][i], count[node][i])
+                }
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0 {
+                    q.append(neighbor)
+                }
+            }
+        }
+        return nodeSeen < n ? -1 : result
+    }
+    static func test() {
+        let sut = Leet1875()
+        assert(sut.largestPathValue("abaca", [[0,1],[0,2],[2,3],[3,4]]) == 3)
+    }
+}
+//Leet1875.test()
+
+
 print("All playground tests passed!")
