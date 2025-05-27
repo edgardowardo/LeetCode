@@ -18479,4 +18479,25 @@ class Leet1875 {
 //Leet1875.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-palindrome/
+class Leet0409 {
+    func longestPalindrome(_ s: String) -> Int {
+        let counts = s.reduce(into: [Character: Int]()) { r, c in r[c, default: 0] += 1 }
+        var isCenterFound = false
+        return counts.values.reduce(into: 0) { result, count in
+            if !isCenterFound && (count == 1 || !count.isMultiple(of: 2) ) {
+                isCenterFound = true
+                result += count
+                return
+            }
+            if count.isMultiple(of: 2) {
+                result += count
+            } else {
+                result += count - 1
+            }
+        }
+    }
+}
+
 print("All playground tests passed!")
