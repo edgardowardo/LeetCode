@@ -18600,4 +18600,25 @@ class Leet2384 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/permutations-ii/
+class Leet0047 {
+    func permuteUnique(_ nums: [Int]) -> [[Int]] {
+        var result = Set<[Int]>()
+        backtrack([], nums, &result)
+        return Array(result)
+    }
+    private func backtrack(_ current: [Int], _ nums: [Int], _ result: inout Set<[Int]>) {
+        guard !nums.isEmpty else {
+            result.insert(current)
+            return
+        }
+        for i in 0..<nums.count {
+            let n = nums[i]
+            backtrack(current + [n], Array(nums[0..<i] + nums[i+1..<nums.count]), &result)
+        }
+    }
+}
+
+
 print("All playground tests passed!")
