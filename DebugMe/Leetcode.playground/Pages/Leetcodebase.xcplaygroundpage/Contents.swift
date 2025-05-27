@@ -18570,6 +18570,34 @@ extension Dictionary where Key == Character, Value == Int {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/largest-palindromic-number/
+class Leet2384 {
+    func largestPalindromic(_ num: String) -> String {
+        let freq = num.reduce(into: [Character: Int]()) { counts, char in counts[char, default: 0] += 1 }
+        var oddElems = freq.filter { !$1.isMultiple(of: 2) }, evenElems = freq.filter { $1.isMultiple(of: 2) }, result = "", center = ""
+        if let maxOdd = oddElems.max(by: { $0.key < $1.key  }) {
+            center = String(maxOdd.key)
+        }
+        for k in oddElems.keys {
+            oddElems.subtract(k)
+            guard let cnt = oddElems[k], cnt > 0 else { continue }
+            evenElems[k] = oddElems[k]
+        }
+        let evens = evenElems.map { k, v in (String(k), v / 2) }.sorted(by: { $0.0 > $1.0 })
+        for (str, cnt) in evens {
+            // no leading zeroes
+            guard result.isEmpty && str != "0" || !result.isEmpty else { continue }
+            result += String(repeating: str, count: cnt)
+        }
+        let secondHalf = result.reversed()
+        result += String(center) + secondHalf
+        guard !result.isEmpty else { return "0" }
+        return result
+        
+    }
+}
+
 
 
 print("All playground tests passed!")
