@@ -18519,4 +18519,57 @@ class Leet2894 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/palindrome-permutation-ii/
+///O(n * k)
+class Leet0267 {
+    func generatePalindromes(_ s: String) -> [String] {
+        var freq = s.reduce(into: [Character: Int]()) { r, c in r[c, default: 0] += 1 }, center = ""
+        //start from the center character, if existing
+        let oddElems = freq.filter { !$1.isMultiple(of: 2) }, canPermute = oddElems.count <= 1
+        guard canPermute else { return [] }
+        if let c = oddElems.first?.key {
+            freq.subtract(c)
+            center = String(c)
+        }
+        var result: Set<String> = []
+        backtrack(&freq, center, &result)
+        return Array(result)
+        
+    }
+    private func backtrack(_ freq: inout [Character: Int], _ current: String, _ result: inout Set<String>) {
+        guard !freq.isEmpty else {
+            result.insert(current)
+            return
+        }
+        for (k, v) in freq {
+            for _ in 0..<v/2 {
+                freq.subtract(k, 2)
+                let c = String(k)
+                backtrack(&freq, c + current + c, &result)
+                freq[k] = v
+            }
+        }
+    }
+    static func test() {
+        let sut = Leet0267()
+        assert(Set(sut.generatePalindromes("aabb")) == Set(["abba","baab"]))
+    }
+}
+
+extension Dictionary where Key == Character, Value == Int {
+    mutating func subtract(_ k: Character, _ by: Int = 1) {
+        self[k, default: 0] -= by
+        if let cnt = self[k], cnt <= 0 {
+            self[k] = nil
+        }
+    }
+}
+Leet0267.test()
+
+
+
+
+
 print("All playground tests passed!")
