@@ -18500,4 +18500,17 @@ class Leet0409 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/palindrome-permutation/
+class Leet0266 {
+    func canPermutePalindrome(_ s: String) -> Bool {
+        Array(s)
+            .reduce(into: [Character: Int]()) { r, c in r[c, default: 0] += 1 }
+            .values
+            .count { !$0.isMultiple(of: 2) } <= 1
+    }
+}
+
+
+
 print("All playground tests passed!")
