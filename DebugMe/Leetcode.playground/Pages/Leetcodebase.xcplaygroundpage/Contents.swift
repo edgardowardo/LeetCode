@@ -18711,5 +18711,35 @@ class Leet0239 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/
+class Leet1438 {
+    func longestSubarray(_ nums: [Int], _ limit: Int) -> Int {
+        var inc = Deque<Int>(), dec = Deque<Int>(), l = 0, result = 0
+        for r in 0..<nums.count {
+            // maintain monotonic deques
+            while let lastI = inc.last, lastI > nums[r] {
+                inc.removeLast()
+            }
+            while let lastD = dec.last, lastD < nums[r] {
+                dec.removeLast()
+            }
+            inc.append(nums[r])
+            dec.append(nums[r])
+            // shrink window
+            while let mx = dec.first, let mn = inc.first, mx - mn > limit {
+                if nums[l] == mx {
+                    dec.removeFirst()
+                }
+                if nums[l] == mn {
+                    inc.removeFirst()
+                }
+                l += 1
+            }
+            result = max(result, r - l + 1)
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
