@@ -18689,4 +18689,27 @@ class Leet3372 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sliding-window-maximum/
+class Leet0239 {
+    func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
+        var result = [Int](), q = Deque<Int>()
+        for i in 0..<nums.count {
+            let n = nums[i]
+            while !q.isEmpty, nums[q.last!] < n {
+                q.removeLast()
+            }
+            q.append(i)
+            if let first = q.first, first + k == i {
+                q.removeFirst()
+            }
+            if i >= k - 1, let first = q.first {
+                result.append(nums[first])
+            }
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
