@@ -18696,7 +18696,7 @@ class Leet0239 {
         var result = [Int](), q = Deque<Int>()
         for i in 0..<nums.count {
             let n = nums[i]
-            while !q.isEmpty, nums[q.last!] < n {
+            while let last = q.last, nums[last] < n {
                 q.removeLast()
             }
             q.append(i)
