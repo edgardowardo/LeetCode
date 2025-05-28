@@ -18761,5 +18761,23 @@ class Leet0901 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-nodes-from-linked-list/
+class Leet2487 {
+    func removeNodes(_ head: ListNode?) -> ListNode? {
+        var stack = [ListNode](), dummy: ListNode? = ListNode(0, head)
+        while let curr = dummy?.next {
+            while let last = stack.last, curr.val > last.val {
+                stack.removeLast()
+                last.next = nil
+            }
+            stack.last?.next = curr
+            stack.append(curr)
+            dummy = curr
+        }
+        return stack.first
+    }
+}
+
 
 print("All playground tests passed!")
