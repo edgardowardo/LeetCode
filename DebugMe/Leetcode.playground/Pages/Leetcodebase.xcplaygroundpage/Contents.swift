@@ -18742,4 +18742,24 @@ class Leet1438 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/online-stock-span/
+class Leet0901 {
+
+    typealias Span = (price: Int, span: Int)
+    var stack: [Span] = []
+    init() { stack = [] }
+    
+    func next(_ price: Int) -> Int {
+        var result = 1
+        while let top = stack.last, top.price <= price {
+            result += top.span
+            stack.removeLast()
+        }
+        stack.append((price: price, span: result))
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
