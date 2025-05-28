@@ -18647,4 +18647,46 @@ class Leet0031 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-i
+class Leet3372 {
+    func maxTargetNodes(_ edges1: [[Int]], _ edges2: [[Int]], _ k: Int) -> [Int] {
+        let n = edges1.count + 1
+        var count1 = build(edges1, k), count2 = build(edges2, k - 1), maxCount2 = 0
+        for c in count2 {
+            guard c > maxCount2 else { continue }
+            maxCount2 = c
+        }
+        var result = [Int](repeating: 0, count: n)
+        for i in 0..<n {
+            result[i] = count1[i] + maxCount2
+        }
+        return result
+    }
+    
+    private func build(_ edges: [[Int]], _ k: Int) -> [Int] {
+        let n = edges.count + 1
+        var children = [[Int]](repeating: [], count: n)
+        for e in edges {
+            let u = e[0], v = e[1]
+            children[u].append(v)
+            children[v].append(u)
+        }
+        var result = [Int](repeating: 0, count: n)
+        for i in 0..<n {
+            result[i] = dfs(i, -1, children, k)
+        }
+        return result
+    }
+    
+    private func dfs(_ node: Int, _ parent: Int, _ children: [[Int]], _ k: Int) -> Int {
+        guard k >= 0 else { return 0 }
+        var result = 1
+        for c in children[node] where c != parent {
+            result += dfs(c, node, children, k - 1)
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
