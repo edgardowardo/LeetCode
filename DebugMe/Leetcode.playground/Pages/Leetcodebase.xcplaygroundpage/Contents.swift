@@ -18780,4 +18780,34 @@ class Leet2487 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/
+class Leet3217 {
+    func modifiedList(_ nums: [Int], _ head: ListNode?) -> ListNode? {
+        let s = Set(nums)
+        var stack = [ListNode](), curr = head
+        while curr != nil {
+            let temp = curr?.next
+            guard let c = curr else { break }
+            if s.contains(c.val) {
+                stack.last?.next = nil
+                c.next = nil
+            } else {
+                stack.last?.next = c
+                stack.append(c)
+            }
+            curr = temp
+        }
+        return stack.first
+    }
+    static func test() {
+        let sut = Leet3217()
+        assert(sut.modifiedList([5], [1,2,3,4].makeListNode())?.toArray() == [1,2,3,4])
+        assert(sut.modifiedList([1,2,3], [1,2,3,4,5].makeListNode())?.toArray() == [4,5])
+    }
+}
+//Leet3217.test()
+
+
+
 print("All playground tests passed!")
