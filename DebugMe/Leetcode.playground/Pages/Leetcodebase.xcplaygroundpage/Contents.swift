@@ -18845,6 +18845,18 @@ class Leet3217 {
 }
 //Leet3217.test()
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/convert-1d-array-into-2d-array/
+class Leet2022 {
+    func construct2DArray(_ original: [Int], _ m: Int, _ n: Int) -> [[Int]] {
+        guard original.count == m * n else { return [] }
+        var result = Array(repeating: Array(repeating: 0, count: n), count: m)
+        for i in 0..<original.count {
+            result[i / n][i % n] = original[i]
+        }
+        return result
+    }
+}
 
 
 print("All playground tests passed!")
