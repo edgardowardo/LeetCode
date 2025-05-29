@@ -18909,5 +18909,31 @@ class Leet1560 {
 //Leet1560.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sort-even-and-odd-indices-independently/
+class Leet2164 {
+    func sortEvenOdd(_ nums: [Int]) -> [Int] {
+        var odds = [Int](), evens = [Int]()
+        for (i, n) in nums.enumerated() {
+            if i.isMultiple(of: 2) {
+                evens.append(n)
+            } else {
+                odds.append(n)
+            }
+        }
+        odds.sort { $0 > $1 }
+        evens.sort()
+        var result = [Int](repeating: 0, count: nums.count), i = 0, j = 1
+        for n in evens {
+            result[i] = n
+            i += 2
+        }
+        for n in odds {
+            result[j] = n
+            j += 2
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
