@@ -18689,6 +18689,43 @@ class Leet3372 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-ii/
+class Leet3373 {
+    func maxTargetNodes(_ edges1: [[Int]], _ edges2: [[Int]]) -> [Int] {
+        let n = edges1.count + 1, m = edges2.count + 1
+        var color1 = [Int](repeating: 0, count: n), color2 = [Int](repeating: 0, count: m)
+        var count1 = build(edges1, &color1), count2 = build(edges2, &color2)
+        var result = [Int](repeating: 0, count: n)
+        for i in 0..<n {
+            result[i] = count1[color1[i]] + max(count2[0], count2[1])
+        }
+        return result
+    }
+    
+    private func build(_ edges: [[Int]], _ color: inout [Int]) -> [Int] {
+        let n = edges.count + 1
+        var children = [[Int]](repeating: [], count: n)
+        for e in edges {
+            let u = e[0], v = e[1]
+            children[u].append(v)
+            children[v].append(u)
+        }
+        let result = dfs(0, -1, 0, children, &color)
+        return [result, n - result]
+    }
+    
+    private func dfs(_ node: Int, _ parent: Int, _ depth: Int, _ children: [[Int]], _ color: inout [Int]) -> Int {
+        var result = 1 - depth % 2
+        color[node] = depth % 2
+        for c in children[node] where c != parent {
+            result += dfs(c, node, depth + 1, children, &color)
+        }
+        return result
+    }
+}
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/sliding-window-maximum/
 class Leet0239 {
