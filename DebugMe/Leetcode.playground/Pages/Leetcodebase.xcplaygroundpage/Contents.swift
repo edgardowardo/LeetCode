@@ -18859,4 +18859,20 @@ class Leet2022 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/reshape-the-matrix/
+class Leet0566 {
+    func matrixReshape(_ mat: [[Int]], _ r: Int, _ c: Int) -> [[Int]] {
+        let m = mat.count
+        guard let n = mat.first?.count, m * n == r * c, m != r, n != c else { return mat }
+        let flat = mat.flatMap { $0 }
+        var result = Array(repeating: Array(repeating: 0, count: c), count: r)
+        for i in 0..<flat.count {
+            result[i / c][i % c] = flat[i]
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
