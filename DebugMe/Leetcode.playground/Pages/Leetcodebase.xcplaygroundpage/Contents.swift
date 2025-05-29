@@ -18874,5 +18874,15 @@ class Leet0566 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/row-with-maximum-ones/
+class Leet2643 {
+    func rowAndMaximumOnes(_ mat: [[Int]]) -> [Int] {
+        let sums = mat.map { l in l.reduce(0, +) }
+        guard let x = sums.max(), let first = sums.enumerated().filter({ e in e.element == x }).first else { return [] }
+        return [first.offset, x]
+    }
+}
+
 
 print("All playground tests passed!")
