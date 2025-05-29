@@ -18885,4 +18885,29 @@ class Leet2643 {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/most-visited-sector-in-a-circular-track/
+class Leet1560 {
+    func mostVisited(_ n: Int, _ rounds: [Int]) -> [Int] {
+        guard let f = rounds.first, let l = rounds.last else { return [] }
+        if f < l {
+            return Array(f...l)
+        } else if f > l {
+            return Array(1...l) + Array(f...n)
+        } else {
+            return [f]
+        }
+    }
+    static func test() {
+        let sut = Leet1560()
+        assert(sut.mostVisited(7, [1,3,5,7]) == [1,2,3,4,5,6,7])
+        assert(sut.mostVisited(2, [2,1,2,1,2,1,2,1,2]) == [2])
+        assert(sut.mostVisited(4, [1,3,1,2]) == [1,2])
+    }
+}
+//Leet1560.test()
+
+
+
 print("All playground tests passed!")
