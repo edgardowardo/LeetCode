@@ -18936,4 +18936,57 @@ class Leet2164 {
     }
 }
 
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/validate-stack-sequences/
+class Leet0946 {
+    func validateStackSequences(_ pushed: [Int], _ popped: [Int]) -> Bool {
+        var stack = [Int](), i = 0
+        for sh in pushed {
+            var pop = popped[i]
+            if sh == pop {
+                i += 1
+            } else {
+                while let last = stack.last, last == pop {
+                    stack.removeLast()
+                    i += 1
+                    pop = popped[i]
+                }
+                stack.append(sh)
+            }
+        }
+        for pop in popped[i...] {
+            guard let last = stack.last, last == pop else { continue }
+            stack.removeLast()
+        }
+        return stack.isEmpty
+    }
+    
+    static func test() {
+        let sut = Leet0946()
+        assert(sut.validateStackSequences([3,2,1,5,4], [1,2,3,4,5]))
+        assert(sut.validateStackSequences([3,2,1,4,5], [1,2,3,4,5]))
+    }
+}
+Leet0946.test()
+
+/*
+ 
+ 
+ [1,2,3,4,5]
+ [4,5,3,2,1]
+ [1,2,3,4,5]
+ [4,3,5,1,2]
+ [2,1,0]
+ [1,2,0]
+ [2,1,0]
+ [1,0,2]
+ [3,2,1,5,4]
+ [1,2,3,4,5]
+ [3,2,1,4,5]
+ [1,2,3,4,5]
+
+*/
+
 print("All playground tests passed!")
