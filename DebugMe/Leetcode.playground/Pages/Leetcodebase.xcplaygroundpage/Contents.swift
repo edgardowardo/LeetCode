@@ -19028,6 +19028,28 @@ class Leet2359 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/asteroid-collision/
+class Leet0735 {
+    func asteroidCollision(_ asteroids: [Int]) -> [Int] {
+        let isColliding: (Int, Int) -> Bool = { $0 > 0 && $1 < 0 }
+        var stack = [Int]()
+        outer: for a in asteroids {
+            while let last = stack.last, isColliding(last, a) {
+                if abs(last) < abs(a) {
+                    stack.removeLast()
+                } else if abs(last) > abs(a) {
+                    continue outer
+                } else {
+                    stack.removeLast()
+                    continue outer
+                }
+            }
+            stack.append(a)
+        }
+        return stack
+    }
+}
 
 
 print("All playground tests passed!")
