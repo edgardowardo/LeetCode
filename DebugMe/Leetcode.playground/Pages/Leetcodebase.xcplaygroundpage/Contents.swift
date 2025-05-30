@@ -18989,4 +18989,45 @@ Leet0946.test()
 
 */
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-closest-node-to-given-two-nodes/
+class Leet2359 {
+    func closestMeetingNode(_ edges: [Int], _ node1: Int, _ node2: Int) -> Int {
+        let n = edges.count
+        var distance1 = [Int](repeating: .max, count: n), distance2 = [Int](repeating: .max, count: n)
+        bfs(node1, edges, &distance1)
+        bfs(node2, edges, &distance2)
+        
+        var minDistance = Int.max, closestNode = -1
+        for i in 0..<n {
+            let mx = max(distance1[i], distance2[i])
+            if minDistance > mx {
+                closestNode = i
+                minDistance = mx
+            }
+        }
+        return closestNode
+    }
+    
+    private func bfs(_ start: Int, _ edges: [Int], _ distance: inout [Int]) {
+        let n = edges.count
+        var q = Deque<Int>([start]), visited = Set<Int>()
+        distance[start] = 0
+        while !q.isEmpty {
+            let n = q.removeFirst()
+            guard !visited.contains(n) else { continue }
+            visited.insert(n)
+            let neighbor = edges[n]
+            if neighbor != -1 && !visited.contains(neighbor) {
+                distance[neighbor] = distance[n] + 1
+                q.append(neighbor)
+            }
+        }
+    }
+}
+
+
+
+
 print("All playground tests passed!")
