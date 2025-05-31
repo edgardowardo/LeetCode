@@ -19095,5 +19095,40 @@ class Leet2211 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/snakes-and-ladders/
+class Leet0909 {
+    func snakesAndLadders(_ board: [[Int]]) -> Int {
+        let n = board.count
+        var cells = [(Int, Int)](repeating: (-1, -1), count: n * n + 1), label = 1, columns = Array(0..<n)
+        for row in stride(from: n - 1, through: 0, by: -1) {
+            for column in columns {
+                cells[label] = (row, column)
+                label += 1
+            }
+            columns.reverse()
+        }
+        var distance = [Int](repeating: -1, count: n * n + 1), q = Deque<Int>([1])
+        distance[1] = 0
+        while !q.isEmpty {
+            let current = q.removeFirst()
+            var next = current + 1
+            while next <= min(current + 6, n * n) {
+                defer { next += 1 }
+                let (r, c) = cells[next], destination = board[r][c] != -1 ? board[r][c] : next
+                guard distance[destination] == -1 else { continue }
+                distance[destination] = distance[current] + 1
+                q.append(destination)
+            }
+        }
+        return distance[n * n]
+    }
+    static func test() {
+        let sut = Leet0909()
+        assert(sut.snakesAndLadders([[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]]) == 4)
+    }
+}
+//Leet0909.test()
+
 
 print("All playground tests passed!")
