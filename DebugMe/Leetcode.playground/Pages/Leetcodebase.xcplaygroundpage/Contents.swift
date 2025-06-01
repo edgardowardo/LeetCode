@@ -19131,4 +19131,41 @@ class Leet0909 {
 //Leet0909.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/distribute-candies-among-children-iii/
+class Leet2927 {
+    func distributeCandies(_ n: Int, _ limit: Int) -> Int {
+        cal(n + 2)
+        - 3 * cal(n - limit + 1)
+        + 3 * cal(n - (limit + 1) * 2 + 2)
+        - cal(n - 3 * (limit + 1) + 2)
+    }
+    private func cal(_ x: Int) -> Int {
+        guard x > 0 else { return 0 }
+        return x * (x - 1) / 2
+    }
+}
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/distribute-candies-among-children-i/
+class Leet2928 {
+    func distributeCandies(_ n: Int, _ limit: Int) -> Int {
+        Array(0...min(n, limit)).reduce(0) { r, i in
+            guard limit * 2 >= n - i else { return r }
+            return r + min(n - i, limit) - max(0, n - i - limit) + 1
+        }
+    }
+}
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/distribute-candies-among-children-ii/
+class Leet2929 {
+    func distributeCandies(_ n: Int, _ limit: Int) -> Int {
+        Array(0...min(n, limit)).reduce(0) { r, i in
+            guard limit * 2 >= n - i else { return r }
+            return r + min(n - i, limit) - max(0, n - i - limit) + 1
+        }
+    }
+}
+
 print("All playground tests passed!")
