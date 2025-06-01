@@ -19168,4 +19168,15 @@ class Leet2929 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/smallest-even-multiple/
+class Leet2413 {
+    func smallestEvenMultiple(_ n: Int) -> Int {
+        n & 1 == 0 ? n << 1 : n
+    }
+}
+
+
+
+
 print("All playground tests passed!")
