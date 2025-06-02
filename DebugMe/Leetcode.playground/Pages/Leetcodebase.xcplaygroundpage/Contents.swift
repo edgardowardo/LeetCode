@@ -19294,5 +19294,24 @@ class Leet0605 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-valid-subarrays/
+class Leet1063 {
+    func validSubarrays(_ nums: [Int]) -> Int {
+        var result = 0, stack = [Int]()
+        for i in 0..<nums.count {
+            while let last = stack.last, nums[i] < nums[last] {
+                result += i - last
+                stack.removeLast()
+            }
+            stack.append(i)
+        }
+        while let last = stack.last {
+            result += nums.count - last
+            stack.removeLast()
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
