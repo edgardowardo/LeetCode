@@ -19238,4 +19238,13 @@ class Leet2469 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/three-divisors/
+class Leet1952 {
+    func isThree(_ n: Int) -> Bool {
+        Array(1...n).filter { d in n.isMultiple(of: d) }.count == 3
+    }
+}
+
+
 print("All playground tests passed!")
