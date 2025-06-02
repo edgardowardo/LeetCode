@@ -19189,6 +19189,23 @@ class Leet1071 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/candy/
+class Leet0135 {
+    func candy(_ ratings: [Int]) -> Int {
+        var candies = [Int](repeating: 1, count: ratings.count)
+        for i in 1..<ratings.count where ratings[i] > ratings[i - 1] {
+            candies[i] = candies[i - 1] + 1
+        }
+        guard var result = candies.last else { return 0 }
+        for i in (0..<(ratings.count - 1)).reversed() {
+            if  ratings[i] > ratings[i + 1] {
+                candies[i] = max(candies[i], candies[i + 1] + 1)
+            }
+            result += candies[i]
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
