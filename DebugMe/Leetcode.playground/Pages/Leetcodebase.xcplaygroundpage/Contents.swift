@@ -19246,5 +19246,12 @@ class Leet1952 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/
+class Leet2481 {
+    func numberOfCuts(_ n: Int) -> Int {
+        n > 1 ? (n.isMultiple(of: 2) ? n/2 : n) : 0
+    }
+}
 
 print("All playground tests passed!")
