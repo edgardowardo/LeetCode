@@ -19230,4 +19230,12 @@ class Leet2126 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/convert-the-temperature/
+class Leet2469 {
+    func convertTemperature(_ celsius: Double) -> [Double] {
+        [celsius + 273.15, celsius * 9.0 / 5.0 + 32.0 ]
+    }
+}
+
 print("All playground tests passed!")
