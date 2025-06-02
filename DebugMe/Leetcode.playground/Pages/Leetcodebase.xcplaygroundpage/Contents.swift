@@ -19254,4 +19254,29 @@ class Leet2481 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/car-fleet/
+class Leet0853 {
+    func carFleet(_ target: Int, _ position: [Int], _ speed: [Int]) -> Int {
+        typealias Car = (position: Int, time: Double)
+        var cars = zip(position, speed)
+            .map { p, s in Car(position: p, time: Double(target - p) / Double(s)) }
+            .sorted { c1, c2  in c1.position < c2.position }
+        var result = 0, t = position.count
+        print(cars)
+        while t > 0 {
+            t -= 1
+            print("\(cars[t]) \(cars[t-1])")
+            if cars[t].time < cars[t-1].time {
+                result += 1
+            } else {
+                cars[t-1] = cars[t]
+            }
+        }
+        return result + (t == 0 ? 1 : 0)
+    }
+}
+
+
+
 print("All playground tests passed!")
