@@ -19314,4 +19314,27 @@ class Leet1063 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-of-subarray-minimums/
+class Leet0907 {
+    func sumSubarrayMins(_ arr: [Int]) -> Int {
+        let mod = 1_000_000_007
+        var stack = [Int](), result = 0
+        for i in 0...arr.count {
+            while let last = stack.last, i == arr.count || arr[last] >= arr[i] {
+                let mid = stack.removeLast()
+                let l = stack.isEmpty ? -1 : stack.last!
+                let r = i
+                let count = (mid - l) * (r - mid) % mod
+                result += (count * arr[mid]) % mod
+                result %= mod
+            }
+            stack.append(i)
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
