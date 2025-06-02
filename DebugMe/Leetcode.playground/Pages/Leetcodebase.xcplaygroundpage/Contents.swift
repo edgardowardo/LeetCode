@@ -19363,5 +19363,25 @@ class Leet2104 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-most-competitive-subsequence/
+class Leet1673 {
+    func mostCompetitive(_ nums: [Int], _ k: Int) -> [Int] {
+        var q = Deque<Int>(), additionalCount = nums.count - k
+        for i in 0..<nums.count {
+            while let last = q.last, last > nums[i], additionalCount > 0 {
+                q.removeLast()
+                additionalCount -= 1
+            }
+            q.append(nums[i])
+        }
+        var result = [Int]()
+        for i in 0..<k {
+            result.append(q.removeFirst())
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
