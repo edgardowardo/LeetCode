@@ -19217,4 +19217,17 @@ class Leet1503 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/destroying-asteroids/
+class Leet2126 {
+    func asteroidsDestroyed(_ mass: Int, _ asteroids: [Int]) -> Bool {
+        var mass = mass
+        for a in asteroids.sorted() {
+            guard mass >= a else { return false }
+            mass += a
+        }
+        return true
+    }
+}
+
 print("All playground tests passed!")
