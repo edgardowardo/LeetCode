@@ -19208,4 +19208,13 @@ class Leet0135 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/
+class Leet1503 {
+    func getLastMoment(_ n: Int, _ left: [Int], _ right: [Int]) -> Int {
+        right.reduce(into: left.max() ?? 0) { $0 = max($0, n - $1) }
+    }
+}
+
+
 print("All playground tests passed!")
