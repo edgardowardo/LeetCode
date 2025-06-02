@@ -19336,5 +19336,32 @@ class Leet0907 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-of-subarray-ranges/
+class Leet2104 {
+    func subArrayRanges(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var result = 0, stack = [Int]()
+        for r in 0...n {
+            while let last = stack.last, r == n || nums[last] >= nums[r] {
+                let mid = stack.removeLast()
+                let l = stack.last ?? -1
+                result -= nums[mid] * (r - mid) * (mid - l)
+            }
+            stack.append(r)
+        }
+        stack.removeAll()
+        for r in 0...n {
+            while let last = stack.last, r == n || nums[last] <= nums[r] {
+                let mid = stack.removeLast()
+                let l = stack.last ?? -1
+                result += nums[mid] * (r - mid) * (mid - l)
+            }
+            stack.append(r)
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
