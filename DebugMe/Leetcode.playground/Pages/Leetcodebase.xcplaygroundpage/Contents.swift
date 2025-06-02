@@ -19176,6 +19176,18 @@ class Leet2413 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/greatest-common-divisor-of-strings/
+class Leet1071 {
+    func gcdOfStrings(_ str1: String, _ str2: String) -> String {
+        guard str1 + str2 == str2 + str1 else { return "" }
+        let l = gcd(str1.count, str2.count)
+        return String(str1[str1.startIndex..<str1.index(str1.startIndex, offsetBy: l)])
+    }
+    private func gcd(_ x: Int, _ y: Int) -> Int {
+        y == 0 ? x : gcd(y, x % y)
+    }
+}
 
 
 
