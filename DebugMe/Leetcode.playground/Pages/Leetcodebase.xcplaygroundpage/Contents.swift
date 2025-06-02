@@ -19277,6 +19277,22 @@ class Leet0853 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/can-place-flowers/
+class Leet0605 {
+    func canPlaceFlowers(_ flowerbed: [Int], _ n: Int) -> Bool {
+        var count = 0, flowerbed = flowerbed
+        for i in 0..<flowerbed.count where flowerbed[i] == 0 {
+            let isPrevEmpty = (i == 0) || (flowerbed[i - 1] == 0)
+            let isNextEmpty = (i == flowerbed.count - 1) || (flowerbed[i + 1] == 0)
+            if isPrevEmpty && isNextEmpty  {
+                flowerbed[i] = 1
+                count += 1
+            }
+        }
+        return count >= n
+    }
+}
 
 
 print("All playground tests passed!")
