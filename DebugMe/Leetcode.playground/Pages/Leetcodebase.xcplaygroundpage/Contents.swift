@@ -19452,6 +19452,28 @@ class Leet1944 {
  
  */
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/using-a-robot-to-print-the-lexicographically-smallest-string/
+class Leet2434 {
+    func robotWithString(_ s: String) -> String {
+        let s = Array(s), charZ = Character("z")
+        var counts = s.reduce(into: [Character: Int]()) { c, v in c[v, default: 0] += 1 }
+        var stack = [Character](), result = [Character](), minChar = Character("a")
+        for c in s {
+            stack.append(c)
+            counts[c, default: 0] -= 1
+            if counts[c] == 0 {
+                counts[c] = nil
+            }
+            while minChar < charZ, counts[minChar] ?? 0 == 0 {
+                minChar = Character(UnicodeScalar(Int(minChar.asciiValue!) + 1)!)
+            }
+            while let last = stack.last, last <= minChar {
+                result.append(stack.removeLast())
+            }
+        }
+        return String(result)
+    }
+}
 
 print("All playground tests passed!")
