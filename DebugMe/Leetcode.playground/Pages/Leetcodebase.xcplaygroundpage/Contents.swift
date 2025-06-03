@@ -19418,4 +19418,40 @@ class Leet1298 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-visible-people-in-a-queue/
+class Leet1944 {
+    func canSeePersonsCount(_ heights: [Int]) -> [Int] {
+        var result = [Int](), stack: [Int] = []
+        for h in heights.reversed() {
+            var count = 0
+            while let last = stack.last, last < h {
+                count += 1
+                stack.removeLast()
+            }
+            if let last = stack.last, last > h {
+                count += 1
+            }
+            result.append(count)
+            stack.append(h)
+        }
+        return result.reversed()
+    }
+}
+
+/**
+ [10,6,8,5,11,9]
+ [11,19,12,15,14,18,7,1,8,9]
+ [5,1,2,3,10]
+ [3,1,5,8,6]
+ [10,8,7,6,11,9]
+ [10, 5, 8, 12, 3, 7, 20, 6, 15]
+ [5, 1, 4, 2, 3, 6]
+ [10, 3, 7, 4, 12]
+ [5, 4, 3, 2, 1]
+ 
+ */
+
+
+
 print("All playground tests passed!")
