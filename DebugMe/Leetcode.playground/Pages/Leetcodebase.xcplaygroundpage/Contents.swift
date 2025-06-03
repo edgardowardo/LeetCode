@@ -19384,4 +19384,38 @@ class Leet1673 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/
+class Leet1298 {
+    func maxCandies(_ status: [Int], _ candies: [Int], _ keys: [[Int]], _ containedBoxes: [[Int]], _ initialBoxes: [Int]) -> Int {
+        let n = status.count
+        var canOpen = status.map { $0 == 1 }, hasBox = [Bool](repeating: false, count: n), used = [Bool](repeating: false, count: n)
+        var q = Deque<Int>(), result = 0
+        for b in initialBoxes {
+            hasBox[b] = true
+            guard canOpen[b] else { continue }
+            q.append(b)
+            used[b] = true
+            result += candies[b]
+        }
+        while let b = q.popFirst() {
+            for k in keys[b] {
+                canOpen[k] = true
+                guard !used[k], hasBox[k] else { continue }
+                q.append(k)
+                used[k] = true
+                result += candies[k]
+            }
+            for b in containedBoxes[b] {
+                hasBox[b] = true
+                guard !used[b], canOpen[b] else { continue }
+                q.append(b)
+                used[b] = true
+                result += candies[b]
+            }
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
