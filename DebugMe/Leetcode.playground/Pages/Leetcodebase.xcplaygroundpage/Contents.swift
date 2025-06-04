@@ -19547,4 +19547,24 @@ class Leet3403 {
 //Leet3403.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/binary-gap/
+class Leet0868 {
+    func binaryGap(_ n: Int) -> Int {
+        var bin = Array(0..<32).map { i in (n >> i) & 1 == 1 }
+        var result = 0, l = 0, window = 0
+        for r in 0..<bin.count where bin[r] {
+            window += 1
+            if window == 1 {
+                l = r
+            } else if window == 2 {
+                result = max(result, r - l)
+                l = r
+                window = 1
+            }
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
