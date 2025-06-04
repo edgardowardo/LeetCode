@@ -19513,4 +19513,38 @@ class Leet2398 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-lexicographically-largest-string-from-the-box-i/
+class Leet3403 {
+    func answerString(_ word: String, _ numFriends: Int) -> String {
+        guard numFriends > 1 else { return word }
+        let last = Array(lastSubstring(word)), n = word.count, m = last.count
+        return String(last[..<min(m, n - numFriends + 1)])
+    }
+    private func lastSubstring(_ s: String) -> ArraySlice<Character> {
+        let s = Array(s), n = s.count
+        var i = 0, j = 1
+        while j < n {
+            var k = 0
+            while j + k < n, s[i + k] == s[j + k] {
+                k += 1
+            }
+            if j + k < n, s[i + k] < s[j + k] {
+                let t = i
+                i = j
+                j = max(j + 1, t + k + 1)
+            } else {
+                j = j + k + 1
+            }
+        }
+        return s[i...]
+    }
+    static func test() {
+        let sut = Leet3403()
+        assert(sut.answerString("yxz", 3) == "z")
+    }
+}
+//Leet3403.test()
+
+
 print("All playground tests passed!")
