@@ -19567,4 +19567,25 @@ class Leet0868 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/add-digits/
+class Leet0258 {
+    func addDigits(_ num: Int) -> Int {
+        1 + (num - 1) % 9
+    }
+    
+    
+    func addDigits2(_ num: Int) -> Int {
+        guard num > 9 else { return num }
+        var num = num, sum = 0
+        while num > 0 {
+            sum += num % 10
+            num /= 10
+        }
+        return addDigits(sum)
+    }
+}
+
+
 print("All playground tests passed!")
