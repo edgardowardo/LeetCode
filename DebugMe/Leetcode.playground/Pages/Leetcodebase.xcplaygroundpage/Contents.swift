@@ -19640,4 +19640,77 @@ class Leet1061 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/spiral-matrix/
+class Leet0054 {
+        
+    private struct Cell { let r: Int; let c: Int }
+    private enum Direction {
+        case right, down, left, up
+        var vector: Cell {
+            switch self {
+            case .right: return Cell(r: 0, c: 1)
+            case .down: return Cell(r: 1, c: 0)
+            case .left: return Cell(r: 0, c: -1)
+            case .up: return Cell(r: -1, c: 0)
+            }
+        }
+        var nexts: [Direction] {
+            switch self {
+            case .right: return [.right, .down]
+            case .down: return [.down, .left]
+            case .left: return [.left, .up]
+            case .up: return [.up, .right]
+            }
+        }
+    }
+    func spiralOrder(_ matrix: [[Int]]) -> [Int] {
+        let m = matrix.count, n = matrix[0].count, visited = 101
+        var matrix = matrix, result = [Int](), d: Direction = .right, next: Cell? = Cell(r: 0, c: 0)
+        while let n = next {
+            // a cell will be set to 101 to mark visit
+            result.append(matrix[n.r][n.c])
+            matrix[n.r][n.c] = visited
+            // calculate the next cell. priority is the current direction. the next cell must be in bound and not visited
+            if let x = d.nexts.first, let c = nextCandidate(x.vector, n) {
+                next = c
+                d = x
+            } else if let x = d.nexts.last, let c = nextCandidate(x.vector, n) {
+                next = c
+                d = x
+            } else {
+                next = nil
+            }
+        }
+        func nextCandidate(_ vector: Cell, _ current: Cell) -> Cell? {
+            let o = Cell(r: current.r + vector.r, c: current.c + vector.c)
+            guard 0..<m ~= o.r, 0..<n ~= o.c, matrix[o.r][o.c] != visited else { return nil }
+            return o
+        }
+        return result
+    }
+}
+
+
+/*
+ 
+ [[1,2,9,9,3,4,5,1],[1,2,9,9,1,4,1,1],[1,10,9,9,3,4,5,1],[1,21,9,9,3,4,5,1],[1,2,9,3,3,4,3,3],[1,2,19,9,13,4,15,1]]
+ [[1,2,3,4,3],[5,6,7,8,1],[9,10,11,12,1]]
+ [[1,2],[2,5]]
+ [[1],[2]]
+ [[1]]
+ 
+ 
+ [[1,2,3,4]]
+ [[1,2,3,4],[5,6,7,8]]
+ [[1,2,3],[4,5,6],[7,8,9],[10,11,12],[13,14,15]]
+ [[1]]
+ [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+ [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15]]
+ [[1],[2],[3],[4]]
+ 
+ */
+
+
+
 print("All playground tests passed!")
