@@ -19711,6 +19711,51 @@ class Leet0054 {
  
  */
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/spiral-matrix-ii/
+class Leet0059 {
+    private struct Cell { let r: Int; let c: Int }
+    private enum Direction {
+        case right, down, left, up
+        var vector: Cell {
+            switch self {
+            case .right: return Cell(r: 0, c: 1)
+            case .down: return Cell(r: 1, c: 0)
+            case .left: return Cell(r: 0, c: -1)
+            case .up: return Cell(r: -1, c: 0)
+            }
+        }
+        var nexts: [Direction] {
+            switch self {
+            case .right: return [.right, .down]
+            case .down: return [.down, .left]
+            case .left: return [.left, .up]
+            case .up: return [.up, .right]
+            }
+        }
+    }
+    func generateMatrix(_ n: Int) -> [[Int]] {
+        var result = [[Int]](repeating: [Int](repeating: 0, count: n), count: n), d: Direction = .right, next: Cell? = Cell(r: 0, c: 0), i = 1
+        while let n = next {
+            result[n.r][n.c] = i
+            i += 1
+            if let x = d.nexts.first, let c = nextCandidate(x.vector, n) {
+                next = c
+                d = x
+            } else if let x = d.nexts.last, let c = nextCandidate(x.vector, n) {
+                next = c
+                d = x
+            } else {
+                next = nil
+            }
+        }
+        return result
+        func nextCandidate(_ vector: Cell, _ current: Cell) -> Cell? {
+            let o = Cell(r: current.r + vector.r, c: current.c + vector.c)
+            guard 0..<n ~= o.r, 0..<n ~= o.c, result[o.r][o.c] == 0 else { return nil }
+            return o
+        }
+    }
+}
 
 print("All playground tests passed!")
