@@ -19621,10 +19621,9 @@ class Leet0572 {
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/lexicographically-smallest-equivalent-string/
 class Leet1061 {
-    var map = [Character: Character]()
+    var map = [Character: Character](uniqueKeysWithValues: (Character("a").asciiValue!...Character("z").asciiValue!).map { Character(UnicodeScalar($0)) }.map { ($0, $0) })
     func smallestEquivalentString(_ s1: String, _ s2: String, _ baseStr: String) -> String {
-        let s1 = Array(s1), s2 = Array(s2)
-        for (c1, c2) in zip(s1, s2) {
+        for (c1, c2) in zip(Array(s1), Array(s2)) {
             union(c1, c2)
         }
         return String(baseStr.map(find))
@@ -19634,14 +19633,9 @@ class Leet1061 {
         map[max(c,d)] = min(c,d)
     }
     private func find(_ c: Character) -> Character {
-        guard let v = map[c] else {
-            map[c] = c
-            return c
-        }
-        guard v != c else { return c }
-        let result = find(v)
-        map[c] = result
-        return result
+        guard let v = map[c], v != c else { return c }
+        map[c] = find(v)
+        return map[c]!
     }
 }
 
