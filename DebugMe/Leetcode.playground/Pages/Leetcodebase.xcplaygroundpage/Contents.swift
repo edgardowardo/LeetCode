@@ -19823,6 +19823,55 @@ class Leet0885 {
 //Leet0885.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/spiral-matrix-iv/
+class Leet2326 {
+    private struct Cell { let r: Int; let c: Int }
+    private enum Direction {
+        case right, down, left, up
+        var vector: Cell {
+            switch self {
+            case .right: return Cell(r: 0, c: 1)
+            case .down: return Cell(r: 1, c: 0)
+            case .left: return Cell(r: 0, c: -1)
+            case .up: return Cell(r: -1, c: 0)
+            }
+        }
+        var nexts: [Direction] {
+            switch self {
+            case .right: return [.right, .down]
+            case .down: return [.down, .left]
+            case .left: return [.left, .up]
+            case .up: return [.up, .right]
+            }
+        }
+    }
+    func spiralMatrix(_ m: Int, _ n: Int, _ head: ListNode?) -> [[Int]] {
+        var result = [[Int]](repeating: [Int](repeating: -1, count: n), count: m), curr = head
+        var d: Direction = .right, next: Cell? = Cell(r: 0, c: 0)
+        while let node = curr, let c = next {
+            result[c.r][c.c] = node.val
+            if let x = d.nexts.first, let c = nextCandidate(x.vector, c) {
+                next = c
+                d = x
+            } else if let x = d.nexts.last, let c = nextCandidate(x.vector, c) {
+                next = c
+                d = x
+            } else {
+                next = nil
+            }
+            curr = node.next
+        }
+        
+        return result
+        
+        func nextCandidate(_ vector: Cell, _ current: Cell) -> Cell? {
+            let o = Cell(r: current.r + vector.r, c: current.c + vector.c)
+            guard 0..<m ~= o.r, 0..<n ~= o.c, result[o.r][o.c] == -1 else { return nil }
+            return o
+        }
+    }
+}
 
 
 print("All playground tests passed!")
