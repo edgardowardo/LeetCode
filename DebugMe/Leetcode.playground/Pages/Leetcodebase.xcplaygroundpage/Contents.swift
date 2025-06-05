@@ -19587,5 +19587,36 @@ class Leet0258 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/subtree-of-another-tree/
+class Leet0572 {
+    func isSubtree(_ root: TreeNode?, _ subRoot: TreeNode?) -> Bool {
+        guard let root, let subRoot else { return false }
+        let subList = subRoot.buildArray()
+        let candidates = findCandidates(root, subRoot)
+        for c in candidates where subList == c.buildArray() {
+            return true
+        }
+        return false
+    }
+    private func findCandidates(_ root: TreeNode, _ subRoot: TreeNode) -> [TreeNode] {
+        var deque: Deque<TreeNode?> = [root], result: [TreeNode] = []
+        while !deque.isEmpty {
+            for _ in deque {
+                let node = deque.removeFirst()
+                guard let node = node else { continue }
+                guard node.val != subRoot.val else {
+                    result.append(node)
+                    continue
+                }
+                deque.append(node.left)
+                deque.append(node.right)
+            }
+        }
+        return result
+    }
+}
+
+
 
 print("All playground tests passed!")
