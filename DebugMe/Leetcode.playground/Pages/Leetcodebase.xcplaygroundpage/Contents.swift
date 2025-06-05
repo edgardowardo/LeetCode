@@ -19758,4 +19758,71 @@ class Leet0059 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/spiral-matrix-iii/
+class Leet0885 {
+    
+    private struct Cell { let r: Int; let c: Int }
+    private enum Direction {
+        case right, down, left, up
+        var vector: Cell {
+            switch self {
+            case .right: return Cell(r: 0, c: 1)
+            case .down: return Cell(r: 1, c: 0)
+            case .left: return Cell(r: 0, c: -1)
+            case .up: return Cell(r: -1, c: 0)
+            }
+        }
+        var nexts: [Direction] {
+            switch self {
+            case .right: return [.right, .down]
+            case .down: return [.down, .left]
+            case .left: return [.left, .up]
+            case .up: return [.up, .right]
+            }
+        }
+    }
+    func spiralMatrixIII(_ rows: Int, _ cols: Int, _ rStart: Int, _ cStart: Int) -> [[Int]] {
+        var matrix = [[Int]](repeating: [Int](repeating: 0, count: cols), count: rows), result = [[Int]]()
+        var d: Direction = .right, pos: Cell = Cell(r: rStart, c: cStart), i = 1, stepsLimit = 1, steps = 0, changes = 0
+        while i <= rows * cols {
+            if let c = validCell(pos) {
+                result.append([c.r, c.c])
+                matrix[c.r][c.c] = i
+                i += 1
+            }
+            if steps < stepsLimit {
+                steps += 1
+            } else {
+                steps = 1
+                changes += 1
+                if changes == 2 {
+                    changes = 0
+                    stepsLimit += 1
+                }
+                d = d.nexts.last!
+            }
+            pos = nextPosition(d.vector, pos)
+        }
+        return result
+        func nextPosition(_ vector: Cell, _ pos: Cell) -> Cell {
+            Cell(r: pos.r + vector.r, c: pos.c + vector.c)
+        }
+        func validCell(_ pos: Cell) -> Cell? {
+            guard 0..<rows ~= pos.r, 0..<cols ~= pos.c, matrix[pos.r][pos.c] == 0 else { return nil }
+            return pos
+        }
+    }
+    static func test() {
+        let sut = Leet0885()
+        assert(sut.spiralMatrixIII(5, 6, 1, 4) == [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]])
+        assert(sut.spiralMatrixIII(1, 4, 0, 0) == [[0,0],[0,1],[0,2],[0,3]])
+    }
+}
+//Leet0885.test()
+
+
+
+
 print("All playground tests passed!")
