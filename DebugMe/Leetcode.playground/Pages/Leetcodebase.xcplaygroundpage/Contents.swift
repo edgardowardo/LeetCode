@@ -20027,5 +20027,24 @@ class Leet0103 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
+class Leet0107 {
+    func levelOrderBottom(_ root: TreeNode?) -> [[Int]] {
+        var result = [[Int]](), deque = Deque<TreeNode?>([root])
+        while !deque.isEmpty {
+            var levelNodes = [Int]()
+            for _ in deque {
+                guard let node = deque.removeFirst() else { continue }
+                levelNodes.append(node.val)
+                deque.append(node.left)
+                deque.append(node.right)
+            }
+            guard levelNodes.count > 0 else { continue }
+            result.append(levelNodes)
+        }
+        return result.reversed()
+    }
+}
 
 print("All playground tests passed!")
