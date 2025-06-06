@@ -20068,5 +20068,26 @@ class Leet0637 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/zigzag-grid-traversal-with-skip/
+class Leet3417 {
+    func zigzagTraversal(_ grid: [[Int]]) -> [Int] {
+        var result = [Int]()
+        for i in 0..<grid.count {
+            if i % 2 == 0 {
+                for j in 0..<grid[i].count where j % 2 == 0 {
+                    result.append(grid[i][j])
+                }
+            } else {
+                var list = [Int]()
+                for j in 0..<grid[i].count where j % 2 == 1 {
+                    list.append(grid[i][j])
+                }
+                result.append(contentsOf: list.reversed())
+            }
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
