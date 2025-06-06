@@ -20047,4 +20047,26 @@ class Leet0107 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/average-of-levels-in-binary-tree/
+class Leet0637 {
+    func averageOfLevels(_ root: TreeNode?) -> [Double] {
+        var result = [Double](), deque = Deque<TreeNode?>([root])
+        while !deque.isEmpty {
+            var count = 0, sum = 0.0
+            for _ in deque {
+                guard let node = deque.removeFirst() else { continue }
+                sum += Double(node.val)
+                count += 1
+                deque.append(node.left)
+                deque.append(node.right)
+            }
+            guard count > 0 else { continue }
+            result.append(sum / Double(count))
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
