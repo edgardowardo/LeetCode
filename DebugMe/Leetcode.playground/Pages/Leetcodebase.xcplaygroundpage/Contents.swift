@@ -19921,5 +19921,83 @@ class Leet1909 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/search-in-rotated-sorted-array/
+class Leet0033 {
+    func search(_ nums: [Int], _ target: Int) -> Int {
+        // binary search for the pivot index
+        let n = nums.count
+        var low = 0, high = n - 1
+        while low <= high {
+            let mid = low + (high - low) / 2
+            if nums[mid] > nums[n - 1] {
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        let pivot = low, result = binarySearch(nums, 0, pivot - 1, target)
+        if result != -1 {
+            return result
+        }
+        return binarySearch(nums, pivot, n - 1, target)
+    }
+    private func binarySearch(_ nums: [Int], _ low: Int, _ high: Int, _ target: Int) -> Int {
+        var low = low, high = high
+        while low <= high {
+            let mid = low + (high - low) / 2
+            if nums[mid] == target {
+                return mid
+            } else if target < nums[mid] {
+                high = mid - 1
+            } else {
+                low = mid + 1
+            }
+        }
+        return -1
+    }
+        
+    static func test() {
+        let sut = Leet0033()
+        assert(sut.search([1,3], 3) == 1)
+        assert(sut.search([1], 1) == 0)
+        assert(sut.search([1], 0) == -1)
+        assert(sut.search([4,5,6,7,0,1,2], 0) == 4)
+    }
+}
+//Leet0033.test()
+
+/*
+ [1,3,5]
+ 5
+ [1,3]
+ 0
+ [1,3]
+ 3
+ [3,1]
+ 3
+ [3,1]
+ 0
+ 
+ 
+ [4,5,6,7,0,1,2]
+ 0
+ [4,5,6,7,0,1,2]
+ 3
+ [1]
+ 1
+ [1]
+ 0
+ [1,2,3,4,5,6,7,8,9]
+ 5
+ [6,7,1,2,3,4,5]
+ 6
+ [4,5,6,7,8,1,2,3]
+ 3
+ [8,9,10,1,2,3,4,5,6,7]
+ 11
+ 
+ */
+
 
 print("All playground tests passed!")
