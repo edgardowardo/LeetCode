@@ -19873,5 +19873,53 @@ class Leet2326 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-one-element-to-make-the-array-strictly-increasing/
+class Leet1909 {
+    func canBeIncreasing(_ nums: [Int]) -> Bool {
+        var count = 0, hi = nums[0]
+        for i in 1 ..< nums.count {
+            if hi >= nums[i] { // dip
+                count += 1
+                if i > 1, nums[i - 2] >= nums[i] {
+                    hi = nums[i - 1]
+                    continue
+                }
+            }
+            hi = nums[i]
+        }
+        return count < 2
+    }
+    
+    static func test() {
+        let sut = Leet1909()
+        assert(sut.canBeIncreasing([3,1,2]))
+        assert(sut.canBeIncreasing([1,3,2,3]))
+        assert(sut.canBeIncreasing([2,3,2,4]))
+        assert(sut.canBeIncreasing([1,2,10,5,7]))
+        assert(sut.canBeIncreasing([2,3,1,2]) == false)
+        assert(sut.canBeIncreasing([100, 21, 100]))
+        assert(sut.canBeIncreasing([105, 924, 32, 968]))
+        assert(sut.canBeIncreasing([1]))
+        assert(sut.canBeIncreasing([1,1]))
+        assert(sut.canBeIncreasing([1,1,1]) == false)
+    }
+}
+//Leet1909.test()
+
+/*
+ [1,2,10,5,7]
+ [2,3,1,2]
+ [100, 21, 100]
+ [105, 924, 32, 968]
+ [1]
+ [1,1]
+ [1,1,1]
+ [3,1,2]
+ [1,3,2,3]
+ [2,3,2,4]
+ */
+
+
 
 print("All playground tests passed!")
