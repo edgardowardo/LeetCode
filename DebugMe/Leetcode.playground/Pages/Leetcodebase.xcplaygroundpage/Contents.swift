@@ -19999,5 +19999,33 @@ class Leet0033 {
  
  */
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+class Leet0103 {
+    func zigzagLevelOrder(_ root: TreeNode?) -> [[Int]] {
+        var result = [[Int]](), deque = Deque<TreeNode?>([root]), level = 1
+        // breadth first search traverse the tree alternating left to right, and right to left
+        while !deque.isEmpty {
+            var levelNodes = [Int]()
+            for _  in deque {
+                guard let node = deque.removeFirst() else { continue }
+                levelNodes.append(node.val)
+                deque.append(node.left)
+                deque.append(node.right)
+            }
+            if !levelNodes.isEmpty {
+                if level.isMultiple(of: 2) {
+                    result.append(levelNodes.reversed())
+                } else {
+                    result.append(levelNodes)
+                }
+            }
+            level += 1
+        }
+        return result
+    }
+}
+
+
 
 print("All playground tests passed!")
