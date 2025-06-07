@@ -20117,4 +20117,35 @@ class Leet3170 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/
+class Leet1372 {
+    struct Item {
+        let n: TreeNode
+        let depth: Int
+        let isParentLeft: Bool
+    }
+    func longestZigZag(_ root: TreeNode?) -> Int {
+        // dfs using stack to traverse the tree
+        var stack: [Item] = []
+        guard let root = root else { return 0 }
+        stack.append(.init(n: root, depth: 0, isParentLeft: false))
+        var result = 0
+        while !stack.isEmpty {
+            let item = stack.removeLast()
+            result = max(result, item.depth)
+            if let left = item.n.left {
+                let depth = item.isParentLeft ? 1 : item.depth + 1
+                stack.append(.init(n: left, depth: depth, isParentLeft: true))
+            }
+            if let right = item.n.right {
+                let depth = item.isParentLeft ? item.depth + 1 : 1
+                stack.append(.init(n: right, depth: depth, isParentLeft: false))
+            }
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
