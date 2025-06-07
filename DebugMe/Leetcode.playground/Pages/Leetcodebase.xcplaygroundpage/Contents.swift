@@ -20090,4 +20090,31 @@ class Leet3417 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/lexicographically-minimum-string-after-removing-stars/
+class Leet3170 {
+    func clearStars(_ s: String) -> String {
+        var s: [Character?] = Array(s), heap = Heap<Letter>()
+        for (i, c) in s.enumerated() {
+            guard let c else { continue }
+            if c == "*" {
+                s[i] = nil
+                if let min = heap.popMin() {
+                    s[abs(min.i)] = nil
+                }
+            } else {
+                heap.insert(.init(c: c, i: -i))
+            }
+        }
+        return String(s.compactMap { $0 })
+    }
+    struct Letter: Comparable {
+        let c: Character
+        let i: Int
+        static func < (lhs: Letter, rhs: Letter) -> Bool {
+            return lhs.c < rhs.c || (lhs.c == rhs.c && lhs.i < rhs.i)
+        }
+    }
+}
+
 print("All playground tests passed!")
