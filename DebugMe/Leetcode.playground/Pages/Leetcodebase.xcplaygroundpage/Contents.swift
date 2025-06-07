@@ -1241,7 +1241,16 @@ extension Array<Int?> {
 }
 
 
-
+public class Node {
+    public var val: Int
+    public var next: Node?
+    public var random: Node?
+    public init(_ val: Int) {
+        self.val = val
+        self.next = nil
+        self.random = nil
+    }
+}
 
 
 ///---------------------------------------------------------------------------------------
@@ -20142,6 +20151,36 @@ class Leet1372 {
                 let depth = item.isParentLeft ? item.depth + 1 : 1
                 stack.append(.init(n: right, depth: depth, isParentLeft: false))
             }
+        }
+        return result
+    }
+}
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/copy-list-with-random-pointer/
+class Leet0138 {
+    func copyRandomList(_ head: Node?) -> Node? {
+        var curr: Node? = head, prev: Node?, result: Node?, resultIds = [ObjectIdentifier: Node](), idMap = [ObjectIdentifier: ObjectIdentifier]()
+        while let n = curr {
+            let newNode = Node(n.val)
+            idMap[ObjectIdentifier(n)] = ObjectIdentifier(newNode)
+            resultIds[ObjectIdentifier(newNode)] = newNode
+            if result == nil {
+                result = newNode
+            }
+            prev?.next = newNode
+            prev = newNode
+            curr = n.next
+        }
+        curr = head
+        var curr2 = result
+        while let n = curr, let m = curr2 {
+            if let r = n.random, let id = idMap[ObjectIdentifier(r)], let randomNode = resultIds[id] {
+                m.random = randomNode
+            }
+            curr = curr?.next
+            curr2 = curr2?.next
         }
         return result
     }
