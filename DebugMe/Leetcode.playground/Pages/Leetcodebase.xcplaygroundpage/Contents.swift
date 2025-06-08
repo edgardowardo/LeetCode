@@ -20187,4 +20187,26 @@ class Leet0138 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/lexicographical-numbers/
+class Leet0386 {
+    func lexicalOrder(_ n: Int) -> [Int] {
+        var result = [Int](), num = 1
+        while result.count < n {
+            if num <= n {
+                result.append(num)
+                num *= 10
+            } else {
+                num /= 10
+                while num % 10 == 9 {
+                    num /= 10
+                }
+                num += 1
+            }
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
