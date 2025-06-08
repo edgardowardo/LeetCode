@@ -20208,5 +20208,21 @@ class Leet0386 {
     }
 }
 
+class Leet0386_StackSolution {
+    func lexicalOrder(_ n: Int) -> [Int] {
+        var result = [Int](), s = [Int](stride(from: min(9, n), through: 1, by: -1))
+        while let num = s.popLast() {
+            guard num <= n else { break }
+            result.append(num)
+            for i in stride(from: 9, through: 0, by: -1) {
+                let newNum = num * 10 + i
+                guard newNum <= n else { continue }
+                s.append(newNum)
+            }
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
