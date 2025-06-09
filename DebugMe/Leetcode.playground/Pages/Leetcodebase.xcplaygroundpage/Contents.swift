@@ -20225,4 +20225,43 @@ class Leet0386_StackSolution {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/clone-n-ary-tree/
+class Leet1490 {
+    public class Node {
+        public var val: Int
+        public var children: [Node]
+        public init(_ val: Int) {
+            self.val = val
+            self.children = []
+        }
+    }
+    func cloneTree(_ root: Node?) -> Node? {
+        guard let root else { return nil }
+        var map = [ObjectIdentifier: ObjectIdentifier](), newMap = [ObjectIdentifier: Node]()
+        var deq = Deque<Node>([root]), result: Node?
+        while let oldNode = deq.popFirst() {
+            let newNode = Node(oldNode.val)
+            map[ObjectIdentifier(oldNode)] = ObjectIdentifier(newNode)
+            newMap[ObjectIdentifier(newNode)] = newNode
+            if result == nil {
+                result = newNode
+            }
+            for c in oldNode.children {
+                deq.append(c)
+            }
+        }
+        deq = [root]
+        while let oldNode = deq.popFirst(), let newId = map[ObjectIdentifier(oldNode)], let newNode = newMap[newId] {
+            newNode.children = oldNode.children.compactMap { newMap[map[ObjectIdentifier($0)]!] }
+            for c in oldNode.children {
+                deq.append(c)
+            }
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
