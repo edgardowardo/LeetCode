@@ -20263,5 +20263,35 @@ class Leet1490 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/
+class Leet0440 {
+    func findKthNumber(_ n: Int, _ k: Int) -> Int {
+        var curr = 1, k = k - 1
+        while k > 0 {
+            let steps = countSteps(n, curr, curr + 1)
+            if steps <= k {
+                curr += 1
+                k -= steps
+            } else {
+                curr *= 10
+                k -= 1
+            }
+        }
+        return curr
+    }
+    private func countSteps(_ n: Int, _ prefix1: Int, _ prefix2: Int) -> Int {
+        var result = 0, prefix1 = prefix1, prefix2 = prefix2
+        while prefix1 <= n {
+            result += min(n + 1, prefix2) - prefix1
+            prefix1 *= 10
+            prefix2 *= 10
+        }
+        return result
+    }
+    
+}
+ 
+
 
 print("All playground tests passed!")
