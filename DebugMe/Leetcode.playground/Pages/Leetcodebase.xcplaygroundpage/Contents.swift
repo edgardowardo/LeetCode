@@ -20293,5 +20293,30 @@ class Leet0440 {
 }
  
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-difference-between-even-and-odd-frequency-i/
+class Leet3442 {
+    func maxDifference(_ s: String) -> Int {
+        let map = s.reduce(into: [Character: Int]()) { r, c in r[c, default: 0] += 1 }
+        var maxOdd = 1, minEven = s.count
+        for v in map.values {
+            if v % 2 == 1 {
+                maxOdd = max(maxOdd, v)
+            } else {
+                minEven = min(minEven, v)
+            }
+        }
+        return maxOdd - minEven
+    }
+    static func test() {
+        let sut = Leet3442()
+        assert(sut.maxDifference("abbbcccccddddddddeeeeeeeeffffffff") == -3)
+        assert(sut.maxDifference("aaaaabbc") == 3)
+    }
+}
+Leet3442.test()
+
+
+
 
 print("All playground tests passed!")
