@@ -20316,7 +20316,38 @@ class Leet3442 {
 }
 Leet3442.test()
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-difference-between-even-and-odd-frequency-ii/
+class Leet3445 {
+    func maxDifference(_ s: String, _ k: Int) -> Int {
+        let n = s.count, values = Array("01234"), s = Array(s)
+        var result = Int.min
+        for a in values {
+            for b in values where a != b {
+                var best: [Int] = [.max, .max, .max, .max]
+                var countA = 0, countB = 0, prevA = 0, prevB = 0, l = -1
+                for r in 0..<n {
+                    countA += s[r] == a ? 1 : 0
+                    countB += s[r] == b ? 1 : 0
+                    while r - l >= k, countB - prevB >= 2 {
+                        let lStatus = status(prevA, prevB)
+                        best[lStatus] = min(best[lStatus], prevA - prevB)
+                        l += 1
+                        prevA += s[l] == a ? 1 : 0
+                        prevB += s[l] == b ? 1 : 0
+                    }
+                    let rStatus = status(countA, countB)
+                    guard best[rStatus ^ 2 ] != .max else { continue }
+                    result = max(result, countA - countB - best[rStatus ^ 2 ])
+                }
+            }
+        }
+        return result
+    }
+    private func status(_ countA: Int, _ countB: Int) -> Int {
+        (countA & 1) << 1 | (countB & 1)
+    }
+}
 
 
 print("All playground tests passed!")
