@@ -20363,4 +20363,61 @@ class Leet3423 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/clone-binary-tree-with-random-pointer/
+class Leet1485 {
+    public class Node {
+        public var val: Int
+        public var left: Node?
+        public var right: Node?
+        public var random: Node?
+        public init() { self.val = 0; self.left = nil; self.right = nil; self.random = nil; }
+        public init(_ val: Int) {
+            self.val = val
+            self.left = nil
+            self.right = nil
+            self.random = nil
+        }
+    }
+    typealias NodeCopy = Node
+    
+    
+    func copyRandomBinaryTree(_ root: Node?) -> NodeCopy? {
+        guard let root = root else { return nil }
+        var map = [ObjectIdentifier: ObjectIdentifier](), copyMap = [ObjectIdentifier: NodeCopy]()
+        var queue = Deque<Node>([root]), result: NodeCopy?
+        while let oldNode = queue.popFirst() {
+            let copyNode = NodeCopy(oldNode.val)
+            map[ObjectIdentifier(oldNode)] = ObjectIdentifier(copyNode)
+            copyMap[ObjectIdentifier(copyNode)] = copyNode
+            if result == nil {
+                result = copyNode
+            }
+            if let left = oldNode.left {
+                queue.append(left)
+            }
+            if let right = oldNode.right {
+                queue.append(right)
+            }
+        }
+        queue = [root]
+        while let oldNode = queue.popFirst(), let copyId = map[ObjectIdentifier(oldNode)], let copyNode = copyMap[copyId] {
+            if let left = oldNode.left, let id = map[ObjectIdentifier(left)] {
+                copyNode.left = copyMap[id]
+                queue.append(left)
+            }
+            if let right = oldNode.right, let id = map[ObjectIdentifier(right)] {
+                copyNode.right = copyMap[id]
+                queue.append(right)
+            }
+            if let random = oldNode.random, let id = map[ObjectIdentifier(random)] {
+                copyNode.random = copyMap[id]
+            }
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
