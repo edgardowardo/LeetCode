@@ -20350,4 +20350,17 @@ class Leet3445 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-difference-between-adjacent-elements-in-a-circular-array/
+class Leet3423 {
+    func maxAdjacentDistance(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var result = abs(nums[0] - nums[n - 1])
+        for i in 1..<n {
+            result = max(result, abs(nums[i] - nums[i - 1]))
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
