@@ -20449,5 +20449,23 @@ class Leet2616 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/
+class Leet0255 {
+    func verifyPreorder(_ preorder: [Int]) -> Bool {
+        var minLimit = Int.min, stack = [Int]()
+        for n in preorder {
+            while let last = stack.last, last < n {
+                minLimit = stack.removeLast()
+            }
+            if n <= minLimit {
+                return false
+            }
+            stack.append(n)
+        }
+        return true
+    }
+}
+
 
 print("All playground tests passed!")
