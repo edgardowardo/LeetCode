@@ -20419,5 +20419,35 @@ class Leet1485 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/
+class Leet2616 {
+    func minimizeMax(_ nums: [Int], _ p: Int) -> Int {
+        let nums = nums.sorted(), n = nums.count
+        var l = 0, r = nums[n - 1] - nums[0]
+        while l < r {
+            let mid = l + (r - l) / 2
+            if countValidPairs(nums, mid) >= p {
+                r = mid
+            } else {
+                l = mid + 1
+            }
+        }
+        return l
+    }
+    private func countValidPairs(_ nums: [Int], _ threshold: Int) -> Int {
+        var result = 0, i = 0
+        while i < nums.count - 1 {
+            if nums[i + 1] - nums[i] <= threshold {
+                i += 1
+                result += 1
+            }
+            i += 1
+        }
+        return result
+    }
+}
+
+
 
 print("All playground tests passed!")
