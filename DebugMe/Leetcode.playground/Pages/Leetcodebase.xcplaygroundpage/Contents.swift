@@ -20487,4 +20487,49 @@ class Leet2566 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/max-difference-you-can-get-from-changing-an-integer/
+class Leet1432 {
+    func maxDiff(_ num: Int) -> Int {
+        var digits = [Int](), mn = 0, mx = 0, num = num
+        while num > 0 {
+            let d = num % 10
+            digits.append(d)
+            num /= 10
+        }
+        let mapped = digits.enumerated().map { (i: $0.offset, v: $0.element) }.reversed()
+        let notNine = mapped.first(where: { $0.v != 9 })?.v, n = mapped.count
+        let gtOne = mapped.first(where: { $0.v > 1 })
+        for m in mapped {
+            var dx = m.v, dn = m.v
+            if let notNine, m.v == notNine {
+                dx = 9
+            }
+            mx += Int(pow(10.0, Double(m.i))) * dx
+            if let gtOne, gtOne.v == m.v {
+                dn = (gtOne.i == n - 1 ) ? 1 : 0
+            }
+            mn += Int(pow(10.0, Double(m.i))) * dn
+        }
+        return mx - mn
+    }
+}
+
+
+/*
+ 123
+ 923-103=820
+ 
+ 999
+ 999-111=888
+ 
+ 111
+ 999-111=888
+ 
+ 555
+ 999-111=888
+ */
+
+
 print("All playground tests passed!")
