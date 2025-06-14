@@ -20467,5 +20467,24 @@ class Leet0255 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/
+class Leet2566 {
+    func minMaxDifference(_ num: Int) -> Int {
+        var digits = [Int](), mn = 0, mx = 0, num = num, og = num
+        while num > 0 {
+            let d = num % 10
+            digits.append(d)
+            num /= 10
+        }
+        let mapped = digits.enumerated().map { (i: $0.offset, v: $0.element) }.reversed()
+        guard let first = mapped.first?.v, let notNine = mapped.first(where: { $0.v != 9 })?.v else { return og }
+        for m in mapped {
+            mx += Int(pow(10.0, Double(m.i))) * ((m.v == notNine) ? 9 : m.v)
+            mn += Int(pow(10.0, Double(m.i))) * ((m.v == first) ? 0 : m.v)
+        }
+        return mx - mn
+    }
+}
 
 print("All playground tests passed!")
