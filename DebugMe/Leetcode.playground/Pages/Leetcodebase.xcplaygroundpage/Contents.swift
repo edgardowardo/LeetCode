@@ -20008,6 +20008,28 @@ class Leet0033 {
  
  */
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+class Leet0153 {
+    func findMin(_ nums: [Int]) -> Int {
+        // binary search for the pivot index
+        let n = nums.count
+        var lo = 0, hi = n - 1
+        while lo <= hi {
+            let mid = lo + (hi - lo) / 2
+            if nums[mid] > nums[n - 1] {
+                lo = mid + 1
+            } else {
+                hi = mid - 1
+            }
+        }
+        return nums[lo]
+    }
+}
+
+ 
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
 class Leet0103 {
