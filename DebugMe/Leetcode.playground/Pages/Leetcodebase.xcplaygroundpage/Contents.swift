@@ -20028,6 +20028,25 @@ class Leet0153 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
+class Leet0154 {
+    func findMin(_ nums: [Int]) -> Int {
+        let n = nums.count
+        var lo = 0, hi = n - 1
+        while lo < hi {
+            let mid = lo + (hi - lo) / 2
+            if nums[mid] < nums[hi] {
+                hi = mid
+            } else if nums[mid] > nums[hi] {
+                lo = mid + 1
+            } else {
+                hi -= 1
+            }
+        }
+        return nums[lo]
+    }
+}
  
 
 ///---------------------------------------------------------------------------------------
