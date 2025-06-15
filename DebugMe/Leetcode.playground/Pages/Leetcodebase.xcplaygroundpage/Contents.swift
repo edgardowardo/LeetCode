@@ -20616,4 +20616,30 @@ class Leet1432 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/path-sum/
+class Leet0112 {
+    func hasPathSum(_ root: TreeNode?, _ targetSum: Int) -> Bool {
+        typealias State = (node: TreeNode?, sum: Int)
+        guard let root else { return false }
+        var stack = [State]([State(node: root, sum: targetSum - root.val)])
+        while let top = stack.popLast() {
+            var (node, sum) = top
+            guard let node else { continue }
+            if top.sum == 0, node.left == nil, node.right == nil {
+                return true
+            }
+            if let left = node.left {
+                stack.append((node: left, sum: sum - left.val))
+            }
+            if let right = node.right {
+                stack.append((node: right, sum: sum - right.val))
+            }
+        }
+        return false
+    }
+}
+
+
+
 print("All playground tests passed!")
