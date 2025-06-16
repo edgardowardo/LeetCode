@@ -20657,5 +20657,20 @@ class Leet2016 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/two-furthest-houses-with-different-colors/description/
+class Leet2078 {
+    func maxDistance(_ colors: [Int]) -> Int {
+        var l = 0, r = colors.count - 1
+        while let first = colors.first, first == colors[r] {
+            r -= 1
+        }
+        while let last = colors.last, last == colors[l] {
+            l += 1
+        }
+        return max(r, colors.count - 1 - l)
+    }
+}
+
 
 print("All playground tests passed!")
