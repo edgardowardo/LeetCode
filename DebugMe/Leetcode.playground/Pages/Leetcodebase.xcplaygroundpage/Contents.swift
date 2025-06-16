@@ -20725,4 +20725,22 @@ class Leet0111 {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-depth-of-n-ary-tree/
+class Leet0559 {
+    public class Node {
+        public var val: Int
+        public var children: [Node]
+        public init(_ val: Int) {
+            self.val = val
+            self.children = []
+        }
+    }
+    func maxDepth(_ root: Node?) -> Int {
+        guard let root else { return 0 }
+        return 1 + root.children.reduce(0) { max($0, maxDepth($1)) }
+    }
+}
+
 print("All playground tests passed!")
