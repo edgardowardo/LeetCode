@@ -20776,5 +20776,40 @@ class Leet0543 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/diameter-of-n-ary-tree/
+class Leet1522 {
+    public class Node {
+        public var val: Int
+        public var children: [Node]
+        public init(_ val: Int) {
+            self.val = val
+            self.children = []
+        }
+    }
+    
+    func diameter(_ root: Node?) -> Int {
+        var diameter = 0
+        height(root)
+        return diameter
+        @discardableResult func height(_ node: Node?) -> Int {
+            guard let node, node.children.count > 0 else { return 0 }
+            var max1 = 0, max2 = 0
+            for c in node.children {
+                let h = height(c) + 1
+                if h > max1 {
+                    max2 = max1
+                    max1 = h
+                } else if h > max2 {
+                    max2 = h
+                }
+                let distance = max1 + max2
+                diameter = max(diameter, distance)
+            }
+            return max1
+        }
+    }
+}
+
 
 print("All playground tests passed!")
