@@ -20862,4 +20862,35 @@ class Leet0257 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/
+class Leet1022 {
+    func sumRootToLeaf(_ root: TreeNode?) -> Int {
+        typealias State = (node: TreeNode?, path: [Int])
+        guard let root else { return 0 }
+        var stack = [State(node: root, path: [root.val])], result = 0
+        while let (node, path) = stack.popLast() {
+            if node?.left == nil, node?.right == nil {
+                result += num(path)
+            } else {
+                if let right = node?.right {
+                    stack.append((node: right, path: path + [right.val]))
+                }
+                if let left = node?.left {
+                    stack.append((node: left, path: path + [left.val]))
+                }
+            }
+        }
+        return result
+    }
+    private func num(_ path: [Int]) -> Int {
+        var result = 0
+        for bit in path.reversed().enumerated() {
+            result += bit.element * Int(pow(2.0, Double(bit.offset)))
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
