@@ -20743,4 +20743,18 @@ class Leet0559 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/balanced-binary-tree/
+class Leet0110 {
+    func isBalanced(_ root: TreeNode?) -> Bool {
+        guard let root else { return true }
+        return isBalanced(root.left) && isBalanced(root.right) && abs(height(root.left) - height(root.right)) <= 1
+    }
+    private func height(_ root: TreeNode?) -> Int {
+        guard let root else { return 0 }
+        return max(height(root.left), height(root.right)) + 1
+    }
+}
+
 print("All playground tests passed!")
