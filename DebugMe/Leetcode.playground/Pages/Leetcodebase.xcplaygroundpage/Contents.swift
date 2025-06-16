@@ -20641,6 +20641,31 @@ class Leet0112 {
 }
 
 ///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-good-nodes-in-binary-tree/
+class Leet1448 {
+    func goodNodes(_ root: TreeNode?) -> Int {
+        typealias State = (node: TreeNode?, maxSoFar: Int)
+        guard let root else { return 0 }
+        var stack = [State(node: root, maxSoFar: root.val)], result = 0
+        while let top = stack.popLast() {
+            var (node, maxSoFar) = top
+            guard let node else { continue }
+            if node.val >= maxSoFar {
+                result += 1
+            }
+            if let right = node.right {
+                stack.append((node: right, maxSoFar: max(maxSoFar, right.val)))
+            }
+            if let left = node.left {
+                stack.append((node: left, maxSoFar: max(maxSoFar, left.val)))
+            }
+        }
+        return result
+    }
+}
+
+
+///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/maximum-difference-between-increasing-elements/
 class Leet2016 {
     func maximumDifference(_ nums: [Int]) -> Int {
