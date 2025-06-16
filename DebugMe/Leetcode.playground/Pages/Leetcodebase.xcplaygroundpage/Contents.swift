@@ -20640,6 +20640,22 @@ class Leet0112 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-difference-between-increasing-elements/
+class Leet2016 {
+    func maximumDifference(_ nums: [Int]) -> Int {
+        var minValue = nums[0], result = -1
+        for i in 1..<nums.count {
+            let diff = nums[i] - minValue
+            if diff > 0 {
+                result = max(result, diff)
+            } else {
+                minValue = nums[i]
+            }
+        }
+        return result
+    }
+}
 
 
 print("All playground tests passed!")
