@@ -20757,4 +20757,24 @@ class Leet0110 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/diameter-of-binary-tree/
+class Leet0543 {
+    func diameterOfBinaryTree(_ root: TreeNode?) -> Int {
+        var diameter = 0
+        height(root)
+        return diameter
+        
+        @discardableResult func height(_ node: TreeNode?) -> Int {
+            guard let node else { return -1 }
+            let left = height(node.left)
+            let right = height(node.right)
+            diameter = max(diameter, left + right + 2)
+            return max(left, right) + 1
+        }
+    }
+}
+
+
 print("All playground tests passed!")
