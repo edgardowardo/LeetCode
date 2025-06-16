@@ -20837,4 +20837,29 @@ class Leet1522 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/binary-tree-paths/
+class Leet0257 {
+    func binaryTreePaths(_ root: TreeNode?) -> [String] {
+        typealias State = (node: TreeNode?, path: [Int])
+        guard let root else { return [] }
+        var stack = [State(node: root, path: [root.val])], result: [String] = []
+        while let top = stack.popLast() {
+            var (node, path) = top
+            guard let node else { continue }
+            if node.left == nil, node.right == nil {
+                result.append(path.map(String.init).joined(separator: "->"))
+            } else {
+                if let right = node.right {
+                    stack.append((node: right, path: path + [right.val]))
+                }
+                if let left = node.left {
+                    stack.append((node: left, path: path + [left.val]))
+                }
+            }
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
