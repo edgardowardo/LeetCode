@@ -20698,4 +20698,31 @@ class Leet2078 {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-depth-of-binary-tree/
+class Leet0111 {
+    func minDepth(_ root: TreeNode?) -> Int {
+        guard let root else { return 0 }
+        var deq = Deque<TreeNode>([root]), depth = 1
+        while !deq.isEmpty {
+            for _ in deq {
+                guard let node = deq.popFirst() else { continue }
+                if node.left == nil, node.right == nil {
+                    return depth
+                }
+                if let left = node.left {
+                    deq.append(left)
+                }
+                if let right = node.right {
+                    deq.append(right)
+                }
+            }
+            depth += 1
+        }
+        return -1
+    }
+}
+
+
 print("All playground tests passed!")
