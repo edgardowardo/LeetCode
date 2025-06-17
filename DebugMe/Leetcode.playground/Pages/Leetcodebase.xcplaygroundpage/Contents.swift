@@ -20892,5 +20892,45 @@ class Leet1022 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-the-number-of-arrays-with-k-matching-adjacent-elements/
+class Leet3405 {
+        
+    func countGoodArrays(_ n: Int, _ m: Int, _ k: Int) -> Int {
+        combination(n - 1, k) * m % mod * power(m - 1, n - k - 1) % mod
+    }
+    private let mod = 1_000_000_007
+    private let mx = 100_000
+    private var fact: [Int]
+    private var inv: [Int]
+    init() {
+        fact = Array(repeating: 0, count: mx)
+        inv = Array(repeating: 0, count: mx)
+        fact[0] = 1
+        for i in 1..<mx {
+            fact[i] = (fact[i - 1] * i) % mod
+        }
+        inv[mx - 1] = power(fact[mx - 1], mod - 2)
+        for i in stride(from: mx - 1, to: 0, by: -1) {
+            inv[i - 1] = (inv[i] * i) % mod
+        }
+    }
+    private func combination(_ n: Int, _ r: Int) -> Int {
+        return (fact[n] * inv[r]) % mod * inv[n - r] % mod
+    }
+    private func power(_ base: Int, _ exponent: Int) -> Int {
+        var result = 1, base = base, exponent = exponent
+        while exponent > 0 {
+            if exponent % 2 == 1 {
+                result = (result * base) % mod
+            }
+            base = (base * base) % mod
+            exponent /= 2
+        }
+        return result
+    }
+    
+}
+
 
 print("All playground tests passed!")
