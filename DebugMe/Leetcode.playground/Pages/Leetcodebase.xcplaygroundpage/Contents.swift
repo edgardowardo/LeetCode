@@ -20893,6 +20893,30 @@ class Leet1022 {
 }
 
 ///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/smallest-string-starting-from-leaf/
+class Leet0988 {
+    func smallestFromLeaf(_ root: TreeNode?) -> String {
+        typealias State = (node: TreeNode?, path: [Int])
+        guard let root, let aAscii = Character("a").asciiValue else { return "" }
+        var stack = [State(node: root, path: [root.val])], result = "{"
+        while let (node, path) = stack.popLast() {
+            if node?.left == nil, node?.right == nil {
+                let stringifyPath = String(path.reversed().compactMap { Character(UnicodeScalar( UInt8($0) + aAscii)) })
+                result = min(result, stringifyPath)
+            } else {
+                if let right = node?.right {
+                    stack.append((node: right, path: path + [right.val]))
+                }
+                if let left = node?.left {
+                    stack.append((node: left, path: path + [left.val]))
+                }
+            }
+        }
+        return result
+    }
+}
+
+///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/count-the-number-of-arrays-with-k-matching-adjacent-elements/
 class Leet3405 {
         
