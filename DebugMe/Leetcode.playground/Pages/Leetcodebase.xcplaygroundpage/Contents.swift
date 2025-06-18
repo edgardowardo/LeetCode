@@ -20939,6 +20939,33 @@ class Leet0404 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-root-to-leaf-numbers/
+class Leet0129 {
+    func sumNumbers(_ root: TreeNode?) -> Int {
+        typealias State = (node: TreeNode?, path: [Int])
+        guard let root else { return 0 }
+        var stack = [State(node: root, path: [root.val])], result = 0
+        while let (node, path) = stack.popLast(), let node {
+            if node.left == nil, node.right == nil {
+                result += num(path)
+            } else {
+                if let right = node.right {
+                    stack.append((node: right, path: path + [right.val]))
+                }
+                if let left = node.left {
+                    stack.append((node: left, path: path + [left.val]))
+                }
+            }
+        }
+        return result
+    }
+    private func num(_ path: [Int]) -> Int {
+        path.reversed().enumerated().reduce(0) { r, e in r + e.element * Int(pow(10, Double(e.offset))) }
+    }
+}
+
+
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/count-the-number-of-arrays-with-k-matching-adjacent-elements/
