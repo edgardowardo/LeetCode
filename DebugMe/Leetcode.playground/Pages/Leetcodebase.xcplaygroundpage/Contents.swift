@@ -20956,5 +20956,19 @@ class Leet3405 {
     
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/
+class Leet2966 {
+    func divideArray(_ nums: [Int], _ k: Int) -> [[Int]] {
+        let nums = nums.sorted(), n = nums.count
+        var result = [[Int]]()
+        for i in stride(from: 0, to: n, by: 3) {
+            let temp = nums[i..<i+3]
+            guard let first = temp.first, let last = temp.last, last - first <= k else { return [] }
+            result.append(Array(temp))
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
