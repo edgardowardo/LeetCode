@@ -20917,6 +20917,30 @@ class Leet0988 {
 }
 
 ///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-of-left-leaves/
+class Leet0404 {
+    func sumOfLeftLeaves(_ root: TreeNode?) -> Int {
+        typealias State = (node: TreeNode?, isLeftChild: Bool)
+        guard let root = root else { return 0 }
+        var stack = [State(node: root, isLeftChild: false)], result = 0
+        while let (node, isLeftChild) = stack.popLast(), let node {
+            if node.left == nil, node.right == nil, isLeftChild {
+                result += node.val
+            } else {
+                if let right = node.right {
+                    stack.append((node: right, isLeftChild: false))
+                }
+                if let left = node.left {
+                    stack.append((node: left, isLeftChild: true))
+                }
+            }
+        }
+        return result
+    }
+}
+
+
+///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/count-the-number-of-arrays-with-k-matching-adjacent-elements/
 class Leet3405 {
         
