@@ -21022,4 +21022,20 @@ class Leet2966 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/partition-array-such-that-maximum-difference-is-k/
+class Leet2294 {
+    func partitionArray(_ nums: [Int], _ k: Int) -> Int {
+        let nums = nums.sorted(), n = nums.count
+        var l = 0, result = 1
+        for r in 0..<n where  nums[r] - nums[l] > k  {
+            l = r
+            result += 1
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
