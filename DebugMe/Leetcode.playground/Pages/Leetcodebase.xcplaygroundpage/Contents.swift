@@ -3389,47 +3389,53 @@ func rob(_ nums: [Int]) -> Int {
 ///---------------------------------------------------------------------------------------
 /// Leetcode 155
 /// https://leetcode.com/problems/min-stack/description/
-class MinStack {
-
-    var stack: [Int] = []
-    var minStack: [Int] = []
+class Leet0155 {
     
-    init() {
-    }
-    
-    func push(_ x: Int) {
-        stack.append(x)
+    class MinStack {
         
-        if minStack.isEmpty || minStack.last! >= x {
-            minStack.append(x)
+        var stack: [Int] = []
+        var minStack: [Int] = []
+        
+        init() {
+        }
+        
+        func push(_ x: Int) {
+            stack.append(x)
+            
+            if minStack.isEmpty || minStack.last! >= x {
+                minStack.append(x)
+            }
+        }
+        
+        func pop() {
+            if stack.last! == minStack.last! {
+                minStack.removeLast()
+            }
+            stack.removeLast()
+        }
+        
+        func top() -> Int {
+            stack.last!
+        }
+        
+        func getMin() -> Int {
+            minStack.last!
         }
     }
     
-    func pop() {
-        if stack.last! == minStack.last! {
-            minStack.removeLast()
-        }
-        stack.removeLast()
-    }
-
-    func top() -> Int {
-        stack.last!
-    }
-    
-    func getMin() -> Int {
-        minStack.last!
+    static func test() {
+        let minStack = MinStack()
+        minStack.push(-2)
+        minStack.push(0)
+        minStack.push(-3)
+        minStack.getMin()
+        minStack.pop()
+        minStack.top()
+        minStack.getMin()
     }
 }
 
 
-let minStack = MinStack()
-minStack.push(-2)
-minStack.push(0)
-minStack.push(-3)
-minStack.getMin() 
-minStack.pop()
-minStack.top()    
-minStack.getMin() 
 
 
 /*
