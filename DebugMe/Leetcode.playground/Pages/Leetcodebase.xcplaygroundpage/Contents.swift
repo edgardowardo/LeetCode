@@ -21037,5 +21037,24 @@ class Leet2294 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-manhattan-distance-after-k-changes/
+class Leet3443 {
+    func maxDistance(_ s: String, _ k: Int) -> Int {
+        let n = s.count, s = Array(s)
+        var lat = 0, lon = 0, result = 0
+        for i in 0 ..< n {
+            switch s[i] {
+            case "N": lat += 1; break
+            case "S": lat -= 1; break
+            case "E": lon += 1; break
+            case "W": lon -= 1; break
+            default: break
+            }
+            result = max(result, min(abs(lat) + abs(lon) + k * 2, i + 1))
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
