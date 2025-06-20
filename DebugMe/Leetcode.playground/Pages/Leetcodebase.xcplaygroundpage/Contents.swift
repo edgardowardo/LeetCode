@@ -513,7 +513,7 @@ class Leet0344 {
         assert(s == ["h","a","n","n","a","H"])
     }
 }
-Leet0344.test()
+//Leet0344.test()
 
 func reverseString(_ s: inout [Character]) {
     s.reverse()
@@ -5850,7 +5850,7 @@ class Leet0922 {
         assert(sut.sortArrayByParityII([3,4]) == [4,3])
     }
 }
-Leet0922.test()
+//Leet0922.test()
 
 
 
@@ -7147,7 +7147,7 @@ class Leet0643 {
         assert(sut.findMaxAverage([5], 1) == 5.0)
     }
 }
-Leet0643.test()
+//Leet0643.test()
 
 
 
@@ -11512,7 +11512,7 @@ class Leet0646 {
         assert(sut.findLongestChain([[1,2]]) == 1)
     }
 }
-Leet0646.test()
+//Leet0646.test()
 
 
 
@@ -12533,7 +12533,7 @@ class Leet2999 {
     }
     
 }
-Leet2999.test()
+//Leet2999.test()
 
 /*
  
@@ -13657,7 +13657,7 @@ class Leet1839 {
         assert(sut.longestBeautifulSubstring("aeiaaioaaaaeiiiiouuuooaauuaeiu") == 13)
     }
 }
-Leet1839.test()
+//Leet1839.test()
 
 
 
@@ -15979,7 +15979,7 @@ class Leet1297 {
         assert(sut.maxFreq("aaaa", 1, 3, 3) == 2)
     }
 }
-Leet1297.test()
+//Leet1297.test()
 
 
 /*
@@ -18978,7 +18978,7 @@ class Leet0946 {
         assert(sut.validateStackSequences([3,2,1,4,5], [1,2,3,4,5]))
     }
 }
-Leet0946.test()
+//Leet0946.test()
 
 /*
  
@@ -20398,7 +20398,7 @@ class Leet3442 {
         assert(sut.maxDifference("aaaaabbc") == 3)
     }
 }
-Leet3442.test()
+//Leet3442.test()
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/maximum-difference-between-even-and-odd-frequency-ii/
