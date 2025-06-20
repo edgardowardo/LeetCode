@@ -3487,25 +3487,25 @@ func hammingDistance(_ x: Int, _ y: Int) -> Int {
 //11111111111111111111111111111101.bitPattern
 
 
-"00000010100101000001111010011100"
-"000000" + String(43261596, radix: 2)
-UInt16.max
-
-"00111001011110000010100101000000"
-"00" + String(964176192, radix: 2)
-
-"11111111111111111111111111111101"
-String(4294967293, radix: 2)
-
-"10111111111111111111111111111111"
-String(3221225471, radix: 2)
-
-
-"10111111111111111111111111111111".count
-
-Int(Int16.max) * 2
-UInt32.max
-1 << 16
+//"00000010100101000001111010011100"
+//"000000" + String(43261596, radix: 2)
+//UInt16.max
+//
+//"00111001011110000010100101000000"
+//"00" + String(964176192, radix: 2)
+//
+//"11111111111111111111111111111101"
+//String(4294967293, radix: 2)
+//
+//"10111111111111111111111111111111"
+//String(3221225471, radix: 2)
+//
+//
+//"10111111111111111111111111111111".count
+//
+//Int(Int16.max) * 2
+//UInt32.max
+//1 << 16
 //>> 16
 
 
@@ -5521,13 +5521,16 @@ class Leet0680 {
         }
         return true
     }
+    
+    static func test() {
+        let sut0680 = Leet0680()
+        assert(sut0680.validPalindrome("deddde") == true)
+        assert(sut0680.validPalindrome("aba") == true)
+        assert(sut0680.validPalindrome("abca") == true)
+        assert(sut0680.validPalindrome("abc") == false)
+        assert(sut0680.validPalindrome("abcd") == false)
+    }
 }
-let sut0680 = Leet0680()
-//assert(sut0680.validPalindrome("deddde") == true)
-//assert(sut0680.validPalindrome("aba") == true)
-//assert(sut0680.validPalindrome("abca") == true)
-//assert(sut0680.validPalindrome("abc") == false)
-//assert(sut0680.validPalindrome("abcd") == false)
 
 
 
