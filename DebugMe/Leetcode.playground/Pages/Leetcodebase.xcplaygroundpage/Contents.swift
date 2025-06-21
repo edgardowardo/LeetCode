@@ -21073,4 +21073,24 @@ class Leet3443 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-deletions-to-make-string-k-special/
+class Leet3085 {
+    func minimumDeletions(_ word: String, _ k: Int) -> Int {
+        var count = word.reduce(into: [Character: Int]()) { r, c in r[c, default: 0] += 1 }, result = word.count
+        for a in count.values {
+            var deleted = 0
+            for b in count.values {
+                if a > b {
+                    deleted += b
+                } else if b > a + k {
+                    deleted += b - (a + k)
+                }
+            }
+            result = min(result, deleted)
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
