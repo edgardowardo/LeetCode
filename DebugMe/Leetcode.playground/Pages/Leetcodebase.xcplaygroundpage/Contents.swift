@@ -21093,4 +21093,21 @@ class Leet3085 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/divide-a-string-into-groups-of-size-k/
+class Leet2138 {
+    func divideString(_ s: String, _ k: Int, _ fill: Character) -> [String] {
+        let s = Array(s)
+        var result = [String]()
+        for i in stride(from: 0, to: s.count, by: k) {
+            let endIndex = min(i + k, s.count)
+            let chunk = s[i..<endIndex]
+            let filledChunk = Array(chunk) + Array(repeating: fill, count: k - chunk.count)
+            result.append(String(filledChunk))
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
