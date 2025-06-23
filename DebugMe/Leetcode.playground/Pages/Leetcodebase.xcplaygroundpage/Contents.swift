@@ -21110,4 +21110,51 @@ class Leet2138 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sum-of-k-mirror-numbers/
+class Leet2081 {
+    
+    var digit = [Int](repeating: 0, count: 100)
+    func kMirror(_ k: Int, _ n: Int) -> Int {
+        var l = 1, count = 0, result = 0
+        while count < n {
+            let r = l * 10
+            for op in 0..<2 {
+                var i = l
+                while i < r && count < n {
+                    var combined = i, x = (op == 0 ? i / 10 : i)
+                    while x > 0 {
+                        combined = combined * 10 + (x % 10)
+                        x /= 10
+                    }
+                    if isPalindrome(combined, k) {
+                        count += 1
+                        result += combined
+                    }
+                    i += 1
+                }
+            }
+            l = r
+        }
+        return result
+    }
+    private func isPalindrome(_ num: Int, _ base: Int) -> Bool {
+        var l = -1, num = num
+        while num > 0 {
+            l += 1
+            digit[l] = num % base
+            num /= base
+        }
+        var i = 0, j = l
+        while i < j {
+            if digit[i] != digit[j] {
+                return false
+            }
+            i += 1
+            j -= 1
+        }
+        return true
+    }
+}
+
 print("All playground tests passed!")
