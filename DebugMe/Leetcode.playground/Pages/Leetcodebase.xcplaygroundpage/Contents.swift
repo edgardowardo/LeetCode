@@ -21157,4 +21157,46 @@ class Leet2081 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/kth-smallest-product-of-two-sorted-arrays/
+class Leet2040 {
+    func kthSmallestProduct(_ nums1: [Int], _ nums2: [Int], _ k: Int) -> Int {
+        let n1 = nums1.count
+        var low = -10_000_000_000, high = 10_000_000_000
+        while low <= high {
+            let mid = low + (high - low) / 2
+            var count = 0
+            for i in 0..<n1 {
+                count += f(nums2, nums1[i], mid)
+            }
+            if count < k {
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        return low
+    }
+    
+    private func f(_ nums2: [Int], _ x1: Int, _ v: Int) -> Int {
+        var low = 0
+        var high = nums2.count - 1
+        while low <= high {
+            let mid = low + (high - low) / 2, product = nums2[mid] * x1
+            if x1 >= 0 && product <= v || x1 < 0 && product > v {
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        if x1 >= 0 {
+            return low
+        } else {
+            return nums2.count - low
+        }
+    }
+}
+
+
 print("All playground tests passed!")
