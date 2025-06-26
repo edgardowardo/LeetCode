@@ -21198,5 +21198,27 @@ class Leet2040 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-binary-subsequence-less-than-or-equal-to-k/
+class Leet2311 {
+    func longestSubsequence(_ s: String, _ k: Int) -> Int {
+        let s = Array(s.reversed()), bits = String(k, radix: 2).count
+        var num = 0, result = 0
+        for i in 0..<s.count {
+            if s[i] == "1" {
+                let temp = 1 << i
+                if i < bits && num + temp <= k {
+                    num += temp
+                    result += 1
+                }
+            } else {
+                result += 1
+            }
+        }
+        return result
+    }
+}
+
+
 
 print("All playground tests passed!")
