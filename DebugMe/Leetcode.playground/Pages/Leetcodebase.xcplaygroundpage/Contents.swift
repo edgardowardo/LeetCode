@@ -21220,5 +21220,40 @@ class Leet2311 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-subsequence-repeated-k-times/
+class Leet2014 {
+    func longestSubsequenceRepeatedK(_ s: String, _ k: Int) -> String {
+        let s = Array(s)
+        var freq = s.reduce(into: [Character: Int]()) { r, ch in r[ch, default: 0] += 1 }
+        let candidates: [Character] = freq.filter { $1 >= k }.keys.sorted().reversed()
+        var q = Deque<String>(candidates.map { String($0)} ), result = ""
+        while let curr = q.popFirst() {
+            if curr.count > result.count {
+                result = curr
+            }
+            for ch in candidates {
+                let next = curr + String(ch)
+                guard isKRepeatedSubsequence(s, next, k) else { continue }
+                q.append(next)
+            }
+        }
+        return result
+    }
+    private func isKRepeatedSubsequence(_ s: [Character], _ t: String, _ k: Int) -> Bool {
+        let t = Array(t), m = t.count
+        var pos = 0, matched = 0
+        for ch in s where ch == t[pos] {
+            pos += 1
+            guard pos == m else { continue }
+            pos = 0
+            matched += 1
+            guard matched == k else { continue }
+            return true
+        }
+        return false
+    }
+}
+
 
 print("All playground tests passed!")
