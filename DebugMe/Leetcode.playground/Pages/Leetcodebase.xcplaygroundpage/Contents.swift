@@ -21269,4 +21269,36 @@ class Leet2099 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/
+class Leet1498 {
+    func numSubseq(_ nums: [Int], _ target: Int) -> Int {
+        let n = nums.count, mod = 1_000_000_007, nums = nums.sorted()
+        var power = [Int](repeating: 0, count: n), result = 0
+        power[0] = 1
+        for i in 1..<n {
+            power[i] = (power[i-1] * 2) % mod
+        }
+        for l in 0..<n {
+            let r = binarySearchRightmostIndex(nums, target - nums[l]) - 1
+            guard r >= l else { continue }
+            result += power[r - l]
+            result %= mod
+        }
+        return result
+    }
+    private func binarySearchRightmostIndex(_ nums: [Int], _ target: Int) -> Int {
+        var low = 0, high = nums.count - 1
+        while low <= high {
+            let mid = low + (high - low) / 2
+            if nums[mid] <= target {
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        return low
+    }
+}
+
 print("All playground tests passed!")
