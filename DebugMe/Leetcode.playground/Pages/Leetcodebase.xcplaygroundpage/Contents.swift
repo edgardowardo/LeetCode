@@ -21301,4 +21301,50 @@ class Leet1498 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-original-typed-string-ii/
+class Leet3333 {
+    func possibleStringCount(_ word: String, _ k: Int) -> Int {
+        let mod = 1_000_000_007, n = word.count, word = Array(word)
+        var count = 1, freq = [Int](), result = 1
+        for i in 1..<n {
+            if word[i] == word[i-1] {
+                count += 1
+            } else {
+                freq.append(count)
+                count = 1
+            }
+        }
+        freq.append(count)
+        
+        for o in freq {
+            result = (result * o) % mod
+        }
+        if freq.count >= k {
+            return result
+        }
+        
+        var f = Array(repeating: 0, count: k), g = Array(repeating: 1, count: k)
+        f[0] = 1
+        for i in 0..<freq.count {
+            var fNew = Array(repeating: 0, count: k)
+            for j in 1..<k {
+                fNew[j] = g[j-1]
+                guard (j - freq[i] - 1 >= 0) else { continue }
+                fNew[j] = (fNew[j] - g[j - freq[i] - 1] + mod) % mod
+            }
+            var gNew = Array(repeating: 0, count: k)
+            gNew[0] = fNew[0]
+            for j in 1..<k {
+                gNew[j] = (gNew[j - 1] + fNew[j]) % mod
+            }
+            f = fNew
+            g = gNew
+        }
+        return (result - g[k - 1] + mod) % mod
+    }
+}
+
+
 print("All playground tests passed!")
