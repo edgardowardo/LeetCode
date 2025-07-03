@@ -21369,4 +21369,37 @@ class Leet0848 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/shifting-letters-ii/
+class Leet2381 {
+    func shiftingLetters(_ s: String, _ shifts: [[Int]]) -> String {
+        let aAscii = Character("a").asciiValue!, n = s.count
+        // build difference array
+        var diffArray = [Int](repeating: 0, count: n), numbefOfShifts = 0, result = Array(s)
+        for shift in shifts {
+            if shift[2] == 1 {
+                diffArray[shift[0]] += 1
+                if shift[1] + 1 < n {
+                    diffArray[shift[1] + 1] -= 1
+                }
+            } else {
+                diffArray[shift[0]] -= 1
+                if shift[1] + 1 < n {
+                    diffArray[shift[1] + 1] += 1
+                }
+            }
+        }
+        // shift
+        for i in 0..<s.count {
+            numbefOfShifts = (numbefOfShifts + diffArray[i]) % 26
+            if numbefOfShifts < 0 {
+                numbefOfShifts += 26
+            }
+            result[i] = Character(UnicodeScalar((Int(result[i].asciiValue! - aAscii) + numbefOfShifts) % 26 + Int(aAscii))!)
+        }
+        return String(result)
+    }
+}
+
+
 print("All playground tests passed!")
