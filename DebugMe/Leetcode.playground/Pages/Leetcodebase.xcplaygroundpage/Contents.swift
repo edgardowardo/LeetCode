@@ -21354,7 +21354,19 @@ class Leet3304 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/shifting-letters/
+class Leet0848 {
+    func shiftingLetters(_ s: String, _ shifts: [Int]) -> String {
+        let aAscii = Character("a").asciiValue!
+        var result = Array(s), shifts = shifts
+        for i in stride(from: s.count - 1, through: 0, by: -1) {
+            shifts[i] = shifts[i] + (i == shifts.count - 1 ? 0 : shifts[i + 1])
+            result[i] = Character(UnicodeScalar((Int(result[i].asciiValue! - aAscii) + shifts[i]) % 26 + Int(aAscii))!)
+        }
+        return String(result)
+    }
+}
 
 
 print("All playground tests passed!")
