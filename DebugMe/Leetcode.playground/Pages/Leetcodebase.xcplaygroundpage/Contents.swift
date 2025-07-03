@@ -21401,5 +21401,25 @@ class Leet2381 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/range-addition/
+class Leet0370 {
+    func getModifiedArray(_ length: Int, _ updates: [[Int]]) -> [Int] {
+        var result = [Int](repeating: 0, count: length), diffArray = [Int](repeating: 0, count: length)
+        for op in updates {
+            diffArray[op[0]] += op[2]
+            if op[1] + 1 < length {
+                diffArray[op[1] + 1] -= op[2]
+            }
+        }
+        var sum = 0
+        for (i, v) in diffArray.enumerated() {
+            sum += v
+            result[i] = sum
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
