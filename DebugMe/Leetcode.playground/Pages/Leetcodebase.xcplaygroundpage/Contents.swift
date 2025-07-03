@@ -21346,5 +21346,15 @@ class Leet3333 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-k-th-character-in-string-game-i/
+class Leet3304 {
+    func kthCharacter(_ k: Int) -> Character {
+        Character(UnicodeScalar(Int(Character("a").asciiValue!) + (k - 1).nonzeroBitCount)!)
+    }
+}
+
+
+
 
 print("All playground tests passed!")
