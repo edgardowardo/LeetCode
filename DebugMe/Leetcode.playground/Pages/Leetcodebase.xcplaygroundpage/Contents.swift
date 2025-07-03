@@ -21421,5 +21421,18 @@ class Leet0370 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/range-addition-ii/
+class Leet0598 {
+    func maxCount(_ m: Int, _ n: Int, _ ops: [[Int]]) -> Int {
+        var m = m, n = n
+        for o in ops {
+            m = min(m, o[0])
+            n = min(n, o[1])
+        }
+        return m * n
+    }
+}
+
 
 print("All playground tests passed!")
