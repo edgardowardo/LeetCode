@@ -21500,4 +21500,20 @@ class Leet0779 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/
+class Leet1545 {
+    func findKthBit(_ n: Int, _ k: Int) -> Character {
+        let positionInSection = k & -k
+        let isInInvertedPart = (((k / positionInSection) >> 1) & 1) == 1
+        let originalBitIsOne = (k & 1) == 0;
+        if isInInvertedPart {
+            return originalBitIsOne ? "0" : "1"
+        } else {
+            return originalBitIsOne ? "1" : "0"
+        }
+    }
+}
+
+
 print("All playground tests passed!")
