@@ -21478,5 +21478,20 @@ extension Character {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/replace-all-digits-with-characters/
+class Leet1844 {
+    func replaceDigits(_ s: String) -> String {
+        guard s.count > 1 else { return s }
+        var s = Array(s)
+        for i in 1..<s.count {
+            guard s[i].isNumber, let d = Int(String(s[i])) else { continue }
+            s[i] = Character(UnicodeScalar(Int(s[i - 1].asciiValue!) + d)!)
+        }
+        return String(s)
+    }
+}
+
+
 
 print("All playground tests passed!")
