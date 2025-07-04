@@ -21448,5 +21448,35 @@ class Leet0598 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/lexicographically-smallest-string-after-substring-operation/
+class Leet2734 {
+    func smallestString(_ s: String) -> String {
+        var s = Array(s), isNonAfound = false
+        for i in 0..<s.count {
+            let c = s[i]
+            if c == "a" {
+                if isNonAfound {
+                    break
+                }
+            } else {
+                isNonAfound = true
+                s[i] = c.previous
+            }
+        }
+        if !isNonAfound {
+            s[s.count - 1] = "z"
+        }
+        return String(s)
+    }
+}
+
+extension Character {
+    var previous: Character {
+        guard self != "a" else { return "z" }
+        return Character(UnicodeScalar(Int(self.asciiValue!) - 1)!)
+    }
+}
+
 
 print("All playground tests passed!")
