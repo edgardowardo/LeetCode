@@ -21492,6 +21492,12 @@ class Leet1844 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/k-th-symbol-in-grammar/
+class Leet0779 {
+    func kthGrammar(_ n: Int, _ k: Int) -> Int {
+        (k - 1).nonzeroBitCount % 2
+    }
+}
 
 print("All playground tests passed!")
