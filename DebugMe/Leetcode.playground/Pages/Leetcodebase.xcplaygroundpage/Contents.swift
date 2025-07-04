@@ -21355,6 +21355,20 @@ class Leet3304 {
 }
 
 ///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-k-th-character-in-string-game-ii/
+class Leet3307 {
+    func kthCharacter(_ k: Int, _ operations: [Int]) -> Character {
+        Character(UnicodeScalar(Character("a").asciiValue! + UInt8((
+            (0..<String(k - 1, radix: 2).count).reduce(into: 0) { (result, i) in
+                guard ((k - 1) >> i) & 1 == 1 else { return }
+                result += operations[i]
+            }
+        ) % 26)))
+    }
+}
+
+
+///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/shifting-letters/
 class Leet0848 {
     func shiftingLetters(_ s: String, _ shifts: [Int]) -> String {
