@@ -21516,4 +21516,27 @@ class Leet1545 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/divide-two-integers/
+class Leet0029 {
+    func divide(_ dividend: Int, _ divisor: Int) -> Int {
+        if dividend == -(Int(Int32.max)  + 1) && divisor == -1 {
+            return Int(Int32.max)
+        }
+        let sign = (dividend < 0) != (divisor < 0) ? -1 : 1
+        var dividend = abs(dividend), divisor = abs(divisor), quotient = 0
+        while dividend >= divisor {
+            var tempDivisor = divisor, i = 0
+            while tempDivisor << 1 <= dividend {
+                tempDivisor <<= 1
+                i += 1
+            }
+            dividend -= tempDivisor
+            quotient += 1 << i
+        }
+        return (sign == -1) ? -quotient : quotient
+    }
+}
+
+
 print("All playground tests passed!")
