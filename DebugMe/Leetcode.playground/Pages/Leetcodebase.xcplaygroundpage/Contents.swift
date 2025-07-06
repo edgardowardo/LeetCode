@@ -21598,6 +21598,28 @@ class Leet005 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/palindromic-substrings/
+class Leet0647 {
+    func countSubstrings(_ s: String) -> Int {
+        let s = Array(s)
+        var result = 0
+        for i in 0..<s.count {
+            result += countFromCenter(i, i, s)
+            result += countFromCenter(i, i + 1, s)
+        }
+        return result
+    }
+    private func countFromCenter(_ l: Int, _ r: Int, _ s: [Character]) -> Int {
+        var l = l, r = r, result = 0
+        while l >= 0 && r < s.count && s[l] == s[r] {
+            result += 1
+            l -= 1
+            r += 1
+        }
+        return result
+    }
+}
 
 
 print("All playground tests passed!")
