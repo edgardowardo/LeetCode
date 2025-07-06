@@ -21539,4 +21539,30 @@ class Leet0029 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/finding-pairs-with-a-certain-sum/
+class Leet1865 {
+    private let counts1: [Int: Int]
+    private var nums2: [Int]
+    private var counts2: [Int: Int]
+    init(_ nums1: [Int], _ nums2: [Int]) {
+        self.nums2 = nums2
+        self.counts1 = nums1.reduce(into: [:]) { counts, n in counts[n, default: 0] += 1 }
+        self.counts2 = nums2.reduce(into: [:]) { counts, n in counts[n, default: 0] += 1 }
+    }
+    func add(_ index: Int, _ val: Int) {
+        let oldValue = nums2[index]
+        nums2[index] += val
+        let newValue = nums2[index]
+        self.counts2[oldValue, default: 0] -= 1
+        self.counts2[newValue, default: 0] += 1
+    }
+    func count(_ tot: Int) -> Int {
+        counts1.keys.reduce(into: 0) { (result, n) in
+            guard let sub = counts2[tot - n], let count1 = counts1[n] else { return }
+            result += count1 * sub
+        }
+    }
+}
+
 print("All playground tests passed!")
