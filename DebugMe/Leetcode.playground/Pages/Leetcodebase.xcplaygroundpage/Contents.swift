@@ -21559,8 +21559,8 @@ class Leet1865 {
     }
     func count(_ tot: Int) -> Int {
         counts1.keys.reduce(into: 0) { (result, n) in
-            guard let sub = counts2[tot - n], let count1 = counts1[n] else { return }
-            result += count1 * sub
+            guard let difference = counts2[tot - n], let count1 = counts1[n] else { return }
+            result += count1 * difference
         }
     }
 }
