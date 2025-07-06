@@ -21565,4 +21565,39 @@ class Leet1865 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-palindromic-substring/
+class Leet005 {
+    func longestPalindrome(_ s: String) -> String {
+        let s = Array(s)
+        var (l, r) = (0, 0)
+        for i in 0..<s.count {
+            let oddLength = expand(i, i, s)
+            if oddLength > r - l + 1 {
+                let distance = oddLength / 2
+                l = i - distance
+                r = i + distance
+            }
+            let evenLength = expand(i, i + 1, s)
+            if evenLength > r - l + 1 {
+                let distance = evenLength / 2 - 1
+                l = i - distance
+                r = i + distance + 1
+            }
+        }
+        return String(s[l...r])
+    }
+    private func expand(_ i: Int, _ j: Int, _ s: [Character]) -> Int {
+        var l = i, r = j
+        while l >= 0 && r < s.count && s[l] == s[r] {
+            l -= 1
+            r += 1
+        }
+        return r - l - 1
+    }
+}
+
+
+
 print("All playground tests passed!")
