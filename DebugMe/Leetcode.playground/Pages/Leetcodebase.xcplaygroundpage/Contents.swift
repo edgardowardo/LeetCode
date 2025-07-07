@@ -20682,6 +20682,55 @@ class Leet0113 {
 
 
 ///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/path-sum-iii/
+class Leet0437 {
+    func pathSum(_ root: TreeNode?, _ targetSum: Int) -> Int {
+        typealias State = (node: TreeNode?, sum: Int, freq: [Int: Int])
+        guard let root else { return 0 }
+        var stack = [State(node: root, sum: 0, freq: [Int: Int]())], result = 0
+        while let top = stack.popLast() {
+            var (node, sum, freq) = top
+            guard let node else { continue }
+            sum += node.val
+            if sum == targetSum {
+                result += 1
+            }
+            if let diff = freq[sum - targetSum] {
+                result += diff
+            }
+            freq[sum, default: 0] += 1
+            stack.append((node: node.left, sum: sum, freq: freq))
+            stack.append((node: node.right, sum: sum, freq: freq))
+        }
+        return result
+    }
+}
+
+ 
+/*
+ 
+ [2,3,4,5,6]
+ 10
+ [1000000000,1000000000,null,294967296,null,1000000000,null,1000000000,null,1000000000]
+ 0
+ [1,-2,-3]
+ -1
+ [0,1,1]
+ 1
+ [5,4,8,11,null,13,4,7,2,null,null,5,1]
+ 22
+ [1,1,1,2,-1,-1]
+ 2
+ [1,0,1,1,2,0,-1,0,1,-1,0,-1,0,1,0]
+ 2
+ [1,-2,-3,1,3,-2,null,-1]
+ 3
+
+ */
+
+
+
+///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/count-good-nodes-in-binary-tree/
 class Leet1448 {
     func goodNodes(_ root: TreeNode?) -> Int {
