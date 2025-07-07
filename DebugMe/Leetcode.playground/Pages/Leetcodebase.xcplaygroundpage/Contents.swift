@@ -20729,6 +20729,65 @@ class Leet0437 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/path-sum-iv/
+class Leet0666 {
+    func pathSum(_ nums: [Int]) -> Int {
+        typealias State = (node: TreeNode?, sum: Int)
+        var root = treeNode(nums), stack = [State(node: root, sum: root.val % 10)], result = 0
+        while let (node, sum) = stack.popLast() {
+            guard let node else { continue }
+            if node.left == nil, node.right == nil {
+                result += sum
+            }
+            if let left = node.left {
+                stack.append((node: left, sum: sum + left.val % 10))
+            }
+            if let right = node.right {
+                stack.append((node: right, sum: sum + right.val % 10))
+            }
+        }
+        return result
+    }
+    
+    private func treeNode(_ nums: [Int]) -> TreeNode {
+        // convert nums array into TreeNode as per problem
+        var root = TreeNode(nums[0]), deque = Deque<TreeNode>([root]), i = 1
+        while !deque.isEmpty {
+            // bfs
+            for _ in deque {
+                guard let parent = deque.popFirst() else { continue }
+                // left
+                if i < nums.count, parent.val / 100 == nums[i] / 100 - 1,  2 * ((parent.val % 100) / 10) - 1 == (nums[i] % 100) / 10 {
+                    let node = TreeNode(nums[i])
+                    parent.left = node
+                    deque.append(node)
+                    i += 1
+                }
+                // right
+                if i < nums.count, parent.val / 100 == nums[i] / 100 - 1, 2 * ((parent.val % 100) / 10) == (nums[i] % 100) / 10 {
+                    let node = TreeNode(nums[i])
+                    parent.right = node
+                    deque.append(node)
+                    i += 1
+                }
+            }
+        }
+        return root
+    }
+    
+    static func test() {
+        let sut = Leet0666()
+        assert(sut.pathSum([115,215,224,325,336,446,458]) == 44)
+        assert(sut.pathSum([111,217,221,315,415]) == 20)
+        assert(sut.pathSum([113,215,221]) == 12)
+        assert(sut.pathSum([111, 212, 223, 334, 345, 476, 487]) == 42)
+    }
+}
+//Leet0666.test()
+
+
+
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/count-good-nodes-in-binary-tree/
