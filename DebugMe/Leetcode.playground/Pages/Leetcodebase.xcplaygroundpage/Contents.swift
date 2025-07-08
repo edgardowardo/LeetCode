@@ -21814,6 +21814,33 @@ class Leet1353 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/
+class Leet1751 {
+    func maxValue(_ events: [[Int]], _ k: Int) -> Int {
+        let n = events.count, events = events.sorted { $0[0] < $1[0] }
+        var dp = Array(repeating: Array(repeating: 0, count: k + 1), count: n + 1)
+        for i in stride(from: n - 1, through: 0, by: -1) {
+            let nextI = bisectRight(events, events[i][1])
+            for count in 1...k {
+                dp[count][i] = max(dp[count][i + 1], dp[count - 1][nextI] + events[i][2])
+            }
+        }
+        return dp[k][0]
+    }
+    private func bisectRight(_ events: [[Int]], _ target: Int) -> Int {
+        var l = 0, r = events.count
+        while l < r {
+            let mid = l + (r - l) / 2
+            if events[mid][0] <= target {
+                l = mid + 1
+            } else {
+                r = mid
+            }
+        }
+        return l
+    }
+}
 
 
 print("All playground tests passed!")
