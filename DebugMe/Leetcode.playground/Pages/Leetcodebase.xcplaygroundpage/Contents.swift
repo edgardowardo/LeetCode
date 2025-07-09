@@ -21896,6 +21896,25 @@ class Leet3440 {
 }
 //Leet3440.test()
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/meeting-scheduler/
+///needs extension ClosedRange
+class Leet1229 {
+    func minAvailableDuration(_ slots1: [[Int]], _ slots2: [[Int]], _ duration: Int) -> [Int] {
+        let slots1 = slots1.sorted { $0[0] < $1[0] }.map { $0[0]...$0[1] }, slots2 = slots2.sorted { $0[0] < $1[0] }.map { $0[0]...$0[1] }
+        var p1 = 0, p2 = 0, result = [Int]()
+        while p1 < slots1.count && p2 < slots2.count {
+            if let i = slots1[p1].intersection(slots2[p2]), i.upperBound - i.lowerBound >= duration {
+                return [i.lowerBound, i.lowerBound + duration]
+            }
+            if slots1[p1].upperBound < slots2[p2].upperBound {
+                p1 += 1
+            } else {
+                p2 += 1
+            }
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
