@@ -21842,5 +21842,24 @@ class Leet1751 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-i/
+class Leet3439 {
+    func maxFreeTime(_ eventTime: Int, _ k: Int, _ startTime: [Int], _ endTime: [Int]) -> Int {
+        let n = startTime.count
+        var result = 0, t = 0
+        for i in 0..<n {
+            t += endTime[i] - startTime[i]
+            let l = (i <= k - 1) ? 0 : endTime[i - k]
+            let r = (i == n - 1) ? eventTime : startTime[i + 1]
+            result = max(result, r - l - t)
+            guard i >= k - 1 else { continue }
+            t -= endTime[i - k + 1] - startTime[i - k + 1]
+        }
+        return result
+    }
+}
+
+
 
 print("All playground tests passed!")
