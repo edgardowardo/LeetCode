@@ -19288,10 +19288,8 @@ class Leet0853 {
             .map { p, s in Car(position: p, time: Double(target - p) / Double(s)) }
             .sorted { c1, c2  in c1.position < c2.position }
         var result = 0, t = position.count
-        print(cars)
         while t > 0 {
             t -= 1
-            print("\(cars[t]) \(cars[t-1])")
             if cars[t].time < cars[t-1].time {
                 result += 1
             } else {
