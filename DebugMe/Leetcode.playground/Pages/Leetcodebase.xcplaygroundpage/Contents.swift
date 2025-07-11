@@ -21954,5 +21954,23 @@ class Leet2402 {
 //Leet2402.test()
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-univalue-path/
+class Leet0687 {
+    func longestUnivaluePath(_ root: TreeNode?) -> Int {
+        var result = 0
+        @discardableResult func dfs(_ node: TreeNode?, _ parent: Int) -> Int {
+            guard let node else { return 0 }
+            let l = dfs(node.left, node.val)
+            let r = dfs(node.right, node.val)
+            result = max(result, l + r)
+            return node.val == parent ? max(l, r) + 1 : 0
+        }
+        guard let root else { return 0 }
+        dfs(root, -1)
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
