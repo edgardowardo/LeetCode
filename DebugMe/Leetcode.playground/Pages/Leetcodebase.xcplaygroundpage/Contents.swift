@@ -21917,4 +21917,44 @@ class Leet1229 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/meeting-rooms-iii/
+class Leet2402 {
+    struct Room: Comparable {
+        let timeAvailable: Int, room: Int
+        static func < (lhs: Room, rhs: Room) -> Bool {
+            lhs.timeAvailable < rhs.timeAvailable || (rhs.timeAvailable == lhs.timeAvailable && lhs.room < rhs.room)
+        }
+    }
+    func mostBooked(_ n: Int, _ meetings: [[Int]]) -> Int {
+        let meetings = meetings.sorted { $0[0] < $1[0] || ($0[0] == $1[0] && $0[1] < $1[1]) }
+        var usedRooms = Heap<Room>(), unusedRooms = Heap<Int>([Int](0..<n)), meetingCount = [Int](repeating: 0, count:n)
+        for m in meetings {
+            let start = m[0], end = m[1]
+            while !usedRooms.isEmpty, let min = usedRooms.min, min.timeAvailable <= start {
+                unusedRooms.insert(min.room)
+                usedRooms.removeMin()
+            }
+            if !unusedRooms.isEmpty, let room = unusedRooms.popMin() {
+                usedRooms.insert(.init(timeAvailable: end, room: room))
+                meetingCount[room] += 1
+            } else if let min = usedRooms.popMin() {
+                usedRooms.insert(.init(timeAvailable: min.timeAvailable + end - start, room: min.room))
+                meetingCount[min.room] += 1
+            }
+        }
+        return meetingCount.enumerated().max(by: { $0.element < $1.element })?.offset ?? 0
+    }
+    
+    static func test() {
+        let sut = Leet2402()
+        assert(sut.mostBooked(3, [[1,20],[2,10],[3,5],[4,9],[6,8]]) == 1)
+        assert(sut.mostBooked(2, [[0,10],[1,5],[2,7],[3,4]]) == 0)
+    }
+}
+//Leet2402.test()
+
+
+
 print("All playground tests passed!")
