@@ -21973,4 +21973,59 @@ class Leet0687 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/the-earliest-and-latest-rounds-where-players-compete/
+class Leet1900 {
+    
+    private var F = [[[Int]]](repeating: [[Int]](repeating: [Int](repeating: 0, count: 30), count: 30), count: 30)
+    private var G = [[[Int]]](repeating: [[Int]](repeating: [Int](repeating: 0, count: 30), count: 30), count: 30)
+
+    private func dp(_ n: Int, _ f: Int, _ s: Int) -> [Int] {
+        if F[n][f][s] != 0 { return [F[n][f][s], G[n][f][s]] }
+        if (f + s == n + 1) { return [1, 1] }
+        // F(n,f,s) = F(n, n + 1 - s, n + 1 - f)
+        if (f + s > n + 1) {
+            let result = dp(n, n + 1 - s, n + 1 - f)
+            F[n][f][s] = result[0]
+            G[n][f][s] = result[1]
+            return [F[n][f][s], G[n][f][s]]
+        }
+
+        var earliest = Int.max, latest = Int.min
+        let nHalf = (n + 1) / 2
+        if s <= nHalf {
+            // On the left or in the middle
+            for i in 0..<f {
+                for j in 0..<s - f {
+                    let result = dp(nHalf, i + 1, i + j + 2)
+                    earliest = min(earliest, result[0])
+                    latest = max(latest, result[1])
+                }
+            }
+        } else {
+            // s on the right
+            let sPrime = n + 1 - s, mid = (n - 2 * sPrime + 1) / 2
+            for i in 0..<f {
+                for j in 0..<sPrime - f {
+                    let result = dp(nHalf, i + 1, i + j + mid + 2)
+                    earliest = min(earliest, result[0])
+                    latest = max(latest, result[1])
+                }
+            }
+        }
+        F[n][f][s] = earliest + 1
+        G[n][f][s] = latest + 1
+        return [F[n][f][s], G[n][f][s]]
+    }
+    func earliestAndLatest(_ n: Int, _ firstPlayer: Int, _ secondPlayer: Int) -> [Int] {
+        // F(n,f,s) = F(n,s,f)
+        if firstPlayer > secondPlayer {
+            return dp(n, secondPlayer, firstPlayer)
+        } else {
+            return dp(n, firstPlayer, secondPlayer)
+        }
+    }
+}
+
+
 print("All playground tests passed!")
