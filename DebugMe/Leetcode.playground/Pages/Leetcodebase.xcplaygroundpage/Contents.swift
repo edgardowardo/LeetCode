@@ -22028,4 +22028,30 @@ class Leet1900 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-univalue-subtrees/
+class Leet0250 {
+    private var count = 0
+    @discardableResult private func isUnival(_ node: TreeNode?) -> Bool {
+        guard let node = node else { return true }
+        let l = isUnival(node.left), r = isUnival(node.right)
+        if l && r {
+            if let left = node.left, left.val != node.val {
+                return false
+            }
+            if let right = node.right, right.val != node.val {
+                return false
+            }
+            count += 1
+            return true
+        }
+        return false
+    }
+    func countUnivalSubtrees(_ root: TreeNode?) -> Int {
+        isUnival(root)
+        return count
+    }
+}
+
+
 print("All playground tests passed!")
