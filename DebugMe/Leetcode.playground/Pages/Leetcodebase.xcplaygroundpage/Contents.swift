@@ -22128,6 +22128,21 @@ class Leet0450 {
  
  */
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/split-bst/
+class Leet0776 {
+    func splitBST(_ root: TreeNode?, _ target: Int) -> [TreeNode?] {
+        guard let root else { return [nil, nil] }
+        if root.val > target {
+            let left = splitBST(root.left, target)
+            root.left = left[1]
+            return [left[0], root]
+        } else {
+            let right = splitBST(root.right, target)
+            root.right = right[0]
+            return [root, right[1]]
+        }
+    }
+}
 
 print("All playground tests passed!")
