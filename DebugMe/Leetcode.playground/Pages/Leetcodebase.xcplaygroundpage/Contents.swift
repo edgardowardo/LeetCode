@@ -16635,6 +16635,17 @@ class Leet1290 {
     }
 }
 
+class Leet1290_2 {
+    func getDecimalValue(_ head: ListNode?) -> Int {
+        var head = head, result = 0
+        while let next = head {
+            result = result << 1 | next.val
+            head = next.next
+        }
+        return result
+    }
+}
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
 class Leet1721 {
