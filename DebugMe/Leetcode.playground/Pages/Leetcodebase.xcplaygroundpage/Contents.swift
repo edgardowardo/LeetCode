@@ -5014,15 +5014,8 @@ class Leet0541 {
 //assert(sut0541.reverseStr("abcdefg", 1) == "abcdefg")
 //assert(sut0541.reverseStr("hyzqyljrnigxvdtneasepfahmtyhlohwxmkqcdfehybknvdmfrfvtbsovjbdhevlfxpdaovjgunjqlimjkfnqcqnajmebeddqsgl", 39) == "fdcqkmxwholhytmhafpesaentdvxginrjlyqzyhehybknvdmfrfvtbsovjbdhevlfxpdaovjgunjqllgsqddebemjanqcqnfkjmi")
 
-extension Character {
-    var isVowel: Bool {
-        switch self {
-        case "a", "e", "i", "o", "u", "A", "E", "I", "O", "U":
-            return true
-        default:
-            return false
-        }
-    }
+private extension Character {
+    var isVowel: Bool { "aeiouAEIOU".contains(self) }
 }
 
 ///---------------------------------------------------------------------------------------
@@ -22155,5 +22148,48 @@ class Leet0776 {
         }
     }
 }
+
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/valid-word/
+class Leet3136 {
+    func isValid(_ word: String) -> Bool {
+        guard word.count > 2 else { return false }
+        var hasVowel = false, hasConsonant = false
+        for c in word {
+            if c.isLetter {
+                if c.isVowel {
+                    hasVowel = true
+                } else {
+                    hasConsonant = true
+                }
+            } else if c.isWholeNumber {
+            } else {
+                return false
+            }
+            
+        }
+        return hasVowel && hasConsonant
+    }
+}
+
+/*
+ "aba"
+ "aaa"
+ "aba$"
+ 
+ "@"
+ "Aa"
+ "rrdsUE"
+ "234Ad$s"
+ "eB3Aa0e53GAAaE0OB3C3"
+ "ZBZ3I0CICOGDZDC7OGCC"
+ "CZ01ZCpzpZ1mBB3537C5"
+ "Uu1I5eOe6uIa8UoIaeae"
+ */
+
+
+
+
 
 print("All playground tests passed!")
