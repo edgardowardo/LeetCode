@@ -22190,6 +22190,24 @@ class Leet3136 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-maximum-length-of-valid-subsequence-i/
+class Leet3201 {
+    private enum Pattern: CaseIterable { case allEven, evenOdd, oddEven, allOdd }
+    func maximumLength(_ nums: [Int]) -> Int {
+        var pattern = [Pattern: Int](uniqueKeysWithValues: Pattern.allCases.map { ($0, 0) })
+        for n in nums {
+            if n % 2 == 0 {
+                pattern[.allOdd]! += 1
+                pattern[.oddEven]! = pattern[.evenOdd]! + 1
+            } else {
+                pattern[.allEven]! += 1
+                pattern[.evenOdd]! = pattern[.oddEven]! + 1
+            }
+        }
+        return pattern.values.max() ?? 0
+    }
+}
 
 
 print("All playground tests passed!")
