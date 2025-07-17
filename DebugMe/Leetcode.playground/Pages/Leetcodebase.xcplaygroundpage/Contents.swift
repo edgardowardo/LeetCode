@@ -22209,5 +22209,21 @@ class Leet3201 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-maximum-length-of-valid-subsequence-ii/
+class Leet3202 {
+    func maximumLength(_ nums: [Int], _ k: Int) -> Int {
+        var dp = [[Int]](repeating: [Int](repeating: 0, count: k), count: k), result = 0
+        for n in nums {
+            let n = n % k
+            for prev in 0..<k {
+                dp[prev][n] = dp[n][prev] + 1
+                result = max(result, dp[prev][n])
+            }
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
