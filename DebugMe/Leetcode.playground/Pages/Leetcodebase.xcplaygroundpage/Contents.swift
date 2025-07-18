@@ -22281,4 +22281,44 @@ class Leet0238 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/construct-product-matrix/
+class Leet2906 {
+    func constructProductMatrix(_ grid: [[Int]]) -> [[Int]] {
+        let nums = grid.reduce(into: [Int]()) { p, l in p.append(contentsOf: l) }, n = nums.count
+        var prefix = nums, suffix = nums, r = nums, grid = grid, k = 0
+        for i in 1..<n {
+            prefix[i] *= prefix[i - 1] % 12345
+            suffix[n - i - 1] *= suffix[n - i] % 12345
+        }
+        r[0] = suffix[1] % 12345
+        r[n - 1] = prefix[n - 2]  % 12345
+        for i in 1..<n-1 {
+            r[i] = (prefix[i - 1]  % 12345) * (suffix[i + 1]  % 12345)
+        }
+        for i in 0..<grid.count {
+            for j in 0..<grid[i].count {
+                grid[i][j] = r[k] % 12345
+                k += 1
+            }
+        }
+        return grid
+    }
+}
+
+ 
+/*
+ [[1,2],[3,4]]
+ [[12345],[2],[1]]
+ 
+ [[137048688,395034800,51674655,853813001,66020662,108245761]]
+ [[414750857],[449145368],[767292749]]
+ [[1,2],[3,4]]
+ [[12345],[2],[1]]
+ [[1,5,5,6],[4,7,6,1],[2,3,3,6],[3,6,3,7]]
+ [[4,3,9],[3,9,10],[9,7,8],[8,4,7],[6,1,3]]
+ [[3,2,5],[6,4,3],[6,3,1]]
+ */
+
+
 print("All playground tests passed!")
