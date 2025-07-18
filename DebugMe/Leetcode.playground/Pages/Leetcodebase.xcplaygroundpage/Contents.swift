@@ -22261,5 +22261,24 @@ class Leet2163 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/product-of-array-except-self/
+class Leet0238 {
+    func productExceptSelf(_ nums: [Int]) -> [Int] {
+        let n = nums.count
+        var prefix = nums, suffix = nums, result = nums
+        for i in 1..<n {
+            prefix[i] *= prefix[i - 1]
+            suffix[n - i - 1] *= suffix[n - i]
+        }
+        result[0] = suffix[1]
+        result[n - 1] = prefix[n - 2]
+        for i in 1..<n-1 {
+            result[i] = prefix[i - 1] * suffix[i + 1]
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
