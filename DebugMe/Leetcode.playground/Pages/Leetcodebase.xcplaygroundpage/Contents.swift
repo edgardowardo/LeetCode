@@ -22226,4 +22226,40 @@ class Leet3202 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/
+class Leet2163 {
+    func minimumDifference(_ nums: [Int]) -> Int {
+        let n3 = nums.count, n = n3 / 3
+        var part1 = [Int](repeating: 0, count: n + 1), sum = 0, heapMax = Heap<Int>()
+
+        for i in 0..<n {
+            sum += nums[i]
+            heapMax.insert(nums[i])
+        }
+        part1[0] = sum
+        
+        for i in n..<n*2 {
+            sum += nums[i]
+            heapMax.insert(nums[i])
+            sum -= heapMax.removeMax()
+            part1[i - (n - 1)] = sum
+        }
+        var part2 = 0, heapMin = Heap<Int>()
+        for i in stride(from: n * 3 - 1, through: n, by: -1) {
+            part2 += nums[i]
+            heapMin.insert(nums[i])
+        }
+        var result = part1[n] - part2
+        for i in stride(from: n * 2 - 1, through: n, by: -1) {
+            part2 += nums[i]
+            heapMin.insert(nums[i])
+            part2 -= heapMin.removeMin()
+            result = min(result, part1[i - n] - part2)
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
