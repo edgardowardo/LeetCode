@@ -22358,4 +22358,43 @@ class Leet0034 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/plates-between-candles/
+class Leet2055 {
+    func platesBetweenCandles(_ s: String, _ queries: [[Int]]) -> [Int] {
+        let s = Array(s), n = s.count
+        var prefix = [Int](), nearestRightCandleIndex = [Int](repeating: -1, count: n), nearestLeftCandleIndex = [Int](repeating: -1, count: n)
+        for i in 0..<s.count {
+            let c = s[i], isPlate = (c == "*"), j = (n - i - 1)
+            if !isPlate { // candle
+                nearestLeftCandleIndex[i] = i
+                nearestRightCandleIndex[i] = i
+            }
+            guard i > 0 else {
+                prefix.append(isPlate ? 1 : 0)
+                continue
+            }
+            guard isPlate else {
+                prefix.append(prefix[i - 1])
+                continue
+            }
+            nearestLeftCandleIndex[i] = nearestLeftCandleIndex[i - 1]
+            prefix.append(prefix[i - 1] + 1)
+        }
+        for j in (0..<s.count - 1).reversed() {
+            let c = s[j], isPlate = (c == "*")
+            guard isPlate else { continue }
+            nearestRightCandleIndex[j] = nearestRightCandleIndex[j + 1]
+        }
+        return queries.map {
+            let leftIndex = nearestLeftCandleIndex[$0[1]], rightIndex = nearestRightCandleIndex[$0[0]]
+            guard leftIndex != -1, rightIndex != -1 else { return 0 }
+            let diff = prefix[leftIndex] - prefix[rightIndex]
+            guard diff >= 0 else { return 0 }
+            return diff
+        }
+    }
+}
+
 print("All playground tests passed!")
