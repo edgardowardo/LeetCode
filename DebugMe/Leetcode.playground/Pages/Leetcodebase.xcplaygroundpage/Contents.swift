@@ -22397,4 +22397,73 @@ class Leet2055 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/delete-duplicate-folders-in-system/
+class Leet1948 {
+    class Trie {
+        var serial = ""                            // Serialized representation
+        var children = [String: Trie]()            // Children nodes
+    }
+
+    func deleteDuplicateFolder(_ paths: [[String]]) -> [[String]] {
+        let root = Trie()
+
+        // Build the trie
+        for path in paths {
+            var cur = root
+            for node in path {
+                if cur.children[node] == nil {
+                    cur.children[node] = Trie()
+                }
+                cur = cur.children[node]!
+            }
+        }
+
+        var freq = [String: Int]()  // Frequency of serialized representations
+        construct(root, &freq)
+
+        var ans = [[String]]()
+        var path = [String]()
+        operate(root, freq, &path, &ans)
+        return ans
+    }
+
+    private func construct(_ node: Trie, _ freq: inout [String: Int]) {
+        if node.children.isEmpty { return }
+
+        var v = [String]()
+        for (key, child) in node.children {
+            construct(child, &freq)
+            v.append("\(key)(\(child.serial))")
+        }
+
+        v.sort()
+        node.serial = v.joined()
+        freq[node.serial, default: 0] += 1
+    }
+
+    private func operate(
+        _ node: Trie,
+        _ freq: [String: Int],
+        _ path: inout [String],
+        _ ans: inout [[String]]
+    ) {
+        if freq[node.serial, default: 0] > 1 {
+            return // Duplicate serialization, skip this branch
+        }
+
+        if !path.isEmpty {
+            ans.append(path)
+        }
+
+        for (key, child) in node.children {
+            path.append(key)
+            operate(child, freq, &path, &ans)
+            path.removeLast()
+        }
+    }
+}
+
+
 print("All playground tests passed!")
