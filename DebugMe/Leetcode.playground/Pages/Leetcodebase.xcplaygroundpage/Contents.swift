@@ -22465,5 +22465,27 @@ class Leet1948 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/delete-characters-to-make-fancy-string/
+class Leet1957 {
+    func makeFancyString(_ s: String) -> String {
+        let s = Array(s)
+        var count = 0, result = [s[0]]
+        for i in 1..<s.count {
+            let curr = s[i], prev = s[i-1]
+            if curr == prev {
+                count += 1
+                if count < 2 {
+                    result.append(curr)
+                }
+            } else {
+                count = 0
+                result.append(curr)
+            }
+        }
+        return String(result)
+    }
+}
+
 
 print("All playground tests passed!")
