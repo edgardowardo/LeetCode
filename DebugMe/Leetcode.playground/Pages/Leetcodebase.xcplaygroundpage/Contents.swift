@@ -22488,4 +22488,38 @@ class Leet1957 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-score-from-removing-substrings/
+class Leet1717 {
+    func maximumGain(_ s: String, _ x: Int, _ y: Int) -> Int {
+        var s = Array(s), result = 0
+        let pairHi = Array(x > y ? "ab" : "ba"), pairLo = Array(x > y ? "ba" : "ab")
+        result += remove(&s, pairHi, max(x, y))
+        result += remove(&s, pairLo, min(x, y))
+        return result
+    }
+    private func remove(_ s: inout [Character], _ pair: [Character], _ score: Int) -> Int {
+        var result = 0, stack = [Character]()
+        for c in s {
+            guard let top = stack.last, top == pair[0], c == pair[1] else {
+                stack.append(c)
+                continue
+            }
+            stack.removeLast()
+            result += score
+        }
+        s = stack
+        return result
+    }
+    
+    static func test() {
+        let sut = Leet1717()
+        assert(sut.maximumGain("cdbcbbaaabab", 4, 5) == 19)
+    }
+}
+//Leet1717.test()
+
+
+
+
 print("All playground tests passed!")
