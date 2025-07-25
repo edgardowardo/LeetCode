@@ -22519,7 +22519,15 @@ class Leet1717 {
 }
 //Leet1717.test()
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/
+class Leet3487 {
+    func maxSum(_ nums: [Int]) -> Int {
+        let s = Set(nums), posSum = s.filter { $0 > 0 }.reduce(0, +)
+        guard posSum > 0 else { return s.max() ?? 0 }
+        return posSum
+    }
+}
 
 
 print("All playground tests passed!")
