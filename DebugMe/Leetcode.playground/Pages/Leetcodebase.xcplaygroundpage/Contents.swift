@@ -22530,4 +22530,35 @@ class Leet3487 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximize-subarrays-after-removing-one-conflicting-pair/
+class Leet3480 {
+    func maxSubarrays(_ n: Int, _ conflictingPairs: [[Int]]) -> Int {
+        var bMin1 = [Int](repeating: Int.max, count: n + 1), bMin2 = [Int](repeating: Int.max, count: n + 1)
+        for p in conflictingPairs {
+            let a = min(p[0], p[1]), b = max(p[0], p[1])
+            if bMin1[a] > b {
+                bMin2[a] = bMin1[a]
+                bMin1[a] = b
+            } else if bMin2[a] > b {
+                bMin2[a] = b
+            }
+        }
+        var result = 0, ib1 = n, b2 = Int.max, delCount = [Int](repeating: 0, count: n + 1)
+        for i in stride(from: n, through: 1, by: -1) {
+            if bMin1[ib1] > bMin1[i] {
+                b2 = min(b2, bMin1[ib1])
+                ib1 = i
+            } else {
+                b2 = min(b2, bMin1[i])
+            }
+            result += min(bMin1[ib1], n + 1) - i
+            delCount[ib1] += min(min(b2, bMin2[ib1]), n + 1) - min(bMin1[ib1], n + 1)
+        }
+        return result + (delCount.max() ?? 0)
+    }
+}
+
+
+
 print("All playground tests passed!")
