@@ -22561,4 +22561,29 @@ class Leet3480 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-hills-and-valleys-in-an-array/
+class Leet2210 {
+    func countHillValley(_ nums: [Int]) -> Int {
+        var result = 0, isUp: Bool? = nil
+        for i in 1..<nums.count {
+            let curr = nums[i], prev = nums[i-1]
+            if curr > prev {
+                if let isUpPrev = isUp, !isUpPrev {
+                    result += 1
+                }
+                isUp = true
+            } else if curr < prev {
+                if let isUpPrev = isUp, isUpPrev {
+                    result += 1
+                }
+                isUp = false
+            }
+        }
+        return result
+    }
+}
+
+
+
 print("All playground tests passed!")
