@@ -22601,5 +22601,17 @@ class Leet0162 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-peaks/
+class Leet2951 {
+    func findPeaks(_ mountain: [Int]) -> [Int] {
+        var result = [Int]()
+        for i in 1..<mountain.count - 1 where mountain[i-1] < mountain[i] && mountain[i] > mountain[i+1] {
+            result.append(i)
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
