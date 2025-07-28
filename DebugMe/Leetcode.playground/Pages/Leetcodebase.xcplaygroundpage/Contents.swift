@@ -22613,5 +22613,19 @@ class Leet2951 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/
+class Leet2044 {
+    func countMaxOrSubsets(_ nums: [Int]) -> Int {
+        countSubsets(nums, 0, 0, nums.reduce(0, |))
+    }
+    private func countSubsets(_ nums: [Int], _ index: Int, _ currentOr: Int, _ targetOr: Int) -> Int {
+        guard index < nums.count else { return currentOr == targetOr ? 1 : 0 }
+        let countWithOut = countSubsets(nums, index + 1, currentOr, targetOr)
+        let countWithIn = countSubsets(nums, index + 1, currentOr | nums[index], targetOr)
+        return countWithOut + countWithIn
+    }
+}
+
 
 print("All playground tests passed!")
