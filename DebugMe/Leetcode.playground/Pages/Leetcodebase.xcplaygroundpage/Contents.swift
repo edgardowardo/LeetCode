@@ -22628,4 +22628,13 @@ class Leet2044 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/monotonic-array/
+class Leet0896 {
+    func isMonotonic(_ nums: [Int]) -> Bool {
+        (1...nums.count-1).allSatisfy { i in nums[i-1] <= nums[i] } || (1...nums.count-1).allSatisfy { i in nums[i-1] >= nums[i] }
+    }
+}
+
+
 print("All playground tests passed!")
