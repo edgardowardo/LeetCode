@@ -22602,6 +22602,23 @@ class Leet0162 {
 }
 
 ///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/peak-index-in-a-mountain-array/
+class Leet0852 {
+    func peakIndexInMountainArray(_ arr: [Int]) -> Int {
+        var l = 0, r = arr.count - 1
+        while l < r {
+            let m = l + (r - l) / 2
+            if arr[m] < arr[m + 1] {
+                l = m + 1
+            } else {
+                r = m
+            }
+        }
+        return l
+    }
+}
+
+///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/find-the-peaks/
 class Leet2951 {
     func findPeaks(_ mountain: [Int]) -> [Int] {
