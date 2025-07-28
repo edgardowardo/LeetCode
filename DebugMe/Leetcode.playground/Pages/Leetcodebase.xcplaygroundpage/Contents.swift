@@ -22654,4 +22654,21 @@ class Leet0896 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/
+class Leet1403 {
+    func minSubsequence(_ nums: [Int]) -> [Int] {
+        let total = nums.reduce(0, +), s = nums.sorted(by: >)
+        var c = 0
+        for i in 0..<s.count {
+            c += s[i]
+            if c > total - c {
+                return Array(s[...i])
+            }
+        }
+        return []
+    }
+}
+
+
 print("All playground tests passed!")
