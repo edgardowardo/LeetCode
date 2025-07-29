@@ -22670,5 +22670,36 @@ class Leet1403 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/
+class Leet2411 {
+    func smallestSubarrays(_ nums: [Int]) -> [Int] {
+        let n = nums.count
+        var pos = [Int](repeating: -1, count: 31), result = [Int](repeating: 0, count: n)
+        for i in (0..<n).reversed() {
+            var j = i
+            for b in 0..<31 {
+                if nums[i] & (1 << b) == 0 {
+                    if pos[b] != -1 {
+                        j = max(j, pos[b])
+                    }
+                } else {
+                    pos[b] = i
+                }
+            }
+            result[i] = j - i + 1
+        }
+        return result
+    }
+    
+    static func test() {
+        let sut = Leet2411()
+        assert(sut.smallestSubarrays([5,1,3,7,15,0,0,31,63,127,3,9,2,14,28,56,112,224,448,896,1024,512,256,128]) == [21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,4,3,2,1])
+        assert(sut.smallestSubarrays([1,2]) == [2,1])
+        assert(sut.smallestSubarrays([1,0,2,1,3,7,0,8,16,2,31,0,4,5,2]) == [9,8,7,6,5,4,5,4,3,2,1,4,3,2,1])
+    }
+}
+//Leet2411.test()
+
 
 print("All playground tests passed!")
