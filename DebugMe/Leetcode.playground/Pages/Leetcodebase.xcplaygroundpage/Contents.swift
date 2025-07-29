@@ -22767,4 +22767,19 @@ class Leet2038 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-days-between-two-dates/
+class Leet1360 {
+    func daysBetweenDates(_ date1: String, _ date2: String) -> Int {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        guard let date1Obj = format.date(from: date1),
+              let date2Obj = format.date(from: date2) else {
+            return -1
+        }
+        let calendar = Calendar.current
+        return abs(calendar.dateComponents([.day], from: date1Obj, to: date2Obj).day ?? 1)
+    }
+}
+
 print("All playground tests passed!")
