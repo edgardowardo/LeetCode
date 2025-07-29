@@ -22782,4 +22782,23 @@ class Leet1360 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-days-spent-together/
+class Leet2409 {
+    func countDaysTogether(_ arriveAlice: String, _ leaveAlice: String, _ arriveBob: String, _ leaveBob: String) -> Int {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        guard let aArrive = format.date(from: "2025-\(arriveAlice)"), let aLeft = format.date(from: "2025-\(leaveAlice)"), let bArrive = format.date(from: "2025-\(arriveBob)"), let bLeft = format.date(from: "2025-\(leaveBob)") else { return 0 }
+        let calendar = Calendar.current
+        if let i = (aArrive.timeIntervalSince1970...aLeft.timeIntervalSince1970).intersection(bArrive.timeIntervalSince1970...bLeft.timeIntervalSince1970)  {
+            let lowerBoundDate = Date(timeIntervalSince1970: i.lowerBound)
+            let upperBoundDate = Date(timeIntervalSince1970: i.upperBound)
+            return (calendar.dateComponents([.day], from: lowerBoundDate, to: upperBoundDate).day ?? 0) + 1
+        }
+        return 0
+    }
+}
+
+
+
 print("All playground tests passed!")
