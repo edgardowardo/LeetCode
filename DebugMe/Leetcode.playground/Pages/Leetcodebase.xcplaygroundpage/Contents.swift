@@ -22720,4 +22720,26 @@ class Leet0898 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/
+class Leet2419 {
+    func longestSubarray(_ nums: [Int]) -> Int {
+        var maxVal = 0, result = 0, currentStreak = 0
+        for n in nums {
+            if maxVal < n {
+                maxVal = n
+                currentStreak = 0
+                result = currentStreak
+            }
+            if maxVal == n {
+                currentStreak += 1
+            } else {
+                currentStreak = 0
+            }
+            result = max(result, currentStreak)
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
