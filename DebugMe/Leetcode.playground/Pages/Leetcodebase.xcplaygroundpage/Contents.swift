@@ -22701,5 +22701,23 @@ class Leet2411 {
 }
 //Leet2411.test()
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/bitwise-ors-of-subarrays/
+class Leet0898 {
+    func subarrayBitwiseORs(_ arr: [Int]) -> Int {
+        var result = Set<Int>(), curr = Set<Int>([0])
+        for x in arr {
+            var next = Set<Int>()
+            for y in curr {
+                next.insert(y | x)
+            }
+            next.insert(x)
+            curr = next
+            result.formUnion(next)
+        }
+        return result.count
+    }
+}
+
 
 print("All playground tests passed!")
