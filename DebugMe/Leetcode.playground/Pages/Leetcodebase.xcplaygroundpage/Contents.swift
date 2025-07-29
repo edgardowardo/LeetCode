@@ -22742,4 +22742,29 @@ class Leet2419 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-colored-pieces-if-both-neighbors-are-the-same-color/
+class Leet2038 {
+    func winnerOfGame(_ colors: String) -> Bool {
+        let colors = Array(colors)
+        var aTotal = 0, bTotal = 0, count = 0
+        for i in 1..<colors.count {
+            if colors[i-1] == colors[i] {
+                count += 1
+                if count > 2 {
+                    if colors[i] == "A" {
+                        aTotal += 1
+                    } else {
+                        bTotal += 1
+                    }
+                }
+                
+            } else {
+                count = 0
+            }
+        }
+        return aTotal > bTotal
+    }
+}
+
 print("All playground tests passed!")
