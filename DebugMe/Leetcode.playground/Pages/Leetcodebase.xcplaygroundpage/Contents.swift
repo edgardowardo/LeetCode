@@ -22813,4 +22813,16 @@ class Leet2224 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/day-of-the-week/
+class Leet1185 {
+    func dayOfTheWeek(_ day: Int, _ month: Int, _ year: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+        guard let date = Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) else { return "" }
+        return formatter.string(from: date)
+    }
+}
+
+
 print("All playground tests passed!")
