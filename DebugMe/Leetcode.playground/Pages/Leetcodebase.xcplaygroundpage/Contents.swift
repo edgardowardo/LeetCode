@@ -22601,6 +22601,70 @@ class Leet0162 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-a-peak-element-ii/
+class Leet1901 {
+    func findPeakGrid(_ mat: [[Int]]) -> [Int] {
+        var x = 0, y = searchIndexOfMax(x, true), x2 = searchIndexOfMax(y, false), seen = Set<String>(["\(x),\(y)", "\(x2),\(y)"]), result = [x, y, mat[x][y]]
+        while mat[x][y] < mat[x2][y] {
+            if let m = result.last, m < mat[x2][y] {
+                result = [x2, y, mat[x2][y]]
+            }
+            x = x2
+            y = searchIndexOfMax(x, true)
+            guard !seen.contains("\(x),\(y)") else { break }
+            seen.insert("\(x),\(y)")
+            if let m = result.last, m < mat[x][y] {
+                result = [x, y, mat[x][y]]
+            }
+            x2 = searchIndexOfMax(y, false)
+            guard !seen.contains("\(x2),\(y)") else { break }
+            seen.insert("\(x2),\(y)")
+        }
+        return result.dropLast()
+        
+        func searchIndexOfMax(_ i: Int, _ isIRow: Bool = true) -> Int {
+            var result = (value: 0, index: 0)
+            if isIRow {
+                for j in 0..<mat[i].count {
+                    result = result.value < mat[i][j] ? (mat[i][j], j) : result
+                }
+            } else {
+                for j in 0..<mat.count {
+                    result = result.value < mat[j][i] ? (mat[j][i], j) : result
+                }
+            }
+            return result.index
+        }
+    }
+    static func test() {
+        let sut = Leet1901()
+        assert(sut.findPeakGrid([[1,10],[50,500],[40,2],[30,3],[20,4]]) == [1,1])
+        assert(sut.findPeakGrid([[1,2,3],[8,16,4],[7,6,5]]) == [1,1])
+        assert(sut.findPeakGrid([[10,50,40,30,20],[1,500,2,3,4]]) == [1,1])
+    }
+}
+//Leet1901.test()
+
+ 
+/*
+ [[1,4],[3,2]]
+ [[10,20,15],[21,30,14],[7,16,32]]
+ [[10,50,40,30,20],[1,500,2,3,4]]
+ [[1,5,10,5,1],[6,7,8,7,6],[4,3,2,1,3]]
+ [[70,50,40,30,20],[100,1,2,3,4]]
+ [[100,1,2,3,4],[70,50,40,30,20]]
+ [[7,8,9,10,11,12,13],[6,5,4,3,2,1,14]]
+ [[10,20,40,50,60,70],[1,4,2,3,500,80]]
+ 
+ [[1,10],[50,500],[40,2],[30,3],[20,4]]
+ [[1,2,3],[8,16,4],[7,6,5]]
+ [[7,8,9,10,11,12,13],[6,5,4,3,2,1,14]]
+ [[41,8,2,48,18],[16,15,9,7,44],[48,35,6,38,28],[3,2,14,15,33],[39,36,13,46,42]]
+ */
+
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/peak-index-in-a-mountain-array/
 class Leet0852 {
