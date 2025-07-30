@@ -22799,6 +22799,18 @@ class Leet2409 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-number-of-operations-to-convert-time/
+class Leet2224 {
+    func convertTime(_ current: String, _ correct: String) -> Int {
+        let format = DateFormatter()
+        format.dateFormat = "HH:mm"
+        guard let currentDate = format.date(from: current),
+              let correctDate = format.date(from: correct) else { return -1 }
+        let components = Calendar.current.dateComponents([.hour, .minute], from: currentDate, to: correctDate)
+        guard let hour = components.hour, let minute = components.minute else { return -1 }
+        return hour + minute / 15 + (minute % 15 / 5) + (minute % 15 % 5)
+    }
+}
 
 print("All playground tests passed!")
