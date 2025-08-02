@@ -22889,4 +22889,33 @@ class Leet1185 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/rearranging-fruits/
+class Leet2561 {
+    func minCost(_ basket1: [Int], _ basket2: [Int]) -> Int {
+        var frequency: [Int: Int] = [:], m = Int.max, merge = [Int](), result = 0
+        for f in basket1 {
+            frequency[f, default: 0] += 1
+            m = min(m, f)
+        }
+        for f in basket2 {
+            frequency[f, default: 0] -= 1
+            m = min(m, f)
+        }
+        for (k, v) in frequency {
+            guard v % 2 == 0 else { return -1 }
+            for _ in 0..<abs(v)/2 {
+                merge.append(k)
+            }
+        }
+        merge.sort()
+        for i in 0..<merge.count/2 {
+            result += min(2 * m, merge[i])
+        }
+        return result
+    }
+}
+
+
+
 print("All playground tests passed!")
