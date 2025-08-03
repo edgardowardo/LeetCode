@@ -22916,6 +22916,27 @@ class Leet2561 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-fruits-harvested-after-at-most-k-steps/
+class Leet2106 {
+    func maxTotalFruits(_ fruits: [[Int]], _ startPos: Int, _ k: Int) -> Int {
+        var l = 0, r = 0, sum = 0, result = 0
+        while r < fruits.count {
+            sum += fruits[r][1]
+            while l <= r && step(fruits, startPos, l, r) > k {
+                sum -= fruits[l][1]
+                l += 1
+            }
+            result = max(result, sum)
+            r += 1
+        }
+        return result
+    }
+    
+    private func step(_ fruits: [[Int]], _ startPos: Int, _ l: Int, _ r: Int) -> Int {
+        min(abs(startPos - fruits[r][0]), abs(startPos - fruits[l][0])) + fruits[r][0] - fruits[l][0]
+    }
+}
 
 
 print("All playground tests passed!")
