@@ -22939,4 +22939,41 @@ class Leet2106 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/fruits-into-baskets-iii/
+class Leet3479 {
+    func numOfUnplacedFruits(_ fruits: [Int], _ baskets: [Int]) -> Int {
+        let n = baskets.count, m = Int(sqrt(Double(n))), section = (n + m - 1) / m
+        var count = 0, maxV = [Int](repeating: 0, count: section), baskets = baskets
+        for i in 0..<n {
+            maxV[i / m] = max(maxV[i / m], baskets[i])
+        }
+        for f in fruits {
+            var unset = 1
+            for s in 0..<section {
+                if maxV[s] < f {
+                    continue
+                }
+                var choose = 0
+                maxV[s] = 0
+                for i in 0..<m {
+                    let pos = s * m + i
+                    if pos < n && baskets[pos] >= f && choose == 0 {
+                        baskets[pos] = 0
+                        choose = 1
+                    }
+                    if pos < n {
+                        maxV[s] = max(maxV[s], baskets[pos])
+                    }
+                }
+                unset = 0
+                break
+            }
+            count += unset
+        }
+        return count
+    }
+}
+
+
 print("All playground tests passed!")
