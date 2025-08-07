@@ -22976,4 +22976,42 @@ class Leet3479 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-maximum-number-of-fruits-collected/
+class Leet3363 {
+    func maxCollectedFruits(_ fruits: [[Int]]) -> Int {
+        let n = fruits.count
+        var result = 0, fruits = fruits
+        for i in 0..<n {
+            result += fruits[i][i]
+        }
+        func dp() -> Int {
+            var prev = [Int](repeating: Int.min, count: n), curr = prev
+            prev[n - 1] = fruits[0][n - 1]
+            for i in 1..<n - 1 {
+                for j in max(n - 1 - i, i + 1)..<n {
+                    var best = prev[j]
+                    if j - 1 >= 0 {
+                        best = max(best, prev[j - 1])
+                    }
+                    if j + 1 < n {
+                        best = max(best, prev[j + 1])
+                    }
+                    curr[j] = fruits[i][j] + best
+                }
+                (prev, curr) = (curr, prev)
+            }
+            return prev[n - 1]
+        }
+        result += dp()
+        for i in 0..<n {
+            for j in 0..<i {
+                (fruits[i][j], fruits[j][i]) = (fruits[j][i], fruits[i][j])
+            }
+        }
+        result += dp()
+        return result
+    }
+}
+
 print("All playground tests passed!")
