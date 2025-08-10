@@ -23014,4 +23014,40 @@ class Leet3363 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/soup-servings/
+class Leet0808 {
+    func soupServings(_ n: Int) -> Double {
+        guard n > 0 else { return 1.0 }
+        let m = Int(ceil(Double(n) / 25.0))
+        var dp: [Int: [Int: Double]] = [:]
+        dp[0] = [:]
+        dp[0]![0] = 0.5
+
+        for k in 1...m {
+            dp[k] = [:]
+            dp[0]![k] = 1.0
+            dp[k]![0] = 0.0
+            for j in 1...k {
+                dp[j]![k] = calculateDp(j, k, dp)
+                dp[k]![j] = calculateDp(k, j, dp)
+            }
+            if dp[k]![k]! > 1 - 1e-5 {
+                return 1.0
+            }
+        }
+
+        return dp[m]![m]!
+    }
+    
+    private func calculateDp(_ i: Int, _ j: Int, _ dp: [Int: [Int: Double]]) -> Double {
+        (dp[max(0, i - 4), default: [:]][j, default: 0]
+         + dp[max(0, i - 3), default: [:]][j - 1, default: 0]
+         + dp[max(0, i - 2), default: [:]][max(0, j - 2), default: 0]
+         + dp[i - 1, default: [:]][max(0, j - 3), default: 0]) / 4.0
+    }
+}
+
+
+
 print("All playground tests passed!")
