@@ -23049,5 +23049,43 @@ class Leet0808 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/reordered-power-of-2/
+class Leet0869 {
+    func reorderedPowerOf2(_ n: Int) -> Bool {
+        var a = [Int](), n = n
+        while n > 0 {
+            let d = n % 10
+            a.append(d)
+            n /= 10
+        }
+        return permutations(a, 0)
+    }
+    private func isPowerOf2(_ a: [Int]) -> Bool {
+        guard a[0] != 0 else { return false }
+        var n = 0
+        for x in a {
+            n = n * 10 + x
+        }
+        while n > 0 && (n & 1) == 0 {
+            n >>= 1
+        }
+        return n == 1
+    }
+    private func permutations(_ a: [Int], _ start: Int) -> Bool {
+        guard start != a.count else { return isPowerOf2(a) }
+        var a = a
+        for i in start..<a.count {
+            a.swapAt(start, i)
+            if permutations(a, start + 1) {
+                return true
+            }
+            a.swapAt(start, i)
+        }
+        return false
+    }
+}
+
+
 
 print("All playground tests passed!")
