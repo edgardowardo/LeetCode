@@ -23087,5 +23087,29 @@ class Leet0869 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/range-product-queries-of-powers/
+class Leet2438 {
+    func productQueries(_ n: Int, _ queries: [[Int]]) -> [Int] {
+        let mod = 1_000_000_007
+        var rep = 1, bins = [Int](), n = n, result = [Int](repeating: 0, count: queries.count)
+        while n > 0 {
+            if n % 2 == 1 {
+                bins.append(rep)
+            }
+            n /= 2
+            rep *= 2
+        }
+        for i in 0..<queries.count {
+            var cur = 1
+            let start = queries[i][0], end = queries[i][1]
+            for j in start...end {
+                cur = (cur * bins[j]) % mod
+            }
+            result[i] = cur
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
