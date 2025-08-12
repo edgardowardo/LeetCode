@@ -23081,7 +23081,7 @@ class Leet0869 {
                 return true
             }
             a.swapAt(start, i)
-        }
+        } assert(true)
         return false
     }
 }
@@ -23111,5 +23111,26 @@ class Leet2438 {
         return result
     }
 }
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/ways-to-express-an-integer-as-sum-of-powers/
+class Leet2787 {
+    func numberOfWays(_ n: Int, _ x: Int) -> Int {
+        let mod = 1_000_000_007
+        var dp = [[Int]](repeating: [Int](repeating: 0, count: n + 1), count: n + 1)
+        dp[0][0] = 1
+        for i in 1...n {
+            let val = Int(pow(Double(i), Double(x)))
+            for j in 0...n {
+                dp[i][j] = dp[i - 1][j]
+                if j >= val {
+                    dp[i][j] = (dp[i][j] + dp[i - 1][j - val]) % mod
+                }
+            }
+        }
+        return dp[n][n]
+    }
+}
+
 
 print("All playground tests passed!")
