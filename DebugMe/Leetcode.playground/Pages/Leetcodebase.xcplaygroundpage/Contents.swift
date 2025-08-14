@@ -23148,7 +23148,19 @@ class Leet2264 {
     }
 }
 
- 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/largest-odd-number-in-string/
+class Leet1903 {
+    func largestOddNumber(_ num: String) -> String {
+        let num = Array(num)
+        for i in stride(from: num.count - 1, through: 0, by: -1) {
+            if let digit = Int(String(num[i])), digit.isMultiple(of: 2) == false {
+                return String(num[...i])
+            }
+        }
+        return ""
+    }
+}
 
 
 print("All playground tests passed!")
