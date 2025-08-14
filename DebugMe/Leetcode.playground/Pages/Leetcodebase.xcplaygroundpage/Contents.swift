@@ -23133,4 +23133,22 @@ class Leet2787 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/largest-3-same-digit-number-in-string/
+class Leet2264 {
+    func largestGoodInteger(_ num: String) -> String {
+        var result = ""
+        Array(0...9).reversed().forEach { digit in
+            let d = "\(digit)\(digit)\(digit)"
+            if num.contains(d) {
+                result = max(d, result)
+            }
+        }
+        return result
+    }
+}
+
+ 
+
+
 print("All playground tests passed!")
