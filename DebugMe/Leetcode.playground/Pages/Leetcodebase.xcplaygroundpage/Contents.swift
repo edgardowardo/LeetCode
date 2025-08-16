@@ -23162,5 +23162,29 @@ class Leet1903 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-69-number/
+class Leet1323 {
+    func maximum69Number (_ num: Int) -> Int {
+        var digits = [Int](), num = num, factor = 1
+        while num > 0 {
+            let lastDigit = num % 10
+            num /= 10
+            digits.append(lastDigit)
+        }
+        for i in (0..<digits.count).reversed() {
+            if digits[i] == 6 {
+                digits[i] = 9
+                break
+            }
+        }
+        for i in 0..<digits.count {
+            num += digits[i] * factor
+            factor *= 10
+        }
+        return num
+    }
+}
+
 
 print("All playground tests passed!")
