@@ -23203,5 +23203,33 @@ class Leet2525 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/
+class Leet1275 {
+    func tictactoe(_ moves: [[Int]]) -> String {
+        let n = 3
+        var rows = [Int](repeating: 0, count: n), cols = [Int](repeating: 0, count: n), diag = 0, anti_diag = 0, player = 1
+
+        for m in moves {
+            let r = m[0], c = m[1]
+            rows[r] += player
+            cols[c] += player
+            if r == c {
+                diag += player
+            }
+            if r + c == n - 1 {
+                anti_diag += player
+            }
+            
+            if (abs(rows[r]) == n || abs(cols[c]) == n || abs(diag) == n || abs(anti_diag) == n) {
+                return player == 1 ? "A" : "B"
+            }
+            player *= -1
+        }
+        return moves.count == n * n ? "Draw" : "Pending"
+    }
+}
+
+
 
 print("All playground tests passed!")
