@@ -23187,4 +23187,21 @@ class Leet1323 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/categorize-box-according-to-criteria/
+class Leet2525 {
+    func categorizeBox(_ length: Int, _ width: Int, _ height: Int, _ mass: Int) -> String {
+        let volume = length * width * height, isHeavy = mass >= 100, isBulky = (![length, width, height].allSatisfy({ $0 < 10_000 }) || volume >= 1_000_000_000)
+        if isBulky && isHeavy {
+            return "Both"
+        } else if isBulky && !isHeavy {
+            return "Bulky"
+        } else if !isBulky && isHeavy {
+            return "Heavy"
+        }
+        return "Neither"
+    }
+}
+
+
 print("All playground tests passed!")
