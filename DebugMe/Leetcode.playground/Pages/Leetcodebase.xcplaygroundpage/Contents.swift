@@ -23231,5 +23231,25 @@ class Leet1275 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/new-21-game/
+class Leet0837 {
+    func new21Game(_ n: Int, _ k: Int, _ maxPts: Int) -> Double {
+        var dp = [Double](repeating: 0, count: n + 1), s = k > 0 ? 1.0: 0.0
+        dp[0] = 1.0
+        guard n > 0 else { return 1.0 }
+        for i in 1...n {
+            dp[i] = s / Double(maxPts)
+            if i < k {
+                s += dp[i]
+            }
+            if i - maxPts >= 0 && i - maxPts < k {
+                s -= dp[i - maxPts]
+            }
+        }
+        guard k <= n else { return 1.0 }
+        return dp[k...n].reduce(0, +)
+    }
+}
 
 print("All playground tests passed!")
