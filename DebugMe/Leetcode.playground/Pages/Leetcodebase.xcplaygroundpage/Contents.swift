@@ -23252,4 +23252,53 @@ class Leet0837 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/24-game/
+class Leet0679 {
+    func judgePoint24(_ cards: [Int]) -> Bool {
+        checkResultsReached24(cards.map { .init($0) })
+    }
+    private func generateResults(_ a: Double, _ b: Double) -> [Double] {
+        var results = [Double]()
+        results.append(a + b)
+        results.append(a - b)
+        results.append(b - a)
+        results.append(a * b)
+        if b != 0 {
+            results.append(a / b)
+        }
+        if a != 0 {
+            results.append(b / a)
+        }
+        return results
+    }
+    private func checkResultsReached24(_ results: [Double]) -> Bool {
+        if results.count == 1 {
+            return abs(results[0] - 24) <= 0.1
+        }
+        for i in 0..<results.count {
+            for j in i+1..<results.count {
+                var newResults = [Double]()
+                for k in 0..<results.count {
+                    if k != j && k != i {
+                        newResults.append(results[k])
+                    }
+                }
+                
+                for res in generateResults(results[i], results[j]) {
+                    newResults.append(res)
+                    if checkResultsReached24(newResults) {
+                        return true
+                    }
+                    newResults.removeLast()
+                }
+                
+            }
+        }
+        return false
+    }
+}
+
+
 print("All playground tests passed!")
