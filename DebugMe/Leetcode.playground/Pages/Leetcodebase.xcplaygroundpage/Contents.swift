@@ -23321,4 +23321,66 @@ class Leet2348 {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/arithmetic-slices/
+class Leet0413 {
+    func numberOfArithmeticSlices(_ nums: [Int]) -> Int {
+        guard nums.count > 2 else { return 0 }
+        var result = 0, currentDiff = nums[1] - nums[0], streak = 0
+        for i in 2..<nums.count {
+            let diff = nums[i] - nums[i-1]
+            if diff == currentDiff {
+                if streak == 0 {
+                    streak = 3
+                } else {
+                    streak += 1
+                }
+                if i == nums.count - 1 {
+                    result += (streak - 2) * (streak - 1) / 2
+                }
+            } else {
+                currentDiff = diff
+                if streak > 0 {
+                    result += (streak - 2) * (streak - 1) / 2
+                }
+                streak = 0
+            }
+        }
+        return result
+    }
+    
+    static func test() {
+        let sut = Leet0413()
+        assert(sut.numberOfArithmeticSlices([1,2,3,4,5,10,20,30,40,50]) == 12)
+    }
+}
+
+
+/*
+ 
+ [1,3,5,7,9]
+ [1,2,3,4,5,10,20,30,40,50]
+ [1,1,0,2,1,1,0,0,0,2,2,1,2,1,2,3]
+ [-12,-43,-74,-105,0,-136,-167,-198,-229]
+ 
+ [1,2,3,4,5]
+ [1,2,3,4]
+ [1]
+ [1,3,5,7,9]
+ [1,2,3,4,5,10,20,30,40,50]
+ [1,1,0,2,1,1,0,0,0,2,2,1,2,1,2,3]
+ [-12,-43,-74,-105,0,-136,-167,-198,-229]
+ 
+ [1]
+ [1,2]
+ [1,2,3]
+ [1,2,3,4]
+ [1,2,3,4,5]
+ [1,2,3,4,5,6]
+ [1,2,3,4,5,6,7]
+ [1,2,3,4,5,6,7,8]
+ 
+ */
+
 print("All playground tests passed!")
