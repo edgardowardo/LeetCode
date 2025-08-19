@@ -23300,5 +23300,25 @@ class Leet0679 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-zero-filled-subarrays/
+class Leet2348 {
+    func zeroFilledSubarray(_ nums: [Int]) -> Int {
+        var result = 0, current0Count = 0
+        for i in 0..<nums.count {
+            if nums[i] == 0 {
+                current0Count += 1
+                if  i == nums.count - 1 {
+                    result += (current0Count * (current0Count + 1)) / 2
+                }
+            } else {
+                result += (current0Count * (current0Count + 1)) / 2
+                current0Count = 0
+            }
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
