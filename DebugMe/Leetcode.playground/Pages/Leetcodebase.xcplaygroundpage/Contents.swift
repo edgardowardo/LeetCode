@@ -23383,4 +23383,28 @@ class Leet0413 {
  
  */
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-square-submatrices-with-all-ones/
+class Leet1277 {
+    func countSquares(_ matrix: [[Int]]) -> Int {
+        let row = matrix.count, col = matrix[0].count
+        var result = 0, prev = 0, dp = [Int](repeating: 0, count: col + 1)
+        for i in 1...row {
+            for j in 1...col {
+                if matrix[i - 1][j - 1] == 1 {
+                    let temp = dp[j]
+                    dp[j] = 1 + min(prev, dp[j - 1], dp[j])
+                    prev = temp
+                    result += dp[j]
+                } else {
+                    dp[j] = 0
+                }
+            }
+        }
+        return result
+    }
+}
+
+
+
 print("All playground tests passed!")
