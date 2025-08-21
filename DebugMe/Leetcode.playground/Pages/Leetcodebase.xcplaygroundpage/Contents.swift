@@ -23429,5 +23429,30 @@ class Leet0221 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-submatrices-with-all-ones/
+class Leet1504 {
+    func numSubmat(_ mat: [[Int]]) -> Int {
+        let n = mat[0].count
+        var heights = [Int](repeating: 0, count: n), result = 0
+        for r in mat {
+            for i in 0..<n {
+                heights[i] = r[i] == 0 ? 0 : heights[i] + 1
+            }
+            var stack = [[-1, 0, -1]]
+            for i in 0..<n {
+                let h = heights[i]
+                while let last = stack.last, last[2] >= h {
+                    stack.removeLast()
+               }
+                let top = stack.last!, j = top[0], prev = top[1], cur = prev + (i - j) * h
+                stack.append([i, cur, h])
+                result += cur
+            }
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
