@@ -23455,4 +23455,25 @@ class Leet1504 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-i/
+class Leet3195 {
+    func minimumArea(_ grid: [[Int]]) -> Int {
+        let n = grid.count, m = grid[0].count
+        var minX = n, maxX = 0, minY = m, maxY = 0
+        for x in 0..<n {
+            for y in 0..<m {
+                if grid[x][y] == 1 {
+                    minX = min(minX, x)
+                    maxX = max(maxX, x)
+                    minY = min(minY, y)
+                    maxY = max(maxY, y)
+                }
+            }
+        }
+        return (maxX - minX + 1) * (maxY - minY + 1)
+    }
+}
+
+
 print("All playground tests passed!")
