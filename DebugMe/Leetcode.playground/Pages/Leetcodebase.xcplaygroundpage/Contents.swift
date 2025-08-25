@@ -23554,5 +23554,203 @@ class Leet3197 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/
+class Leet1493 {
+    func longestSubarray(_ nums: [Int]) -> Int {
+        var result = 0, leftOneCount = 0, rightOneCount = 0, zeroCount = 0, isCountRight = false
+        for i in 0..<nums.count {
+            if nums[i] == 0 {
+                zeroCount += 1
+                if i > 0 && nums[i-1] == 0 {
+                    leftOneCount = 0
+                    rightOneCount = 0
+                    isCountRight = false
+                    continue
+                }
+                if leftOneCount > 0 {
+                    if rightOneCount > 0 {
+                        leftOneCount = rightOneCount
+                        rightOneCount = 0
+                    }
+                    if !isCountRight {
+                        isCountRight.toggle()
+                    }
+                }
+             } else {
+                if isCountRight {
+                    rightOneCount += 1
+                } else {
+                    leftOneCount += 1
+                }
+                result = max(result, leftOneCount + rightOneCount)
+            }
+        }
+        if zeroCount == 0 {
+            result = nums.count - 1
+        }
+        return result
+    }
+        
+    static func test() {
+        let sut = Leet1493()
+        assert(sut.longestSubarray([1,1,0,0,1,1,1,0,1]) == 4)
+        assert(sut.longestSubarray([1,0,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1]) == 7)
+    }
+}
+
+
+/*
+ 
+ [1,0,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1]
+ [0,0,0,0,0,0,0,0,0,0,0,0]
+ [1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1]
+ [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+ [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
+ [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]
+ [0,1,1,1,0,0,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1]
+ [1,1,0,0,1,1,0,1,1,1,0,1,1,1,1,0,1,1,0,1,1]
+ 
+ [1,1,1,1,0,1,0,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,0,1,1,0,1,0,1,1,0,0]
+ [1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1]
+ [1,0,1,0,1,0]
+ [1,0,1,1,1,1,1,1,0,1,1,1,1,1]
+ [0,0,1,1]
+ [1,1,0,0,1,1,1,0,1]
+ 
+ [1,1,0,0,1,0,1,1,1,1]
+ [1,1,0,0,1,0,0,1,1,1,1]
+ [0,0,0,0,1]
+ [0]
+ [1,1,1,1,1]
+ [1,1,1,1,0,0,0,0]
+ [1,0,1,0,1,0,1,0]
+ */
+ 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/diagonal-traverse/
+class Leet0498 {
+    func xxx_findDiagonalOrder(_ mat: [[Int]]) -> [Int] {
+        typealias Pos = (row: Int, col: Int)
+        let rows = mat.count, cols = mat[0].count, diagonal = Pos(-1, 1), anti = Pos(1, -1)
+        var c = 0, r = 0, vector = diagonal, result = [Int](), lowerCol = 0
+        while r < rows && c < cols {
+            let current = mat[r][c], next = Pos(r + vector.row, c + vector.col)
+            result.append(current)
+            var isRowInBound = true, isColInBound = true
+            // Row
+            if 0..<rows ~= next.row {
+                r = next.row
+            } else {
+                isRowInBound = false
+                if next.row < 0 {
+                    r = 0
+                } else if next.row >= rows {
+                    r = rows - 1
+                    lowerCol += 1
+                }
+            }
+            // Col
+            if lowerCol..<cols ~= next.col {
+                c = next.col
+            } else {
+                isColInBound = false
+                if next.col < lowerCol {
+                    c = 0
+                } else if next.col >= cols {
+                    c = cols - 1
+                }
+            }
+            
+            if !isRowInBound && !isColInBound {
+                r += 1
+                lowerCol += 1
+            }
+            if !(isRowInBound && isColInBound) {
+                vector = vector == diagonal ? anti : diagonal
+            }
+        }
+        return result
+    }
+    
+    
+    func findDiagonalOrder(_ mat: [[Int]]) -> [Int] {
+        typealias Pos = (row: Int, col: Int)
+        let rows = mat.count, cols = mat[0].count, vector = Pos(1, -1)
+        var result = [Int]()
+                
+        for col in 0..<cols {
+            var c = col, r = 0, antidiagonal = [mat[r][c]]
+            // complete the antidiagonal from r, c
+            r += vector.row
+            c += vector.col
+            while 0..<rows ~= r && 0..<cols ~= c {
+                antidiagonal.append(mat[r][c])
+                r += vector.row
+                c += vector.col
+            }
+            if col % 2 == 0 {
+                antidiagonal.reverse()
+            }
+            result.append(contentsOf: antidiagonal)
+        }
+
+        let multiple = cols % 2 == 0 ? 1 : 0
+
+        for row in 1..<rows {
+            var r = row, c = cols - 1, antidiagonal = [mat[r][c]]
+            r += vector.row
+            c += vector.col
+            while 0..<rows ~= r && 0..<cols ~= c {
+                antidiagonal.append(mat[r][c])
+                r += vector.row
+                c += vector.col
+            }
+            if row % 2 == multiple {
+                antidiagonal.reverse()
+            }
+            result.append(contentsOf: antidiagonal)
+        }
+        return result
+    }
+    
+    static func test() {
+        let sut = Leet0498()
+        assert(sut.findDiagonalOrder([[1, -2, 3, -4], [5, -6, 7, -8], [9, -10, 11, -12], [13, -14, 15, -16]]) == [1,-2,5,9,-6,3,-4,7,-10,13,-14,11,-8,-12,15,-16])
+        assert(sut.findDiagonalOrder([[1,2,3],[4,5,6],[7,8,9]]) == [1,2,4,7,5,3,6,8,9])
+    }
+    
+}
+
+/*
+ [[1,2,3],[4,5,6],[7,8,9]]
+ [[2,3,4],[5,6,7],[8,9,10],[11,12,13]]
+ [[1,2],[3,4]]
+ [[2,5],[8,4],[0,-1]]
+ 
+ 
+ [[5, -3, 17, 99, -42]]
+ [[-7], [14], [0], [88], [-65]]
+ [[1, 2], [3, 4]]
+ [[10, -20, 30], [-40, 50, -60]]
+ [[1, -2, 3, -4], [5, -6, 7, -8], [9, -10, 11, -12], [13, -14, 15, -16]]
+ [[7, 8, -9], [10, -11, 12], [-13, 14, -15], [16, 17, -18], [19, -20, 21]]
+ [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7], [8, -8]]
+ [[12, -45, 33, 87, -29, 54, -76, 0, 91, -8], [77, 25, -11, 64, -30, 18, -55, 84, -99, 100], [-4, 38, 59, -97, 12, -66, 71, -3, 45, -12], [90, -81, 23, -5, 62, -44, 36, 79, -72, 27], [56, 31, -64, 17, -90, 11, 8, -15, 99, -100], [3, -7, 41, -92, 53, -25, 66, 74, -34, 82], [61, -13, 15, -41, 87, -69, 19, 32, -53, 9], [-99, 100, -88, 77, -55, 42, -36, 25, -20, 11], [44, -11, 33, -22, 66, -77, 55, -99, 88, -66], [1, 2, -3, 4, -5, 6, -7, 8, -9, 10]]
+ 
+ 
+ [[5, -3, 17, 99, -42]]
+ [[-7], [14], [0], [88], [-65]]
+ [[1, 2], [3, 4]]
+ [[10, -20, 30], [-40, 50, -60]]
+ [[1, -2, 3, -4], [5, -6, 7, -8], [9, -10, 11, -12], [13, -14, 15, -16]]
+ [[7, 8, -9], [10, -11, 12], [-13, 14, -15], [16, 17, -18], [19, -20, 21]]
+ [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7], [8, -8]]
+ [[12, -45, 33, 87, -29, 54, -76, 0, 91, -8], [77, 25, -11, 64, -30, 18, -55, 84, -99, 100], [-4, 38, 59, -97, 12, -66, 71, -3, 45, -12], [90, -81, 23, -5, 62, -44, 36, 79, -72, 27], [56, 31, -64, 17, -90, 11, 8, -15, 99, -100], [3, -7, 41, -92, 53, -25, 66, 74, -34, 82], [61, -13, 15, -41, 87, -69, 19, 32, -53, 9], [-99, 100, -88, 77, -55, 42, -36, 25, -20, 11], [44, -11, 33, -22, 66, -77, 55, -99, 88, -66], [1, 2, -3, 4, -5, 6, -7, 8, -9, 10]]
+ 
+ */
+
+
 
 print("All playground tests passed!")
