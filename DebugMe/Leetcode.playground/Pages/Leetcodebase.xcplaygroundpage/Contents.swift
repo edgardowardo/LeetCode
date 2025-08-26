@@ -23752,5 +23752,24 @@ class Leet0498 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-area-of-longest-diagonal-rectangle/
+class Leet3000 {
+    func areaOfMaxDiagonal(_ dimensions: [[Int]]) -> Int {
+        dimensions.map { d in
+            (hypothenus: sqrt(Double(d[0] * d[0] + d[1] * d[1])), area: d[0] * d[1])
+        }
+        .sorted {
+            if $0.hypothenus != $1.hypothenus {
+                return $0.hypothenus < $1.hypothenus
+            } else {
+                return $0.area < $1.area
+            }
+        }
+        .last!.area
+    }
+}
+
+
 
 print("All playground tests passed!")
