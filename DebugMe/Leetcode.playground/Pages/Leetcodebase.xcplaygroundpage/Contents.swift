@@ -23771,5 +23771,43 @@ class Leet3000 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/length-of-longest-v-shaped-diagonal-segment/
+class Leet3459 {
+    private let dirs = [[1,1], [1,-1], [-1,-1], [-1,1]]
+    private var memo = [[[[Int]]]](), grid = [[Int]](), m = 0, n = 0
+    private func dfs(_ cx: Int, _ cy: Int, _ dir: Int, _ turn: Bool, _ target: Int) -> Int {
+        let nx = cx + dirs[dir][0], ny = cy + dirs[dir][1], turnInt = turn ? 1 : 0
+        if nx < 0 || ny < 0 || nx >= m || ny >= n || grid[nx][ny] != target {
+            return 0
+        }
+        if memo[nx][ny][dir][turnInt] != -1 {
+            return memo[nx][ny][dir][turnInt]
+        }
+        var maxStep = dfs(nx, ny, dir, turn, 2 - target)
+        if turn {
+            maxStep = max(maxStep, dfs(nx, ny, (dir + 1) % 4, false, 2 - target))
+        }
+        memo[nx][ny][dir][turnInt] = maxStep + 1
+        return maxStep + 1
+    }
+    
+    func lenOfVDiagonal(_ grid: [[Int]]) -> Int {
+        self.grid = grid; m = grid.count; n = grid[0].count;
+        memo = Array(repeating: Array(repeating: Array(repeating: Array(repeating: -1, count: 2), count: 4), count: n), count: m)
+        var result = 0
+        for i in 0..<m {
+            for j in 0..<n {
+                if grid[i][j] == 1 {
+                    for direction in 0..<4 {
+                        result = max(result, dfs(i, j, direction, true, 2) + 1)
+                    }
+                }
+            }
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
