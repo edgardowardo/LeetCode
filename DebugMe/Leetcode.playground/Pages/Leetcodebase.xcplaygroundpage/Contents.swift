@@ -23809,5 +23809,40 @@ class Leet3459 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sort-matrix-by-diagonals/
+class Leet3446 {
+    func sortMatrix(_ grid: [[Int]]) -> [[Int]] {
+        let n = grid.count
+        var grid = grid
+        for i in 0..<n {
+            var temp = [Int](), j = 0
+            while i + j < n {
+                temp.append(grid[i + j][j])
+                j += 1
+            }
+            temp.sort(by: >)
+            j = 0
+            while i + j < n {
+                grid[i + j][j] = temp[j]
+                j += 1
+            }
+        }
+        for j in 1..<n {
+            var temp = [Int](), i = 0
+            while j + i < n {
+                temp.append(grid[i][j + i])
+                i += 1
+            }
+            temp.sort()
+            i = 0
+            while j + i < n {
+                grid[i][j + i] = temp[i]
+                i += 1
+            }
+        }
+        return grid
+    }
+}
 
 print("All playground tests passed!")
