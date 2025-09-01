@@ -23845,4 +23845,41 @@ class Leet3446 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-average-pass-ratio
+class Leet1792 {
+    
+    struct Item: Comparable {
+        let gain, passes, totalStudents : Double
+        static func < (lhs: Item, rhs: Item) -> Bool {
+            lhs.gain < rhs.gain
+        }
+    }
+    func maxAverageRatio(_ classes: [[Int]], _ extraStudents: Int) -> Double {
+        var maxHeap: Heap<Item> = [], extraStudents = extraStudents, totalPassRatio = 0.0
+        for c in classes {
+            let passes = c[0], totalStudents = c[1], gain: Double = calculateGain(passes, totalStudents)
+            maxHeap.insert(Item(gain: gain, passes: Double(passes), totalStudents: Double(totalStudents)))
+        }
+        while extraStudents > 0 {
+            let curr = maxHeap.removeMax()
+            maxHeap.insert(Item(
+                gain: calculateGain(Int(curr.passes) + 1, Int(curr.totalStudents) + 1),
+                passes: curr.passes + 1,
+                totalStudents: curr.totalStudents + 1))
+            extraStudents -= 1
+        }
+        while !maxHeap.isEmpty {
+            let curr = maxHeap.removeMax()
+            totalPassRatio += curr.passes / curr.totalStudents
+        }
+        return totalPassRatio / Double(classes.count)
+    }
+    private func calculateGain(_ passes: Int, _ totalStudents: Int) -> Double {
+        Double(passes + 1) / Double(totalStudents + 1) - Double(passes) / Double(totalStudents)
+    }
+}
+
+
 print("All playground tests passed!")
