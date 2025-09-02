@@ -23882,4 +23882,40 @@ class Leet1792 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/
+class Leet3025 {
+    func numberOfPairs(_ points: [[Int]]) -> Int {
+        var result = 0, n = points.count
+        for i in 0..<n {
+            let p1 = points[i]
+            for j in 0..<n {
+                let p2 = points[j]
+                if i == j || !(p1[0] <= p2[0] && p1[1] >= p2[1]) {
+                    continue
+                }
+                if n == 2 {
+                    result += 1;
+                    continue;
+                }
+                var isIllegal = false
+                for k in 0..<n {
+                    if k == i || k == j {
+                        continue
+                    }
+                    let p3 = points[k], isXContained = p3[0] >= p1[0] && p3[0] <= p2[0], isYContained = p3[1] <= p1[1] && p3[1] >= p2[1]
+                    if isXContained && isYContained {
+                        isIllegal = true
+                        break
+                    }
+                }
+                if !isIllegal {
+                    result += 1
+                }
+            }
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
