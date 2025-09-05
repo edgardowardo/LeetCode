@@ -23918,4 +23918,23 @@ class Leet3025 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero/
+class Leet2749 {
+    func makeTheIntegerZero(_ num1: Int, _ num2: Int) -> Int {
+        var k = 1
+        while (true) {
+            let x = num1 - num2 * k
+            if (x < k) {
+                return -1
+            }
+            if k >= x.nonzeroBitCount {
+                return k
+            }
+            k += 1
+        }
+    }
+}
+
+
 print("All playground tests passed!")
