@@ -23960,5 +23960,18 @@ class Leet3495 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/
+class Leet1304 {
+    func sumZero(_ n: Int) -> [Int] {
+        guard n > 1 else { return [0] }
+        var result = Array(1...n/2).map { $0 * -1 } + Array(1...n/2)
+        if !n.isMultiple(of: 2) {
+            result.append(0)
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
