@@ -23973,5 +23973,30 @@ class Leet1304 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/convert-integer-to-the-sum-of-two-no-zero-integers/
+class Leet1317 {
+    func getNoZeroIntegers(_ n: Int) -> [Int] {
+        for i in 1...n where !hasZero(i) && !hasZero(n - i) {
+            return [i, n - i]
+        }
+        return []
+    }
+    
+    private func hasZero(_ num: Int) -> Bool {
+        var num = num
+        while num > 0 {
+            let remainder = num % 10
+            if remainder == 0 {
+                return true
+            }
+            num /= 10
+        }
+        return false
+    }
+}
+
+ 
+
 
 print("All playground tests passed!")
