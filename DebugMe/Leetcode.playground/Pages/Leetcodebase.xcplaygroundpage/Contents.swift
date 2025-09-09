@@ -23997,6 +23997,69 @@ class Leet1317 {
 }
 
  
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-people-aware-of-a-secret/
+class Leet2327 {
+    func peopleAwareOfSecret(_ n: Int, _ delay: Int, _ forget: Int) -> Int {
+        let mod = 1_000_000_007
+        var know: Deque<[Int]> = [[1, 1]], share: Deque<[Int]> = [], knowCnt = 1, shareCnt = 0
+        for i in 2...n {
+            if !know.isEmpty && know[0][0] == i - delay {
+                let first = know.removeFirst()
+                knowCnt = (knowCnt - first[1] + mod) % mod
+                shareCnt = (shareCnt + first[1]) % mod
+                share.append(first)
+            }
+            if (!share.isEmpty && share[0][0] == i - forget) {
+                let first = share.removeFirst()
+                shareCnt = (shareCnt - first[1] + mod) % mod
+            }
+            if (!share.isEmpty) {
+                knowCnt = (knowCnt + shareCnt) % mod
+                know.append([i, shareCnt])
+            }
+        }
+        return (knowCnt + shareCnt) % mod
+    }
+}
+
+ 
+/*
+ 
+ class Solution {
+
+     private static final int MOD = 1000000007;
+
+     public int peopleAwareOfSecret(int n, int delay, int forget) {
+         Deque<int[]> know = new LinkedList<>();
+         Deque<int[]> share = new LinkedList<>();
+         know.add(new int[] { 1, 1 });
+         int knowCnt = 1;
+         int shareCnt = 0;
+
+         for (int i = 2; i <= n; i++) {
+             if (!know.isEmpty() && know.peekFirst()[0] == i - delay) {
+                 int[] first = know.pollFirst();
+                 knowCnt = (knowCnt - first[1] + MOD) % MOD;
+                 shareCnt = (shareCnt + first[1]) % MOD;
+                 share.add(first);
+             }
+             if (!share.isEmpty() && share.peekFirst()[0] == i - forget) {
+                 int[] first = share.pollFirst();
+                 shareCnt = (shareCnt - first[1] + MOD) % MOD;
+             }
+             if (!share.isEmpty()) {
+                 knowCnt = (knowCnt + shareCnt) % MOD;
+                 know.add(new int[] { i, shareCnt });
+             }
+         }
+         return (knowCnt + shareCnt) % MOD;
+     }
+ }
+ 
+ */
+
+
 
 
 print("All playground tests passed!")
