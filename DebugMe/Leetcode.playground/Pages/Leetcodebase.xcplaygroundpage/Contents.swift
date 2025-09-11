@@ -24057,6 +24057,35 @@ class Leet1733 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sort-vowels-in-a-string/
+class Leet2785 {
+    func sortVowels(_ s: String) -> String {
+        let vowels = Set("AEIOUaeiou")
+        var s = Array(s), vowelsCount: [Character: Int] = [:], sortedVowelIndex = 0
+        for c in s {
+            if vowels.contains(c) {
+                vowelsCount[c, default: 0] += 1
+            }
+        }
+        let sortedVowels: [Character] = vowelsCount.keys.sorted()
+        for i in 0..<s.count {
+            if vowels.contains(s[i]), sortedVowelIndex < sortedVowels.count  {
+                let curr = sortedVowels[sortedVowelIndex]
+                if let count = vowelsCount[curr], count > 0 {
+                    s[i] = curr
+                    vowelsCount[curr, default: 0] -= 1
+                    
+                    if vowelsCount[curr] == 0 {
+                        vowelsCount[curr] = nil
+                        sortedVowelIndex += 1
+                    }
+                }
+            }
+        }
+        return String(s)
+    }
+}
 
 
 
