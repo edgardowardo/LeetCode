@@ -24087,6 +24087,12 @@ class Leet2785 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/vowels-game-in-a-string/
+class Leet3227 {
+    func doesAliceWin(_ s: String) -> Bool {
+        Array(s).contains(where: { "aeiou".contains($0) })
+    }
+}
 
 print("All playground tests passed!")
