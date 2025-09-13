@@ -24095,4 +24095,23 @@ class Leet3227 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-most-frequent-vowel-and-consonant/
+class Leet3541 {
+    func maxFreqSum(_ s: String) -> Int {
+        (Array(s).reduce(into: [Character:Int](), { d, c in
+            if Set("aeiou").contains(c) {
+                d[c, default: 0] += 1
+            }
+        }).values.max() ?? 0)
+        + (Array(s).reduce(into: [Character:Int](), { d, c in
+            if !Set("aeiou").contains(c) {
+                d[c, default: 0] += 1
+            }
+        }).values.max() ?? 0)
+    }
+}
+
+
 print("All playground tests passed!")
