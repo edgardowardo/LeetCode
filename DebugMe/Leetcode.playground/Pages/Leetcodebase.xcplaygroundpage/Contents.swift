@@ -24114,4 +24114,61 @@ class Leet3541 {
 }
 
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/vowel-spellchecker/
+class Leet0966 {
+    
+    func spellchecker(_ wordlist: [String], _ queries: [String]) -> [String] {
+        let og = Set(wordlist), lo = Set(wordlist.map { $0.lowercased()})
+        var map = [String: String]()
+           
+        // construct case error map of [lowercased : first matched case insensitive]
+        for w in wordlist {
+            let word = w.lowercased()
+            if lo.contains(word), map[word] == nil {
+                map[word] = w
+                continue
+            }
+        }
+
+        // construct vowel errors map [l*w*rc*s*d: first matched case insensitive]
+        let tv = Set(lo.map(transform))
+        var map2 = [String: String]()
+        for w in wordlist {
+            let word = transform(w.lowercased())
+            if tv.contains(word), map2[word] == nil {
+                map2[word] = w
+                continue
+            }
+        }
+        
+        // map
+        return queries.map {
+            if og.contains($0) {
+                return $0
+            } else if let f = map[$0.lowercased()] {
+                return f
+            } else if let t = map2[transform($0.lowercased())] {
+                return t
+            }
+            return ""
+        }
+    }
+    
+    private let vowels = Set("aeiou")
+    private func transform(_ s: String) -> String {
+        var res = ""
+        for c in s {
+            if vowels.contains(c.lowercased()) {
+                res.append("*")
+            } else {
+                res.append(c)
+            }
+        }
+        return res
+    }
+}
+
+
 print("All playground tests passed!")
