@@ -23081,7 +23081,7 @@ class Leet0869 {
                 return true
             }
             a.swapAt(start, i)
-        } assert(true)
+        }
         return false
     }
 }
@@ -24170,5 +24170,43 @@ class Leet0966 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/replace-non-coprime-numbers-in-array/
+class Leet2197 {
+    var counter = 0
+    func replaceNonCoprimes(_ nums: [Int]) -> [Int] {
+        counter += 1
+        let og = nums
+        guard nums.count > 1 else { return nums }
+        var result = [Int](), n = nums[0]
+        for i in 1..<nums.count {
+            let v = nums[i]
+            if n.gcd(v) > 1 {
+                let lcm = n.lcm(v)
+                n = lcm
+            } else {
+                result.append(n)
+                n = v
+            }
+        }
+        result.append(n)
+        guard og != result else { return result }
+        guard counter < 3 else {
+            counter = 0
+            return replaceNonCoprimes(result.reversed())
+        }
+        return replaceNonCoprimes(result)
+    }
+    
+    static func test() {
+        let sut = Leet2197()
+        assert(sut.replaceNonCoprimes([6,4,3,2,7,6,2]) == [12,7,6])
+        sut.counter = 0
+        assert(sut.replaceNonCoprimes([2,3,2,3,2,3,2,3,2,3,6,6]) == [6])
+        sut.counter = 0
+        assert(sut.replaceNonCoprimes([287,41,49,287,899,23,23,20677,5,825]) == [2009,20677,825])
+    }
+}
 
 print("All playground tests passed!")
