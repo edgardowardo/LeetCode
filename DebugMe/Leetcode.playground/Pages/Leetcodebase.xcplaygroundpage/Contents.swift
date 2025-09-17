@@ -24209,4 +24209,44 @@ class Leet2197 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/design-a-food-rating-system/
+struct Leet2353 {
+    
+    struct Entry {
+        let cuisine: String
+        let rating: Int
+    }
+    
+    class FoodRatings {
+        var foods = [String: Entry]()
+        init(_ foods: [String], _ cuisines: [String], _ ratings: [Int]) {
+            for i in 0..<foods.count {
+                self.foods[foods[i]] = Entry(cuisine: cuisines[i], rating: ratings[i])
+            }
+        }
+        
+        func changeRating(_ food: String, _ newRating: Int) {
+            guard let c = self.foods[food] else { return }
+            foods[food] = .init(cuisine: c.cuisine, rating: newRating)
+        }
+        
+        func highestRated(_ cuisine: String) -> String {
+            foods.filter { $0.value.cuisine == cuisine }
+                .max(by: { $0.value.rating < $1.value.rating
+                            || ($0.value.rating == $1.value.rating && $0.key > $1.key) } )?.key ?? ""
+        }
+    }
+}
+
+/*
+ 
+foods:    ["kimchi",  "miso",     "sushi",    "moussaka",  "ramen",      "bulgogi"]
+cuisine:  ["korean",  "japanese", "japanese", "greek",     "japanese",   "korean"]
+ratings:  [9,         12,         8->16,      15,           14->16,       7]]
+
+ */
+
+
 print("All playground tests passed!")
