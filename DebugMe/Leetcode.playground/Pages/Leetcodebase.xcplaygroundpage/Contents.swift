@@ -24249,4 +24249,64 @@ ratings:  [9,         12,         8->16,      15,           14->16,       7]]
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/design-task-manager/
+struct Leet3408 {
+
+    struct Task: Comparable {
+        let userId: Int
+        let taskId: Int
+        let priority: Int
+        static func < (lhs: Task, rhs: Task) -> Bool {
+            if lhs.priority == rhs.priority {
+                return lhs.taskId < rhs.taskId
+            }
+            return lhs.priority < rhs.priority
+        }
+    }
+    
+    
+    class TaskManager {
+        
+        private var tasks = [Int: Task]()
+        private var heap = Heap<Task>()
+        
+        init(_ tasks: [[Int]]) {
+            let keysAndValues = tasks.map { ($0[1], Task(userId: $0[0], taskId: $0[1], priority: $0[2])) }
+            self.tasks = [Int: Task](uniqueKeysWithValues: keysAndValues)
+            heap.insert(contentsOf: self.tasks.values)
+        }
+        
+        func add(_ userId: Int, _ taskId: Int, _ priority: Int) {
+            let t = Task(userId: userId, taskId: taskId, priority: priority)
+            tasks[taskId] = t
+            heap.insert(t)
+        }
+        
+        func edit(_ taskId: Int, _ newPriority: Int) {
+            guard let c = tasks[taskId] else { return }
+            tasks[taskId] = .init(userId: c.userId, taskId: taskId, priority: newPriority)
+            heap.insert(tasks[taskId]!)
+        }
+        
+        func rmv(_ taskId: Int) {
+            tasks[taskId] = nil
+        }
+        
+        func execTop() -> Int {
+            while let top = heap.max {
+                if tasks[top.taskId] != top {
+                    heap.removeMax()
+                } else {
+                    let validTask = heap.removeMax()
+                    tasks[validTask.taskId] = nil
+                    return validTask.userId
+                }
+            }
+            return -1
+        }
+    }
+}
+
+
 print("All playground tests passed!")
