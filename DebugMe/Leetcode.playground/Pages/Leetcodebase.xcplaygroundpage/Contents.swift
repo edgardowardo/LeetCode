@@ -9722,29 +9722,33 @@ class Leet0144 {
         return result
     }
 }
+
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/binary-tree-postorder-traversal/
 class Leet0145 {
     func postorderTraversal(_ root: TreeNode?) -> [Int] {
         guard let root else { return [] }
-        var result: [Int] = []
-        var stack: [TreeNode] = []
-        var current: TreeNode? = root
+        var result: [Int] = [], s1: [TreeNode] = [root], s2: [TreeNode] = [], current: TreeNode?
         
-        while (current != nil || !stack.isEmpty) {
-            if let node = current {
-                result.append(node.val)
-                stack.append(node)
-                current = node.right
-            } else {
-                current = stack.popLast()?.left
+        while !s1.isEmpty {
+            current = s1.removeLast()
+            s2.append(current!)
+            if let left = current?.left {
+                s1.append(left)
+            }
+            if let right = current?.right {
+                s1.append(right)
             }
         }
-        result.reverse()
+        
+        while !s2.isEmpty {
+            current = s2.removeLast()
+            result.append(current!.val)
+        }
         return result
     }
 }
-
 
 
 
