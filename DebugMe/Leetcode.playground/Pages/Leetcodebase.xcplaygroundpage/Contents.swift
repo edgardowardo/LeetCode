@@ -24312,14 +24312,14 @@ struct Leet3408 {
 ///https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/description/
 struct Leet2598 {
     func findSmallestInteger(_ nums: [Int], _ value: Int) -> Int {
-        var map: [Int: Int] = [:]
+        var map: [Int] = .init(repeating: 0, count: value)
         for num in nums {
             let rem = (num % value + value) % value
-            map[rem, default: 0] += 1
+            map[rem] += 1
         }
         var mex = 0
-        while map[mex % value, default: 0] > 0 {
-            map[mex % value, default: 0] -= 1
+        while map[mex % value] > 0 {
+            map[mex % value] -= 1
             mex += 1
         }
         return mex
