@@ -24351,6 +24351,39 @@ class Leet2144 {
 
 
 
+func hasPathSum(_ root: TreeNode?, _ sum: Int) -> [[Int]] {
+    typealias State = (node: TreeNode?, path: [Int], sum: Int)
+    guard let root = root else { return [] }
+    var stack = [State(node: root, path: [root.val], sum: root.val)], result: [[Int]] = []
+
+    while let top = stack.popLast() {
+        let nodeO = top.node
+        let path = top.path
+        guard let node = nodeO else { continue }
+        
+        if node.left == nil, node.right == nil, top.sum == sum {
+            result.append(path)
+        } else {
+            if let right = node.right {
+                stack.append(State(node: right, path: path + [right.val], sum: top.sum + right.val))
+            }
+            if let left = node.left {
+                stack.append(State(node: left, path: path + [left.val], sum: top.sum + left.val))
+            }
+        }
+    }
+
+    // remove duplicates in result, but maintain order
+    var pathExists = Set<[Int]>()
+    var resultOut = [[Int]]()
+    for path in result {
+        if !pathExists.contains(path) {
+            pathExists.insert(path)
+            resultOut.append(path)
+        }
+    }
+    return resultOut
+}
 
 
 print("All playground tests passed!")
