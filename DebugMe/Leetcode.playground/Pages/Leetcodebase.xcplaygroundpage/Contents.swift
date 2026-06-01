@@ -24330,4 +24330,27 @@ struct Leet2598 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-cost-of-buying-candies-with-discount/
+class Leet2144 {
+    func minimumCost(_ cost: [Int]) -> Int {
+        let s = cost.sorted(by: >)
+        var result = 0, p = 0
+        for c in s {
+            if p == 0 || p == 1 {
+                result += c
+            }
+            p += 1
+            if p == 3 {
+                p = 0
+            }
+        }
+        return result
+    }
+}
+
+
+
+
+
 print("All playground tests passed!")
