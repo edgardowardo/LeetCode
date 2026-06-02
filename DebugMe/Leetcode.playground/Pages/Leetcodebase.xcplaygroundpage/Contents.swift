@@ -24385,5 +24385,41 @@ func hasPathSum(_ root: TreeNode?, _ sum: Int) -> [[Int]] {
     return resultOut
 }
 
+///---------------------------------------------------------------------------------------
+/// https://leetcode.com/problems/earliest-finish-time-for-land-and-water-rides-i/
+/// https://leetcode.com/problems/earliest-finish-time-for-land-and-water-rides-ii/
+class Leet3633 {
+    func earliestFinishTime(_ landStartTime: [Int], _ landDuration: [Int], _ waterStartTime: [Int], _ waterDuration: [Int]) -> Int {
+        let minLandEndTime = zip(landStartTime, landDuration).map { $0 + $1 }.min()!
+        let minWaterEndTime = zip(waterStartTime, waterDuration).map { $0 + $1 }.min()!
+        var result = Int.max
+
+        for i in 0..<waterStartTime.count {
+            if waterStartTime[i] < minLandEndTime {
+                result = min(result, minLandEndTime + waterDuration[i])
+            } else {
+                result = min(result, waterStartTime[i] + waterDuration[i])
+            }
+        }
+        
+        for i in 0..<landStartTime.count {
+            if landStartTime[i] < minWaterEndTime {
+                result = min(result, minWaterEndTime + landDuration[i])
+            } else {
+                result = min(result, landStartTime[i] + landDuration[i])
+            }
+        }
+
+        return result
+    }
+
+    static func test() {
+        let sut = Leet3633()
+        let answer = sut.earliestFinishTime([5], [3], [1], [10])
+        assert(answer == 14)
+    }
+    
+}
+
 
 print("All playground tests passed!")
