@@ -24447,5 +24447,23 @@ class Leet0520 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/capitalize-the-title/
+class Leet2129 {
+    func capitalizeTitle(_ title: String) -> String {
+        let words = title.split(separator: " ")
+        var result: [String] = []
+        for word in words {
+            if word.count > 2 {
+                result.append(word.prefix(1).uppercased() + word.dropFirst().lowercased())
+            } else {
+                result.append(word.lowercased())
+            }
+        }
+        return result.joined(separator: " ")
+    }
+}
+
+
 
 print("All playground tests passed!")
