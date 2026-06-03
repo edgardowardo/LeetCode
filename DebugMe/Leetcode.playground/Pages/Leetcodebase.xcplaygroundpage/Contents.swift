@@ -24421,5 +24421,22 @@ class Leet3633 {
     
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-the-number-of-special-characters-i/
+class Leet3120 {
+    func numberOfSpecialChars(_ word: String) -> Int {
+        let s = Set(word)
+        var result = 0
+        // enumerate lower case letters
+        for i in Character("a").asciiValue!...Character("z").asciiValue! {
+            let lower = Character(Unicode.Scalar(i))
+            let upper = Character(lower.uppercased())
+            result += s.contains(lower) && s.contains(upper) ? 1 : 0
+        }
+        return result
+    }
+}
+
+
 
 print("All playground tests passed!")
