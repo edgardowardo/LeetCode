@@ -24437,6 +24437,15 @@ class Leet3120 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/detect-capital/
+class Leet0520 {
+    func detectCapitalUse(_ word: String) -> Bool {
+        word.allSatisfy { $0.isLowercase }
+        || word.allSatisfy { $0.isUppercase }
+        || word.first?.isUppercase == true && word.dropFirst(1).allSatisfy { $0.isLowercase }
+    }
+}
 
 
 print("All playground tests passed!")
