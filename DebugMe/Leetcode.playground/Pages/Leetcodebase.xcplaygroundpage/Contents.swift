@@ -24464,6 +24464,23 @@ class Leet2129 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/to-lower-case/
+class Leet0709 {
+    func toLowerCase(_ s: String) -> String {
+        // not using lowercased, but use Ascii arithmetic
+        var result: [Character] = []
+        for c in s {
+            if let ascii = c.asciiValue, (UInt8(65)...UInt8(90)).contains(ascii) {
+                let newC: Character = Character(UnicodeScalar(c.asciiValue! + 32))
+                result.append(newC)
+            } else {
+                result.append(c)
+            }
+        }
+        return String(result)
+    }
+}
 
 
 print("All playground tests passed!")
