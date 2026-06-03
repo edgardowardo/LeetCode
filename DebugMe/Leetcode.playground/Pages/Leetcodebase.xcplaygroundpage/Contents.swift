@@ -24558,6 +24558,15 @@ class Leet0796 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/furthest-point-from-origin/
+class Leet2833 {
+    func furthestDistanceFromOrigin(_ moves: String) -> Int {
+        var counts: [Character: Int] = moves.reduce(into: [:]) { counts, char in counts[char, default: 0] += 1 }
+        return counts["_", default: 0] + abs(counts["L", default: 0] - counts["R", default: 0])
+    }
+}
+
 
 
 print("All playground tests passed!")
