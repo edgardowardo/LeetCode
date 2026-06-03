@@ -24529,4 +24529,23 @@ class Leet3121 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/greatest-english-letter-in-upper-and-lower-case/
+class Leet2309 {
+    func greatestLetter(_ s: String) -> String {
+        let s = Set(s)
+        var result = ""
+        // enumerate lower case letters
+        for i in (Character("a").asciiValue!...Character("z").asciiValue!).reversed() {
+            let lower = Character(Unicode.Scalar(i))
+            let upper = Character(lower.uppercased())
+            if s.contains(lower) && s.contains(upper) {
+                return String(upper)
+            }
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
