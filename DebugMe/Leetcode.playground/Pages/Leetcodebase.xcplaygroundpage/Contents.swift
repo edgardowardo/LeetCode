@@ -24482,5 +24482,26 @@ class Leet0709 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/most-common-word/
+class Leet0819 {
+    func mostCommonWord(_ paragraph: String, _ banned: [String]) -> String {
+        // strip off white characters except space
+        let p = paragraph.replacingOccurrences(of: "[^a-zA-Z]", with: " ", options: .regularExpression).lowercased()
+        let words = p.split(separator: " "), bannedSet = Set(banned)
+        var result = "", resultCount = 0, wordCounts: [String: Int] = [:]
+        for word in words {
+            let w = String(word)
+            if !bannedSet.contains(w) {
+                wordCounts[w, default: 0] += 1
+                if let wordCount = wordCounts[w], wordCount > resultCount {
+                    result = w
+                    resultCount = wordCount
+                }
+            }
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
