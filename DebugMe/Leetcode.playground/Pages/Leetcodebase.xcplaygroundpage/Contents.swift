@@ -24576,6 +24576,25 @@ class Leet0657 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/total-waviness-of-numbers-in-range-i/
+class Leet3751 {
+    func totalWaviness(_ num1: Int, _ num2: Int) -> Int {
+        var result = 0
+        for i in num1...num2 {
+            let d = i.digits
+            if d.count > 2 {
+                for j in 1..<d.count-1 {
+                    let isPeak = d[j-1] < d[j] && d[j+1] < d[j]
+                    let isValley = d[j-1] > d[j] && d[j+1] > d[j]
+                    result += isPeak || isValley ? 1 : 0
+                }
+            }
+        }
+        return result
+    }
+}
+
 
 
 
