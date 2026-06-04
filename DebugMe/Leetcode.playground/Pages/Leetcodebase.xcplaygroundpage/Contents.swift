@@ -24567,6 +24567,16 @@ class Leet2833 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/robot-return-to-origin/
+class Leet0657 {
+    func judgeCircle(_ moves: String) -> Bool {
+        var counts: [Character: Int] = moves.reduce(into: [:]) { counts, char in counts[char, default: 0] += 1 }
+        return counts["U", default: 0] == counts["D", default: 0] && counts["L", default: 0] == counts["R", default: 0]
+    }
+}
+
+
 
 
 print("All playground tests passed!")
