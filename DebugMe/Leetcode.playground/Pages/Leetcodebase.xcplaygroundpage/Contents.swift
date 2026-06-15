@@ -24725,4 +24725,61 @@ class Leet1848 {
 
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/
+class Leet2415 {
+    func closestTarget(_ words: [String], _ target: String, _ startIndex: Int) -> Int {
+        var result = Int.max, circlularWords = words + words
+        for i in startIndex..<circlularWords.count {
+            if circlularWords[i] == target {
+                result = min(result, i - startIndex)
+                break
+            }
+        }
+        let start = words.count + startIndex
+        for j in stride(from: start, to: -1, by: -1) {
+            if circlularWords[j] == target {
+                result = min(result, start - j)
+                break
+            }
+        }
+        guard result != Int.max else { return -1 }
+        return result
+    }
+}
+
+ 
+/*
+ 0             1            2            3            4            5            6            7            8            9
+ ["hsdqinnoha","mqhskgeqzr","zemkwvqrww","zemkwvqrww","daljcrktje","fghofclnwp","djwdworyka","cxfpybanhd","fghofclnwp","fghofclnwp"]
+ "zemkwvqrww"
+ 8
+
+ 
+ 0             1            2            3            4            5            6            7            8            9            10           11           12           13           14           15
+ ["hsdqinnoha","mqhskgeqzr","zemkwvqrww","zemkwvqrww","daljcrktje","fghofclnwp","djwdworyka","cxfpybanhd","fghofclnwp","fghofclnwp","hsdqinnoha","mqhskgeqzr","zemkwvqrww","zemkwvqrww","daljcrktje","fghofclnwp","djwdworyka","cxfpybanhd","fghofclnwp","fghofclnwp"]
+
+ 
+ ["broccoli", "grape", "apple", "banana", "apple", "orange", "walnut", "peanut"]
+ "apple"
+ 1
+ ["broccoli", "apple", "banana", "apple", "orange", "walnut", "grape", "peanut"]
+ "apple"
+ 6
+ ["a", "the", "lion", "cat", "a", "wall", "sat", "on", "lion", "big", "small", "lion"]
+ "lion"
+ 3
+ ["one", "three", "five", "seven", "nine", "five", "seven", "three", "one", "three", "six", "one", "three", "five", "seven", "nine", "five", "seven", "three", "one", "three"]
+ "five"
+ 10
+ ["the", "farmer", "garden", "rose", "green", "grass", "gold", "coin", "down", "silver", "and", "ruby", "river", "near", "water", "bucket", "ruby", "silver", "iron", "magic", "spark", "flash", "ruby", "lotus", "guard", "sword", "lotus", "water", "spark", "fire", "wood", "dog", "wheat", "flower", "yellow", "rain", "barn", "horse", "magic", "ruby", "roof", "broken", "tin", "jam", "market", "fruits", "money", "silver", "river", "bees", "honey", "expensive", "bridge", "pond", "ducks", "mailbox", "letters", "silver", "gold", "sac", "rice", "lotus", "ruby", "wind", "fly", "carpet", "magic", "brick"]
+ "ruby"
+ 1
+ 
+ 
+ */
+
+
+
+
 print("All playground tests passed!")
