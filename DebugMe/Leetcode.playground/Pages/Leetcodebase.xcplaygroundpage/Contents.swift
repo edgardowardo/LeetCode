@@ -24797,5 +24797,34 @@ class Leet2490 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/add-strings/
+class Leet0415 {
+    func addStrings(_ num1: String, _ num2: String) -> String {
+        let n1 = Array(num1.map { UInt8(String($0))! }.reversed()), n2 = Array(num2.map { UInt8(String($0))! }.reversed()), count = max(n1.count, n2.count)
+        var result = [UInt8](), carry = UInt8(0)
+        
+        for i in 0..<count {
+            if i < n1.count, i < n2.count {
+                let sum = n1[i] + n2[i] + carry
+                result.append(sum % 10)
+                carry = sum > 9 ? 1 : 0
+            } else if i < n1.count {
+                let sum = n1[i] + carry
+                result.append(sum % 10)
+                carry = sum > 9 ? 1 : 0
+            } else if i < n2.count {
+                let sum = n2[i] + carry
+                result.append(sum % 10)
+                carry = sum > 9 ? 1 : 0
+            }
+        }
+        if carry > 0 {
+            result.append(carry)
+        }
+        return result.reversed().map(String.init).joined()
+    }
+}
+
 
 print("All playground tests passed!")
