@@ -24650,6 +24650,49 @@ class Leet3838 {
  
  */
  
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-distance-between-three-equal-elements-i
+///https://leetcode.com/problems/minimum-distance-between-three-equal-elements-ii
+/// Leet3741
+class Leet3740 {
+    func minimumDistance(_ nums: [Int]) -> Int {
+        var result = Int.max, iIndexMap = [Int: Int](), jIndexMap = [Int: Int](), kIndexMap = [Int: Int]()
+        
+        for i in 0..<nums.count {
+            let num = nums[i]
+
+            if let iIndex = iIndexMap[num] {
+                if let jIndex = jIndexMap[num] {
+                    if let kIndex = kIndexMap[num] {
+                        iIndexMap[num] =  jIndex
+                        jIndexMap[num] =  kIndex
+                        result = min(result, i - jIndex)
+                    } else {
+                        result = min(result, i - iIndex)
+                    }
+                    kIndexMap[num] = i
+                } else {
+                    jIndexMap[num] = i
+                }
+            } else {
+                iIndexMap[num] = i
+            }
+        }
+        return result == Int.max ? -1 : result * 2
+    }
+}
+
+ /*
+   0 1 2 3 4 5 6 7 8 9
+  [1,1,2,3,2,1,2,1,1,1]
+  
+  0,1,5 = 5
+  1,5,7 = 6
+  5,7,8 = 3
+  
+  */
+
+
 
 
 print("All playground tests passed!")
