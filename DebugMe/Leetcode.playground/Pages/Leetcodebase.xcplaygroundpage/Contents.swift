@@ -24852,5 +24852,29 @@ class Leet0989 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/add-binary/
+class Leet0067 {
+    func addBinary(_ a: String, _ b: String) -> String {
+        var result: [Int] = [], carry = 0
+        let aList = Array(a.compactMap(\.wholeNumberValue).reversed()), bList = Array(b.compactMap(\.wholeNumberValue).reversed()), count = max(aList.count, bList.count)
+        for i in 0..<count {
+            var sum = 0
+            if i < aList.count, i < bList.count {
+                sum = aList[i] + bList[i] + carry
+            } else if i < aList.count {
+                sum = aList[i] + carry
+            } else if i < bList.count {
+                sum = bList[i] + carry
+            }
+            result.append(sum % 2)
+            carry = sum / 2
+        }
+        if carry > 0 {
+            result.append(carry)
+        }
+        return Array(result.reversed()).map(String.init).joined()
+    }
+}
 
 print("All playground tests passed!")
