@@ -24826,5 +24826,31 @@ class Leet0415 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/add-to-array-form-of-integer/
+class Leet0989 {
+    func addToArrayForm(_ num: [Int], _ k: Int) -> [Int] {
+        var result = [Int](), carry = 0
+        let n1 = Array(num.reversed()), k1 = Array(k.digits), count = max(n1.count, k1.count)
+        for i in 0..<count {
+            var sum = 0
+            if i < n1.count, i < k1.count {
+                sum = n1[i] + k1[i] + carry
+            } else if i < n1.count {
+                sum = n1[i] + carry
+            } else if i < k1.count {
+                sum = k1[i] + carry
+            }
+            result.append(sum % 10)
+            carry = sum / 10
+        }
+        if carry > 0 {
+            result.append(carry)
+        }
+        return Array(result.reversed())
+    }
+}
+
+
 
 print("All playground tests passed!")
