@@ -24727,7 +24727,7 @@ class Leet1848 {
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/
-class Leet2415 {
+class Leet2515 {
     func closestTarget(_ words: [String], _ target: String, _ startIndex: Int) -> Int {
         var result = Int.max, circlularWords = words + words
         for i in startIndex..<circlularWords.count {
