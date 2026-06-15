@@ -24797,6 +24797,7 @@ class Leet2490 {
 }
 
 
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/add-strings/
 class Leet0415 {
@@ -24805,19 +24806,16 @@ class Leet0415 {
         var result = [UInt8](), carry = UInt8(0)
         
         for i in 0..<count {
+            var sum = UInt8(0)
             if i < n1.count, i < n2.count {
-                let sum = n1[i] + n2[i] + carry
-                result.append(sum % 10)
-                carry = sum > 9 ? 1 : 0
+                sum = n1[i] + n2[i] + carry
             } else if i < n1.count {
-                let sum = n1[i] + carry
-                result.append(sum % 10)
-                carry = sum > 9 ? 1 : 0
+                sum = n1[i] + carry
             } else if i < n2.count {
-                let sum = n2[i] + carry
-                result.append(sum % 10)
-                carry = sum > 9 ? 1 : 0
+                sum = n2[i] + carry
             }
+            result.append(sum % 10)
+            carry = sum > 9 ? 1 : 0
         }
         if carry > 0 {
             result.append(carry)
@@ -24825,6 +24823,8 @@ class Leet0415 {
         return result.reversed().map(String.init).joined()
     }
 }
+
+
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/add-to-array-form-of-integer/
