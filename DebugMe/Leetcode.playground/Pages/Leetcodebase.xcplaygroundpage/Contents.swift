@@ -24779,6 +24779,22 @@ class Leet2415 {
  
  */
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/circular-sentence/
+class Leet2490 {
+    func isCircularSentence(_ sentence: String) -> Bool {
+        let words = sentence.split(separator: " ")
+        if words.count > 1 {
+            for i in 1..<words.count {
+                if words[i].first != words[i-1].last {
+                    return false
+                }
+            }
+        }
+        guard let first = words.first, let last = words.last else { return false }
+        return first.first == last.last
+    }
+}
 
 
 
