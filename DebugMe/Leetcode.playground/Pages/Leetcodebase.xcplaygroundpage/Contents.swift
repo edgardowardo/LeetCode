@@ -24693,6 +24693,36 @@ class Leet3740 {
   */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-distance-to-the-target-element/
+class Leet1848 {
+    func getMinDistance(_ nums: [Int], _ target: Int, _ start: Int) -> Int {
+        var result = Int.max
+        for i in start..<nums.count {
+            if nums[i] == target {
+                result = min(result, i - start)
+                break
+            }
+        }
+        for j in (0..<start).reversed() {
+            if nums[j] == target {
+                result = min(result, start - j)
+                break
+            }
+        }
+        return result
+    }
+}
+
+
+/*
+ 
+ [1,2,3,7,8,3,9]
+ 3
+ 3
+
+ */
+
 
 
 print("All playground tests passed!")
