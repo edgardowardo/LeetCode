@@ -24595,7 +24595,61 @@ class Leet3751 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/weighted-word-mapping/description/
+class Leet3838 {
+    func mapWordWeights(_ words: [String], _ weights: [Int]) -> String {
+        var result = [Character]()
+        for word in words {
+            let sum = word.reduce(0) { (result, char) -> Int in
+                let charValue = Int(char.asciiValue!)
+                let charIndex = Int(charValue - 97)
+                return result + weights[charIndex]
+            }
+            result.append(charForWeight(sum))
+        }
+        return result.map(String.init).joined()
+    }
 
+    private func charForWeight(_ weight: Int) -> Character {
+        let remainder = weight % 26
+        // maps to z->1, ... a->25
+        let offset = 25 - remainder
+        return Character(UnicodeScalar(offset + 97)!)
+    }
+}
+
+/*
+ 
+ z 00
+ y 01
+ x 02
+ w 03
+ v 04
+ u 05
+ t 06
+ s 07
+ r 08
+ q 09
+ p 10
+ o 11
+ n 12
+ m 13
+ l 14
+ k 15
+ j 16
+ i 17
+ h 18
+ g 19
+ f 20
+ e 21
+ d 22
+ c 23
+ b 24
+ a 25
+ 
+ */
+ 
 
 
 print("All playground tests passed!")
