@@ -24900,5 +24900,12 @@ class Leet3612 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/check-if-binary-string-has-at-most-one-segment-of-ones/
+class Leet1784 {
+    func checkOnesSegment(_ s: String) -> Bool {
+        s.contains("01")
+    }
+}
 
 print("All playground tests passed!")
