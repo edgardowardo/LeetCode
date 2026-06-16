@@ -25029,6 +25029,56 @@ class Leet2259 {
  */
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/find-special-substring-of-length-k/
+class Leet3456 {
+    func hasSpecialSubstring(_ s: String, _ k: Int) -> Bool {
+        let a = Array(s)
+        var count = 0
+        
+        for i in 0..<a.count {
+            let curr = a[i]
+            count += 1
+            if i > 0 {
+                let prev = a[i - 1]
+                if prev != curr {
+                    count -= 1
+                    if count == k {
+                        return true
+                    }
+                    count = 1
+                }
+            }
+        }
+        if count == k {
+            return true
+        }
+        return false
+    }
+}
+
+
+/*
+ 
+ "aaabaaa"
+ 3
+ "abc"
+ 2
+ "bfggb"
+ 2
+ "ccc"
+ 2
+ "ii"
+ 2
+ "h"
+ 1
+ "mmam"
+ 1
+ "hhhhhhh"
+ 1
+ 
+ */
+ 
 
 
 print("All playground tests passed!")
