@@ -25080,5 +25080,22 @@ class Leet3456 {
  */
  
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/occurrences-after-bigram/
+class Leet1078 {
+    func findOcurrences(_ text: String, _ first: String, _ second: String) -> [String] {
+        let a = text.split(separator: " ").map(String.init)
+        var result = [String]()
+        if a.count > 2 {
+            for i in 2..<a.count {
+                if a[i-2] == first && a[i-1] == second {
+                    result.append(a[i])
+                }
+            }
+        }
+        return result
+    }
+}
+
 
 print("All playground tests passed!")
