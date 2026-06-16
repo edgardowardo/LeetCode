@@ -25097,5 +25097,25 @@ class Leet1078 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/mirror-distance-of-an-integer/
+class Leet3783 {
+    func mirrorDistance(_ n: Int) -> Int {
+        abs(n - n.reversed)
+    }
+}
+
+extension Int {
+    var reversed: Int {
+        var result = 0, num = self
+        while num > 0 {
+            result = result * 10 + num % 10
+            num /= 10
+        }
+        return result
+    }
+}
+
+
 
 print("All playground tests passed!")
