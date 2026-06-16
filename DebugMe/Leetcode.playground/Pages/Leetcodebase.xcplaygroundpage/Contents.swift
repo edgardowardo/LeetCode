@@ -24940,4 +24940,17 @@ class Leet1869 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/second-largest-digit-in-a-string/
+class Leet1796 {
+    func secondHighest(_ s: String) -> Int {
+        var list = Set(s).compactMap { $0.isNumber ? $0 : nil }.sorted()
+        guard list.count > 1 else { return -1 }
+        list.removeLast()
+        guard let second = list.last, let result = Int(String(second)) else { return -1 }
+        return result
+    }
+}
+
 print("All playground tests passed!")
