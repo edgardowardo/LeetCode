@@ -24900,6 +24900,51 @@ class Leet3612 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/process-string-with-special-operations-ii/
+class Leet3614 {
+    func processStr(_ s: String, _ k: Int) -> Character {
+        var len = 0, k = k
+        for c in s {
+            if c == "*" {
+                if len > 0 {
+                    len -= 1
+                }
+            } else if c == "#" {
+                len *= 2
+            } else if c == "%" {
+              // no change
+            } else {
+                len += 1
+            }
+        }
+        if k + 1 > len {
+            return "."
+        }
+        let a = Array(s)
+        for i in (0..<a.count).reversed() {
+            let c = a[i]
+            if c == "*" {
+                len += 1
+            } else if c == "#" {
+                if k + 1 > (len + 1) / 2 {
+                    k -= len / 2
+                }
+                len = (len + 1) / 2
+            } else if c == "%" {
+                k = len - k - 1
+            } else {
+                if k + 1 == len {
+                    return c
+                }
+                len -= 1
+            }
+        }
+        return "."
+    }
+}
+
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/check-if-binary-string-has-at-most-one-segment-of-ones/
 class Leet1784 {
