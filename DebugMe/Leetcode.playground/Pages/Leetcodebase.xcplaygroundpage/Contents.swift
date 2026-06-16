@@ -24953,4 +24953,37 @@ class Leet1796 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/remove-digit-from-number-to-maximize-result/
+class Leet2259 {
+    func removeDigit(_ number: String, _ digit: Character) -> String {
+        let a = Array(number)
+        var result = ""
+        for i in 0..<a.count {
+            if a[i] == digit {
+                let left = a[0..<i]
+                var right = ArraySlice<Character>()
+                if i+1 < a.count {
+                    right = a[i+1..<a.count]
+                }
+                let combined = String(left + right)
+                result = max(result, combined)
+            }
+        }
+        return result
+    }
+}
+
+ 
+/*
+ "133235"
+ 
+ "13235" "13325"
+ 
+ 
+ */
+
+
+
+
 print("All playground tests passed!")
