@@ -24908,4 +24908,36 @@ class Leet1784 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/longer-contiguous-segments-of-ones-than-zeros/
+class Leet1869 {
+    func checkZeroOnes(_ s: String) -> Bool {
+        let a = Array(s)
+        var oneCount = 0, zeroCount = 0, currentOneCount = 0, currentZeroCount = 0
+
+        for i in 0..<a.count {
+            let curr = a[i]
+            currentOneCount += (curr == "1") ? 1 : 0
+            currentZeroCount += (curr == "0") ? 1 : 0
+                        
+            if i > 0 {
+                let prev = a[i - 1]
+                if prev != curr {
+                    oneCount = max(oneCount, currentOneCount)
+                    zeroCount = max(zeroCount, currentZeroCount)
+                    
+                    currentOneCount = (curr == "1") ? 1 : 0
+                    currentZeroCount = (curr == "0") ? 1 : 0
+                }
+            }
+        }
+        
+        oneCount = max(oneCount, currentOneCount)
+        zeroCount = max(zeroCount, currentZeroCount)
+
+        return oneCount > zeroCount
+    }
+}
+
 print("All playground tests passed!")
