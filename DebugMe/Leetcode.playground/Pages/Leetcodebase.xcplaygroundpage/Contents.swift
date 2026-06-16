@@ -24877,4 +24877,28 @@ class Leet0067 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/process-string-with-special-operations-i/
+class Leet3612 {
+    func processStr(_ s: String) -> String {
+        let a = Array(s)
+        var result = [Character]()
+        for c in a {
+            if c == "*" {
+                if !result.isEmpty {
+                    result.removeLast()
+                }
+            } else if c == "#" {
+                result.append(contentsOf: result)
+            } else if c == "%" {
+                result.reverse()
+            } else {
+                result.append(c)
+            }
+        }
+        return result.map(String.init).joined()
+    }
+}
+
+
 print("All playground tests passed!")
