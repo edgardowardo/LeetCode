@@ -25230,5 +25230,21 @@ class Leet1700 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/time-needed-to-buy-tickets/
+class Leet2073 {
+    func timeRequiredToBuy(_ tickets: [Int], _ k: Int) -> Int {
+        var time = 0
+        for i in 0..<tickets.count {
+            if i <= k {
+                time += min(tickets[k], tickets[i])
+            } else {
+                time += min(tickets[k] - 1, tickets[i])
+            }
+        }
+        return time
+    }
+}
+
 
 print("All playground tests passed!")
