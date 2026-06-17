@@ -25316,4 +25316,13 @@ class Leet0682 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-employees-who-met-the-target/
+class Leet2798 {
+    func numberOfEmployeesWhoMetTarget(_ hours: [Int], _ target: Int) -> Int {
+        hours.reduce(0) { $0 + ($1 >= target ? 1 : 0) }
+    }
+}
+
+
 print("All playground tests passed!")
