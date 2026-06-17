@@ -25246,5 +25246,13 @@ class Leet2073 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/bitwise-or-of-even-numbers-in-an-array/
+class Leet3688 {
+    func evenNumberBitwiseORs(_ nums: [Int]) -> Int {
+        nums.reduce(0) { $0 | ( $1 % 2 == 0 ? $1 : 0) }
+    }
+}
+
 
 print("All playground tests passed!")
