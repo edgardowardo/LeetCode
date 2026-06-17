@@ -25295,4 +25295,25 @@ class Leet1598 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+/// https://leetcode.com/problems/baseball-game/
+class Leet0682 {
+    func calPoints(_ operations: [String]) -> Int {
+        var stack = [Int]()
+        for op in operations {
+            switch op {
+            case "+":
+                stack.append(stack.last! + stack[stack.count - 2])
+            case "D":
+                stack.append(stack.last! * 2)
+            case "C":
+                stack.removeLast()
+            default:
+                stack.append(Int(op)!)
+            }
+        }
+        return stack.reduce(0, +)
+    }
+}
+
 print("All playground tests passed!")
