@@ -25182,4 +25182,15 @@ class Leet2839 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-complement/
+class Leet0476 {
+    func findComplement(_ num: Int) -> Int {
+        // invert all bits using ~, then drop all leading 1's using << shift left, then shift right by same amount
+        (~num << num.leadingZeroBitCount) >> num.leadingZeroBitCount
+    }
+}
+
+
+
 print("All playground tests passed!")
