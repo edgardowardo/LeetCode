@@ -25357,4 +25357,18 @@ class Leet1582 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-changes-to-make-alternating-binary-string/
+class Leet1758 {
+    func minOperations(_ s: String) -> Int {
+        let a: [Character] = Array(s)
+        let oneStart = Array(0..<s.count).map { $0 % 2 == 0 ? Character("1") : Character("0") }
+        let zeroStart = Array(0..<s.count).map { $0 % 2 == 0 ? Character("0") : Character("1") }
+        let oneChanges = zip(a, oneStart)
+        let zeroChanges = zip(a, zeroStart)
+        return min(oneChanges.reduce(0) { $0 + ($1.0 != $1.1 ? 1 : 0) }, zeroChanges.reduce(0) { $0 + ($1.0 != $1.1 ? 1 : 0) })
+    }
+}
+
+
 print("All playground tests passed!")
