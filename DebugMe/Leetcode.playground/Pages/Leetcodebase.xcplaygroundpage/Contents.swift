@@ -25124,5 +25124,14 @@ class Leet3190 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-moves-to-equal-array-elements/
+class Leet0453 {
+    func minMoves(_ nums: [Int]) -> Int {
+        guard let min = nums.min() else { return 0 }
+        return nums.reduce(0) { $0 + $1 - min }
+    }
+}
 
+ 
 print("All playground tests passed!")
