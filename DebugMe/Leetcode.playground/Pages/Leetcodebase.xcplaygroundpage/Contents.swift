@@ -25268,4 +25268,13 @@ class Leet2506 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-the-number-of-consistent-strings/
+class Leet1684 {
+    func countConsistentStrings(_ allowed: String, _ words: [String]) -> Int {
+        words.reduce(0) { $0 + (Set($1).isSubset(of: Set(allowed)) ? 1 : 0) }
+    }
+}
+
+
 print("All playground tests passed!")
