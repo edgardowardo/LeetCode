@@ -25142,5 +25142,19 @@ class Leet0462 {
         return nums.reduce(0) { $0 + abs($1 - median) }
     }
 }
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/
+class Leet2491 {
+    func dividePlayers(_ skill: [Int]) -> Int {
+        let ordered = skill.sorted(), targetSkill = ordered[0] + ordered[ordered.count - 1]
+        var result = 0
+        for i in 0..<ordered.count / 2 {
+            guard ordered[i] + ordered[ordered.count - 1 - i] == targetSkill else { return -1 }
+            result += ordered[i] * ordered[ordered.count - 1 - i]
+        }
+        return result
+    }
+}
  
 print("All playground tests passed!")
