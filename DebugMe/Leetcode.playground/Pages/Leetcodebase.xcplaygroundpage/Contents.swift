@@ -25255,4 +25255,17 @@ class Leet3688 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-pairs-of-similar-strings/
+class Leet2506 {
+    func similarPairs(_ words: [String]) -> Int {
+        var hash = [Set<Character>: Int]()
+        for word in words {
+            let key = Set(word)
+            hash[key, default: 0] += 1
+        }
+        return hash.values.reduce(0) { $0 + ($1 * ($1 - 1) / 2) }
+    }
+}
+
 print("All playground tests passed!")
