@@ -25191,6 +25191,14 @@ class Leet0476 {
     }
 }
 
-
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/complement-of-base-10-integer/
+class Leet1009 {
+    func bitwiseComplement(_ n: Int) -> Int {
+        guard n > 0 else { return 1 }
+        // invert all bits using ~, then drop all leading 1's using << shift left, then shift right by same amount
+        return (~n << n.leadingZeroBitCount) >> n.leadingZeroBitCount
+    }
+}
 
 print("All playground tests passed!")
