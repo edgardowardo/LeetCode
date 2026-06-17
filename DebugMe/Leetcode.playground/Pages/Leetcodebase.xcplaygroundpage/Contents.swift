@@ -25116,6 +25116,13 @@ extension Int {
     }
 }
 
+///---------------------------------------------------------------------------------------
+/// https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/
+class Leet3190 {
+    func minimumOperations(_ nums: [Int]) -> Int {
+        nums.reduce(0) { $0 + min($1 % 3, 3 - ($1 % 3)) }
+    }
+}
 
 
 print("All playground tests passed!")
