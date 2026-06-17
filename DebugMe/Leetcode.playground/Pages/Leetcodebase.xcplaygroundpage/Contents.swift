@@ -25201,4 +25201,14 @@ class Leet1009 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-operations-to-equalize-array/
+class Leet3674 {
+    func minOperations(_ nums: [Int]) -> Int {
+        nums.allSatisfy { nums[0] == $0 } ? 0 : 1
+    }
+}
+
+
+
 print("All playground tests passed!")
