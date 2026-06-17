@@ -25276,5 +25276,23 @@ class Leet1684 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/crawler-log-folder/
+class Leet1598 {
+    func minOperations(_ logs: [String]) -> Int {
+        var result = 0
+        for log in logs {
+            if log == "../" {
+                if result > 0 {
+                    result -= 1
+                }
+            } else if log == "./" {
+            } else {
+                result += 1
+            }
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
