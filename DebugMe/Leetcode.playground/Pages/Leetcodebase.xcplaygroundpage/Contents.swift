@@ -25209,6 +25209,26 @@ class Leet3674 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/
+class Leet1700 {
+    func countStudents(_ students: [Int], _ sandwiches: [Int]) -> Int {
+        var sandwichStack = Array(sandwiches.reversed()), studentsDeque = Deque(students), cycles = 0
+
+        // detect cycle
+        while let topSandwich = sandwichStack.last, cycles < studentsDeque.count {
+            if let firstStudent = studentsDeque.first, firstStudent == topSandwich {
+                studentsDeque.removeFirst()
+                sandwichStack.removeLast()
+                cycles = 0
+            } else {
+                studentsDeque.append(studentsDeque.removeFirst())
+                cycles += 1
+            }
+        }
+        return studentsDeque.count
+    }
+}
 
 
 print("All playground tests passed!")
