@@ -25333,4 +25333,28 @@ class Leet3065 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/special-positions-in-a-binary-matrix/
+class Leet1582 {
+    func numSpecial(_ mat: [[Int]]) -> Int {
+        // collect column indexes having a sum of 1
+        var colsWithOne: Set<Int> = [], result = 0
+        for col in 0..<mat[0].count {
+            if mat.reduce(0, { $0 + $1[col] }) == 1 {
+                colsWithOne.insert(col)
+            }
+        }
+        
+        // for each row that has a sum of 1, check each cell if it has a corresponding colsWithOne, add result
+        for row in 0..<mat.count {
+            if mat[row].reduce(0, +) == 1 {
+                for col in 0..<mat[row].count where mat[row][col] == 1 && colsWithOne.contains(col) {
+                    result += 1
+                }
+            }
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
