@@ -25133,5 +25133,14 @@ class Leet0453 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/
+class Leet0462 {
+    func minMoves2(_ nums: [Int]) -> Int {
+        let median = nums.sorted()[nums.count / 2]
+        return nums.reduce(0) { $0 + abs($1 - median) }
+    }
+}
  
 print("All playground tests passed!")
