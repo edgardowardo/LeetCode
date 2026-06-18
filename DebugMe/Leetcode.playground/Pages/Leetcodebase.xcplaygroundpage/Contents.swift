@@ -25420,5 +25420,23 @@ class Leet1716 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/distribute-candies-to-people/
+class Leet1103 {
+    func distributeCandies(_ candies: Int, _ num_people: Int) -> [Int] {
+        var candiesLeft = candies, result = Array(repeating: 0, count: num_people), allocate = 0, index = 0
+        while candiesLeft > 0 {
+            allocate += 1
+            candiesLeft -= allocate
+            if candiesLeft < 0 {
+                allocate += candiesLeft
+            }
+            result[index] += allocate
+            index += 1
+            index %= num_people
+        }
+        return result
+    }
+}
 
 print("All playground tests passed!")
