@@ -25407,4 +25407,18 @@ class Leet2591 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/calculate-money-in-leetcode-bank/
+class Leet1716 {
+    func totalMoney(_ n: Int) -> Int {
+        let k = n / 7, F = 28, L = 28 + (k - 1) * 7, arithmeticSum = (F + L) * k / 2, monday = 1 + k
+        var finalWeek = 0
+        for day in 0 ..< (n % 7) {
+            finalWeek += monday + day
+        }
+        return arithmeticSum + finalWeek
+    }
+}
+
+
 print("All playground tests passed!")
