@@ -25370,5 +25370,15 @@ class Leet1758 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/angle-between-hands-of-a-clock/
+class Leet1344 {
+    func angleClock(_ hour: Int, _ minutes: Int) -> Double {
+        let theta = Double(abs(60 * hour - 11 * minutes)) / 2.0
+        return min(theta, 360 - theta)
+    }
+}
+
+
 
 print("All playground tests passed!")
