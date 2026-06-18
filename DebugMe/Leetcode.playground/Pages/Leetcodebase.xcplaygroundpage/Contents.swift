@@ -25380,5 +25380,13 @@ class Leet1344 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/sign-of-the-product-of-an-array/
+class Leet1822 {
+    func arraySign(_ nums: [Int]) -> Int {
+        !nums.filter { $0 == 0 }.isEmpty ? 0 : (nums.count { $0 < 0 } % 2 == 0 ? 1 : -1 )
+    }
+}
+
 
 print("All playground tests passed!")
