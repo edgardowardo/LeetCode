@@ -25439,4 +25439,51 @@ class Leet1103 {
     }
 }
 
+
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-building-height/
+class Leet1840 {
+    func maxBuilding(_ n: Int, _ restrictions: [[Int]]) -> Int {
+        var r = restrictions + [[1, 0]]
+        r.sort { $0[0] < $1[0] }
+        
+        // Add restriction (n, n-1)
+        if (r[r.count - 1][0] != n) {
+            r.append([n, n - 1])
+        }
+        
+        let m = r.count
+        
+        // pass restriction from left to right
+        for i in 1..<m {
+            let dist = r[i][0] - r[i - 1][0]
+            r[i][1] = min(r[i][1], r[i - 1][1] + dist)
+        }
+        
+        // pass restriction from right to left
+        for i in (0..<m - 1).reversed() {
+            let dist = r[i + 1][0] - r[i][0]
+            r[i][1] = min(r[i][1], r[i + 1][1] + dist)
+        }
+        
+        var result = 0
+        for i in 0..<m-1 {
+            let dist = r[i + 1][0] - r[i][0]
+            let best = (dist + r[i][1] + r[i + 1][1]) / 2
+            result = max(result, best)
+        }
+        
+        return result
+    }
+    
+    static func test() {
+        let sut = Leet1840()
+        
+        let r2 = sut.maxBuilding(4, [[2,4],[4,0],[3,3]])
+        assert(r2 == 1)
+    }
+    
+}
+
+
 print("All playground tests passed!")
