@@ -25486,4 +25486,18 @@ class Leet1840 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/maximum-ice-cream-bars/
+class Leet1833 {
+    func maxIceCream(_ costs: [Int], _ coins: Int) -> Int {
+        let sorted = costs.sorted()
+        var coins = coins
+        return sorted.reduce(0) {
+            coins -= $1
+            return coins >= 0 ? $0 + 1 : $0
+        }
+    }
+}
+
+
 print("All playground tests passed!")
