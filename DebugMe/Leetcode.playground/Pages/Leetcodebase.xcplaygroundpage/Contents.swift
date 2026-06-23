@@ -25499,5 +25499,36 @@ class Leet1833 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-zigzag-arrays-i/
+class Leet3699 {
+    func zigZagArrays(_ n: Int, _ l: Int, _ r: Int) -> Int {
+        let mod = 1_000_000_007
+        var dp0 = Array(repeating: 0, count: r + 1), dp1 = dp0
+        var sum0 = Array(repeating: 0, count: r + 2), sum1 = sum0
+        
+        for i in 1...r {
+            dp1[i] = 1
+            dp0[i] = dp1[i]
+            sum1[i] = i - l + 1
+            sum0[i] = sum1[i]
+        }
+        
+        for i in 1..<n {
+            for j in l...r {
+                dp0[j] = (sum1[r] - sum1[j] + mod) % mod
+                dp1[j] = sum0[j - 1]
+            }
+            sum0[l] = dp0[l]
+            sum1[l] = dp1[l]
+            for j in (l + 1)...r {
+                sum0[j] = (sum0[j - 1] + dp0[j]) % mod
+                sum1[j] = (sum1[j - 1] + dp1[j]) % mod
+            }
+        }
+        return (sum0[r] + sum1[r]) % mod
+    }
+}
+
 
 print("All playground tests passed!")
