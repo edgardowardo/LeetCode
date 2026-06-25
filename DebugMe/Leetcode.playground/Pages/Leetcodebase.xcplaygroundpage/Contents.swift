@@ -25530,5 +25530,22 @@ class Leet3699 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/count-subarrays-with-majority-element-i/
+class Leet3737 {
+    func countMajoritySubarrays(_ nums: [Int], _ target: Int) -> Int {
+        var result = 0
+        for i in 0..<nums.count {
+            var count = 0
+            for j in i..<nums.count {
+                count += (nums[j] == target ? 1 : -1)
+                result += (count > 0 ? 1 : 0)
+            }
+        }
+        return result
+    }
+    
+}
+
 
 print("All playground tests passed!")
