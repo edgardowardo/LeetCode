@@ -25548,4 +25548,24 @@ class Leet3737 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-beautiful-pairs/
+class Leet2748 {
+    func countBeautifulPairs(_ nums: [Int]) -> Int {
+        var result = 0, count = Array(repeating: 0, count: 10), nums = nums
+        for i in 0..<nums.count {
+            for n in 1..<10 {
+                if n.gcd(nums[i] % 10) == 1 {
+                    result += count[n]
+                }
+            }
+            while nums[i] >= 10 {
+                nums[i] /= 10
+            }
+            count[nums[i]] += 1
+        }
+        return result
+    }
+}
+
 print("All playground tests passed!")
