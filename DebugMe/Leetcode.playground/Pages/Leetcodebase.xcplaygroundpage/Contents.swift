@@ -25577,4 +25577,22 @@ class Leet1967 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/minimum-moves-to-convert-string/
+class Leet2027 {
+    func minimumMoves(_ s: String) -> Int {
+        let s = Array(s)
+        var result = 0, i = 0
+        while i < s.count {
+            if s[i] == "X" {
+                result += 1
+                i += 2
+            }
+            i += 1
+        }
+        return result
+    }
+}
+
+
 print("All playground tests passed!")
