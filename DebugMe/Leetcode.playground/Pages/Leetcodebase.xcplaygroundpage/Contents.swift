@@ -25568,4 +25568,13 @@ class Leet2748 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/number-of-strings-that-appear-as-substrings-in-word/
+class Leet1967 {
+    func numOfStrings(_ patterns: [String], _ word: String) -> Int {
+        patterns.count(where: { word.contains($0) })
+    }
+}
+
+
 print("All playground tests passed!")
