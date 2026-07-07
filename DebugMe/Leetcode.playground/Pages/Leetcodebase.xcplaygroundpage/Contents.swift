@@ -25595,4 +25595,23 @@ class Leet2027 {
 }
 
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/concatenate-non-zero-digits-and-multiply-by-sum-i
+class Leet3754 {
+    func sumAndMultiply(_ n: Int) -> Int {
+        var sum = 0, nonzero = 0, num = n, multiplier = 1
+        while num != 0 {
+            let rightDigit = num % 10
+            if rightDigit != 0 {
+                nonzero += multiplier * rightDigit
+                multiplier *= 10
+            }
+            sum += rightDigit
+            num /= 10
+        }
+        // print("\(nonzero) * \(sum)")
+        return nonzero * sum
+    }
+}
+
 print("All playground tests passed!")
