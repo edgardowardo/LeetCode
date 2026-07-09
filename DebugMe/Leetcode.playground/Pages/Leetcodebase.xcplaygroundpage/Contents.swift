@@ -18515,7 +18515,7 @@ class Leet1875 {
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/longest-palindrome/
 class Leet0409 {
-    func longestPalindrome(_ s: String) -> Int {
+    func old_longestPalindrome(_ s: String) -> Int {
         let counts = s.reduce(into: [Character: Int]()) { r, c in r[c, default: 0] += 1 }
         var isCenterFound = false
         return counts.values.reduce(into: 0) { result, count in
@@ -18530,6 +18530,19 @@ class Leet0409 {
                 result += count - 1
             }
         }
+    }
+    
+    func longestPalindrome(_ s: String) -> Int {
+        var result = 0, set = Set<Character>()
+        for c in s {
+            if set.contains(c) {
+                result += 2
+                set.remove(c)
+            } else {
+                set.insert(c)
+            }
+        }
+        return result + (set.isEmpty ? 0 : 1)
     }
 }
 
