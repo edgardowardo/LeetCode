@@ -10992,24 +10992,20 @@ class Leet0056_old {
 ///https://leetcode.com/problems/merge-intervals/
 class Leet0056 {
     func merge(_ intervals: [[Int]]) -> [[Int]] {
+        guard intervals.isEmpty == false else { return [] }
         let sorted = intervals.sorted { $0[0] < $1[0] }
-        var result: [[Int]] = []
-        for i in 0..<sorted.count {
-            let interval = sorted[i]
-            if i == 0 {
-                result.append(interval)
-            } else if var last = result.last {
-                if last[1] < interval[0] {
-                    result.append(interval)
-                } else {
-                    last[1] = max(last[1], interval[1])
-                    result[result.count - 1] = last
-                }
+        var result = [sorted[0]]
+        for i in 1..<sorted.count {
+            if result[result.count - 1][1] < sorted[i][0] {
+                result.append(sorted[i])
+            } else {
+                result[result.count - 1][1] = max(sorted[i][1], result[result.count - 1][1])
             }
         }
         return result
     }
 }
+ 
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/partition-labels/
