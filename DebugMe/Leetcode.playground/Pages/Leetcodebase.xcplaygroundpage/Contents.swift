@@ -10969,7 +10969,7 @@ extension Range where Bound: Comparable {
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/merge-intervals/
-class Leet0056 {
+class Leet0056_old {
     func merge(_ intervals: [[Int]]) -> [[Int]] {
         let sortedRanges = intervals.sorted { $0[0] < $1[0] || ($0[0] == $1[0] && $0[1] < $1[1]) }.map { $0[0]...$0[1] }
         guard let firstRange = sortedRanges.first else { return [] }
@@ -10988,6 +10988,28 @@ class Leet0056 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/merge-intervals/
+class Leet0056 {
+    func merge(_ intervals: [[Int]]) -> [[Int]] {
+        let sorted = intervals.sorted { $0[0] < $1[0] }
+        var result: [[Int]] = []
+        for i in 0..<sorted.count {
+            let interval = sorted[i]
+            if i == 0 {
+                result.append(interval)
+            } else if var last = result.last {
+                if last[1] < interval[0] {
+                    result.append(interval)
+                } else {
+                    last[1] = max(last[1], interval[1])
+                    result[result.count - 1] = last
+                }
+            }
+        }
+        return result
+    }
+}
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/partition-labels/
