@@ -1143,6 +1143,26 @@ class Leet0141 {
 }
 
 ///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/linked-list-cycle-ii/
+class Leet0142 {
+    func detectCycle(_ head: ListNode?) -> ListNode? {
+        var current = head, slow = head?.next, fast = head?.next?.next
+        while fast != nil, slow !== fast  {
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        while current !== slow {
+            current = current?.next
+            slow = slow?.next
+        }
+        return slow
+    }
+}
+
+ 
+
+
+///---------------------------------------------------------------------------------------
 /// Leetcode 141
 ///https://leetcode.com/problems/linked-list-cycle/description/
 func hasCycle(_ head: ListNode?) -> Bool {
