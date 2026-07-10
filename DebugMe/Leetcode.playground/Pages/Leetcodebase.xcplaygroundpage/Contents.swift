@@ -1116,7 +1116,7 @@ func isPalindrome(_ head: ListNode?) -> Bool {
 
 ///---------------------------------------------------------------------------------------
 ///https://leetcode.com/problems/linked-list-cycle/description/
-class Leet0141 {
+class Leet0141_old {
     func hasCycle(_ head: ListNode?) -> Bool {
         var slow: ListNode? = head, fast: ListNode? = head
         while fast != nil && fast?.next != nil {
@@ -1128,6 +1128,19 @@ class Leet0141 {
     }
 }
 
+///---------------------------------------------------------------------------------------
+///https://leetcode.com/problems/linked-list-cycle/
+class Leet0141 {
+    func hasCycle(_ head: ListNode?) -> Bool {
+        var slow = head, fast = head
+        while let f = fast?.next?.next, let s = slow?.next {
+            guard f !== s else { return true }
+            slow = s
+            fast = f
+        }
+        return false
+    }
+}
 
 ///---------------------------------------------------------------------------------------
 /// Leetcode 141
